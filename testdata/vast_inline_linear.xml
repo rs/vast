@@ -2,11 +2,14 @@
 <VAST version="2.0">
   <Ad id="601364">
   <InLine>
-    <AdSystem>Acudeo Compatible</AdSystem>
+    <AdSystem version="1.0">Acudeo Compatible</AdSystem>
     <AdTitle>VAST 2.0 Instream Test 1</AdTitle>
     <Description>VAST 2.0 Instream Test 1</Description>
     <Error>http://myErrorURL/error</Error>
+    <Error>http://myErrorURL/error2</Error>
     <Impression>http://myTrackingURL/impression</Impression>
+    <Impression id="foo">http://myTrackingURL/impression2</Impression>
+    <Extensions><Extension><a>b</a></Extension></Extensions>
 	<Creatives>
 		<Creative AdID="601364">
 			<Linear>
@@ -35,7 +38,6 @@
 					<TrackingEvents>
 						<Tracking event="creativeView">http://myTrackingURL/firstCompanionCreativeView</Tracking>
 					</TrackingEvents>
-
 					<CompanionClickThrough>http://www.tremormedia.com</CompanionClickThrough>
 				</Companion>
 				<Companion width="728" height="90">

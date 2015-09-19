@@ -20,7 +20,7 @@
 					<Tracking event="unmute">http://myTrackingURL/wrapper/unmute</Tracking>
 					<Tracking event="pause">http://myTrackingURL/wrapper/pause</Tracking>
 					<Tracking event="resume">http://myTrackingURL/wrapper/resume</Tracking>
-					<Tracking event="fullscreen">http://myTrackingURL/wrapper/fullscreen</Tracking>	
+					<Tracking event="fullscreen">http://myTrackingURL/wrapper/fullscreen</Tracking>
 				</TrackingEvents>
 			</Linear>
 		</Creative>
@@ -34,6 +34,7 @@
 		<Creative AdID="602833-NonLinearTracking">
 			<NonLinearAds>
 				<TrackingEvents>
+					<Tracking event="creativeView">http://myTrackingURL/wrapper/creativeView</Tracking>
 				</TrackingEvents>
 			</NonLinearAds>
 		</Creative>

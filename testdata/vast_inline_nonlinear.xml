@@ -36,7 +36,7 @@
 			<CompanionAds>
 				<Companion width="300" height="250">
 					<StaticResource creativeType="application/x-shockwave-flash">http://demo.tremormedia.com/proddev/vast/300x250_companion_1.swf</StaticResource>
- 
+
 					<CompanionClickThrough>http://www.tremormedia.com</CompanionClickThrough>
 				</Companion>
 				<Companion width="728" height="90">
