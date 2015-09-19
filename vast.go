@@ -1,3 +1,4 @@
+// Package vast implements IAB VAST 3.0 specification http://www.iab.net/media/file/VASTv3.0.pdf
 package vast
 
 // VAST is the root <VAST> tag
