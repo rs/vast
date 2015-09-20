@@ -25,7 +25,7 @@ type Ad struct {
 	// A number greater than zero (0) that identifies the sequence in which
 	// an ad should play; all <Ad> elements with sequence values are part of
 	// a pod and are intended to be played in sequence
-	Sequence *int     `xml:"sequence,attr,omitempty"`
+	Sequence int      `xml:"sequence,attr,omitempty"`
 	InLine   *InLine  `xml:",omitempty"`
 	Wrapper  *Wrapper `xml:",omitempty"`
 }

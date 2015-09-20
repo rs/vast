@@ -35,7 +35,7 @@ func TestInlineLinear(t *testing.T) {
 		ad := v.Ad[0]
 		assert.Equal(t, "601364", ad.ID)
 		assert.Nil(t, ad.Wrapper)
-		assert.Nil(t, ad.Sequence)
+		assert.Equal(t, 0, ad.Sequence)
 		if assert.NotNil(t, ad.InLine) {
 			inline := ad.InLine
 			assert.Equal(t, "Acudeo Compatible", inline.AdSystem.Name)
@@ -133,7 +133,7 @@ func TestInlineNonLinear(t *testing.T) {
 		ad := v.Ad[0]
 		assert.Equal(t, "602678", ad.ID)
 		assert.Nil(t, ad.Wrapper)
-		assert.Nil(t, ad.Sequence)
+		assert.Equal(t, 0, ad.Sequence)
 		if assert.NotNil(t, ad.InLine) {
 			inline := ad.InLine
 			assert.Equal(t, "Acudeo Compatible", inline.AdSystem.Name)
@@ -212,7 +212,7 @@ func TestWrapperLinear(t *testing.T) {
 	if assert.Len(t, v.Ad, 1) {
 		ad := v.Ad[0]
 		assert.Equal(t, "602833", ad.ID)
-		assert.Nil(t, ad.Sequence)
+		assert.Equal(t, 0, ad.Sequence)
 		assert.Nil(t, ad.InLine)
 		if assert.NotNil(t, ad.Wrapper) {
 			wrapper := ad.Wrapper
@@ -276,7 +276,7 @@ func TestWrapperNonLinear(t *testing.T) {
 	if assert.Len(t, v.Ad, 1) {
 		ad := v.Ad[0]
 		assert.Equal(t, "602867", ad.ID)
-		assert.Nil(t, ad.Sequence)
+		assert.Equal(t, 0, ad.Sequence)
 		assert.Nil(t, ad.InLine)
 		if assert.NotNil(t, ad.Wrapper) {
 			wrapper := ad.Wrapper
