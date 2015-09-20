@@ -9,7 +9,6 @@
     <Error>http://myErrorURL/error2</Error>
     <Impression>http://myTrackingURL/impression</Impression>
     <Impression id="foo">http://myTrackingURL/impression2</Impression>
-    <Extensions><Extension><a>b</a></Extension></Extensions>
 	<Creatives>
 		<Creative AdID="601364">
 			<Linear>
