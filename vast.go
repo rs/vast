@@ -210,7 +210,7 @@ type Linear struct {
 	// represents milliseconds and is optional. This skipoffset value
 	// indicates when the skip control should be provided after the creative
 	// begins playing.
-	SkipOffset Duration `xml:"skipoffset,attr,omitempty"`
+	SkipOffset Offset `xml:"skipoffset,attr,omitempty"`
 	// Duration in standard time format, hh:mm:ss
 	Duration           Duration
 	AdParameters       *AdParameters `xml:",omitempty"`
@@ -389,7 +389,7 @@ type Icon struct {
 	// Must match ([0-9]*|top|bottom)
 	YPosition string `xml:"xPosition,attr"`
 	// Start time at which the player should display the icon. Expressed in standard time format hh:mm:ss.
-	Offset Duration `xml:"offset,attr"`
+	Offset Offset `xml:"offset,attr"`
 	// duration for which the player must display the icon. Expressed in standard time format hh:mm:ss.
 	Duration Duration `xml:"duration,attr"`
 	// The apiFramework defines the method to use for communication with the icon element
@@ -417,7 +417,7 @@ type Tracking struct {
 	Event string `xml:"event,attr"`
 	// The time during the video at which this url should be pinged. Must be present for
 	// progress event. Must match (\d{2}:[0-5]\d:[0-5]\d(\.\d\d\d)?|1?\d?\d(\.?\d)*%)
-	Offset string `xml:"offset,attr,omitempty"`
+	Offset Offset `xml:"offset,attr,omitempty"`
 	URI    string `xml:",chardata"`
 }
 

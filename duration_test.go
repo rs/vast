@@ -30,7 +30,7 @@ func TestDurationMarshaler(t *testing.T) {
 	}
 }
 
-func TestDurationUnmarshalXML(t *testing.T) {
+func TestDurationUnmarshal(t *testing.T) {
 	var d Duration
 	if assert.NoError(t, d.UnmarshalText([]byte("00:00:00"))) {
 		assert.Equal(t, Duration(0), d)
