@@ -10,7 +10,7 @@ type VAST struct {
 	// documentation, usually an insertion order. These line item ads typically
 	// specify the creative to display, price, delivery schedule, targeting,
 	// and so on.
-	Ad []Ad `xml:"Ad"`
+	Ads []Ad `xml:"Ad"`
 	// Contains a URI to a tracking resource that the video player should request
 	// upon receiving a “no ad” response
 	Errors []string `xml:"Error"`
