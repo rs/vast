@@ -24,6 +24,10 @@ func TestDurationMarshaler(t *testing.T) {
 	if assert.NoError(t, err) {
 		assert.Equal(t, "02:00:00", string(b))
 	}
+	b, err = Duration(2*time.Hour + 123).MarshalText()
+	if assert.NoError(t, err) {
+		assert.Equal(t, "02:00:00.123", string(b))
+	}
 }
 
 func TestDurationUnmarshalXML(t *testing.T) {
@@ -43,7 +47,13 @@ func TestDurationUnmarshalXML(t *testing.T) {
 	if assert.NoError(t, d.UnmarshalText([]byte("02:00:00"))) {
 		assert.Equal(t, Duration(2*time.Hour), d)
 	}
+	d = 0
+	if assert.NoError(t, d.UnmarshalText([]byte("02:00:00.123"))) {
+		assert.Equal(t, Duration(2*time.Hour+123), d)
+	}
 	assert.EqualError(t, d.UnmarshalText([]byte("00:00:60")), "invalid duration: 00:00:60")
 	assert.EqualError(t, d.UnmarshalText([]byte("00:60:00")), "invalid duration: 00:60:00")
+	assert.EqualError(t, d.UnmarshalText([]byte("00:00:00.-1")), "invalid duration: 00:00:00.-1")
+	assert.EqualError(t, d.UnmarshalText([]byte("00:00:00.1000")), "invalid duration: 00:00:00.1000")
 	assert.EqualError(t, d.UnmarshalText([]byte("00h01m")), "invalid duration: 00h01m")
 }
