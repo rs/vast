@@ -176,7 +176,7 @@ type CreativeWrapper struct {
 	// If defined, defins companions creatives
 	CompanionAds *CompanionAdsWrapper `xml:"CompanionAds,omitempty"`
 	// If defined, defines non linear creatives
-	NonLinearAds *NonLinearWrapper `xml:"NonLinearAds,omitempty"`
+	NonLinearAds *NonLinearAdsWrapper `xml:"NonLinearAds,omitempty"`
 }
 
 // CompanionAdsWrapper contains companions creatives in a wrapper
