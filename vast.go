@@ -210,7 +210,7 @@ type Linear struct {
 	// represents milliseconds and is optional. This skipoffset value
 	// indicates when the skip control should be provided after the creative
 	// begins playing.
-	SkipOffset Offset `xml:"skipoffset,attr,omitempty"`
+	SkipOffset *Offset `xml:"skipoffset,attr,omitempty"`
 	// Duration in standard time format, hh:mm:ss
 	Duration           Duration
 	AdParameters       *AdParameters `xml:",omitempty"`
@@ -328,7 +328,7 @@ type NonLinear struct {
 	MaintainAspectRatio bool `xml:"maintainAspectRatio,attr,omitempty"`
 	// Suggested duration to display non-linear ad, typically for animation to complete.
 	// Expressed in standard time format hh:mm:ss.
-	MinSuggestedDuration Duration `xml:"minSuggestedDuration,attr,omitempty"`
+	MinSuggestedDuration *Duration `xml:"minSuggestedDuration,attr,omitempty"`
 	// The apiFramework defines the method to use for communication with the nonlinear element.
 	APIFramework string `xml:"apiFramework,attr,omitempty"`
 	// URLs to ping when user clicks on the the non-linear ad.
@@ -364,7 +364,7 @@ type NonLinearWrapper struct {
 	MaintainAspectRatio bool `xml:"maintainAspectRatio,attr,omitempty"`
 	// Suggested duration to display non-linear ad, typically for animation to complete.
 	// Expressed in standard time format hh:mm:ss.
-	MinSuggestedDuration Duration `xml:"minSuggestedDuration,attr,omitempty"`
+	MinSuggestedDuration *Duration `xml:"minSuggestedDuration,attr,omitempty"`
 	// The apiFramework defines the method to use for communication with the nonlinear element.
 	APIFramework string `xml:"apiFramework,attr,omitempty"`
 	// The creativeView should always be requested when present.
@@ -417,8 +417,8 @@ type Tracking struct {
 	Event string `xml:"event,attr"`
 	// The time during the video at which this url should be pinged. Must be present for
 	// progress event. Must match (\d{2}:[0-5]\d:[0-5]\d(\.\d\d\d)?|1?\d?\d(\.?\d)*%)
-	Offset Offset `xml:"offset,attr,omitempty"`
-	URI    string `xml:",chardata"`
+	Offset *Offset `xml:"offset,attr,omitempty"`
+	URI    string  `xml:",chardata"`
 }
 
 // StaticResource is the URL to a static file, such as an image or SWF file
