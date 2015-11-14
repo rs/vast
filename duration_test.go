@@ -12,6 +12,10 @@ func TestDurationMarshaler(t *testing.T) {
 	if assert.NoError(t, err) {
 		assert.Equal(t, "00:00:00", string(b))
 	}
+	b, err = Duration(2 * time.Millisecond).MarshalText()
+	if assert.NoError(t, err) {
+		assert.Equal(t, "00:00:00.002", string(b))
+	}
 	b, err = Duration(2 * time.Second).MarshalText()
 	if assert.NoError(t, err) {
 		assert.Equal(t, "00:00:02", string(b))
@@ -23,10 +27,6 @@ func TestDurationMarshaler(t *testing.T) {
 	b, err = Duration(2 * time.Hour).MarshalText()
 	if assert.NoError(t, err) {
 		assert.Equal(t, "02:00:00", string(b))
-	}
-	b, err = Duration(2*time.Hour + 123).MarshalText()
-	if assert.NoError(t, err) {
-		assert.Equal(t, "02:00:00.123", string(b))
 	}
 }
 
@@ -48,8 +48,8 @@ func TestDurationUnmarshal(t *testing.T) {
 		assert.Equal(t, Duration(2*time.Hour), d)
 	}
 	d = 0
-	if assert.NoError(t, d.UnmarshalText([]byte("02:00:00.123"))) {
-		assert.Equal(t, Duration(2*time.Hour+123), d)
+	if assert.NoError(t, d.UnmarshalText([]byte("00:00:00.123"))) {
+		assert.Equal(t, Duration(123*time.Millisecond), d)
 	}
 	assert.EqualError(t, d.UnmarshalText([]byte("00:00:60")), "invalid duration: 00:00:60")
 	assert.EqualError(t, d.UnmarshalText([]byte("00:60:00")), "invalid duration: 00:60:00")
