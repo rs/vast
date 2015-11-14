@@ -12,12 +12,10 @@ type Duration time.Duration
 
 // MarshalText implements the encoding.TextMarshaler interface.
 func (dur Duration) MarshalText() ([]byte, error) {
-	s := int(dur / Duration(time.Second))
-	ms := int(dur) - s*int(time.Second)
-	h := int(s / 3600)
-	s = s % 3600
-	m := int(s / 60)
-	s = s % 60
+	h := dur / Duration(time.Hour)
+	m := dur % Duration(time.Hour) / Duration(time.Minute)
+	s := dur % Duration(time.Minute) / Duration(time.Second)
+	ms := dur % Duration(time.Second) / Duration(time.Millisecond)
 	if ms == 0 {
 		return []byte(fmt.Sprintf("%02d:%02d:%02d", h, m, s)), nil
 	}
@@ -36,7 +34,7 @@ func (dur *Duration) UnmarshalText(data []byte) (err error) {
 			return fmt.Errorf("invalid duration: %s", data)
 		}
 		parts[2] = parts[2][:i]
-		*dur += Duration(ms)
+		*dur += Duration(ms) * Duration(time.Millisecond)
 	}
 	f := Duration(time.Second)
 	for i := 2; i >= 0; i-- {
