@@ -1,6 +1,39 @@
 // Package vast implements IAB VAST 3.0 specification http://www.iab.net/media/file/VASTv3.0.pdf
 package vast
 
+import (
+	"bytes"
+	"encoding/xml"
+	"strings"
+)
+
+// MarshalXML is a custom XML marshalling method, with some fixes on top of the native encoding/xml package
+func (v *VAST) MarshalXML() ([]byte, error) {
+	data, err := xml.Marshal(v)
+	if err != nil {
+		return nil, err
+	}
+	strXML := string(data)
+	strXML = strings.Replace(strXML, "_xmlns", "xmlns", -1)
+	strXML = strings.Replace(strXML, ` xmlns:xmlns="xmlns"`, "", -1)
+	strXML = xml.Header + strXML
+	strXML = strings.Replace(strXML, "\n", "", -1)
+	strXML = strings.Replace(strXML, "\t", "", -1)
+	strXML = strings.TrimSpace(strXML)
+	return []byte(strXML), nil
+}
+
+// FromXML is a custom XML unmarshalling method, with some fixes on top of the native encoding/xml package
+func FromXML(xmlStr []byte) (*VAST, error) {
+	xmlStr = bytes.Replace(xmlStr, []byte("\n"), []byte(""), -1)
+	xmlStr = bytes.Replace(xmlStr, []byte("\t"), []byte(""), -1)
+	var v VAST
+	if err := xml.Unmarshal(xmlStr, &v); err != nil {
+		return nil, err
+	}
+	return &v, nil
+}
+
 // VAST is the root <VAST> tag
 type VAST struct {
 	// The version of the VAST spec (should be either "2.0" or "3.0")
@@ -184,7 +217,7 @@ type CompanionAdsWrapper struct {
 	// Provides information about which companion creative to display.
 	// All means that the player must attempt to display all. Any means the player
 	// must attempt to play at least one. None means all companions are optional
-	Required   string             `xml:"required,attr,omitempty"`
+	Required   string	     `xml:"required,attr,omitempty"`
 	Companions []CompanionWrapper `xml:"Companion,omitempty"`
 }
 
@@ -212,20 +245,20 @@ type Linear struct {
 	// begins playing.
 	SkipOffset *Offset `xml:"skipoffset,attr,omitempty"`
 	// Duration in standard time format, hh:mm:ss
-	Duration           Duration
+	Duration	   Duration
 	AdParameters       *AdParameters `xml:",omitempty"`
-	Icons              []Icon
-	TrackingEvents     []Tracking          `xml:"TrackingEvents>Tracking,omitempty"`
-	VideoClicks        *VideoClicks        `xml:",omitempty"`
-	MediaFiles         []MediaFile         `xml:"MediaFiles>MediaFile,omitempty"`
+	Icons	      []Icon
+	TrackingEvents     []Tracking	  `xml:"TrackingEvents>Tracking,omitempty"`
+	VideoClicks	*VideoClicks	`xml:",omitempty"`
+	MediaFiles	 []MediaFile	 `xml:"MediaFiles>MediaFile,omitempty"`
 	CreativeExtensions *CreativeExtensions `xml:",omitempty"`
 }
 
 // LinearWrapper defines a wrapped linear creative
 type LinearWrapper struct {
-	Icons              []Icon
-	TrackingEvents     []Tracking          `xml:"TrackingEvents>Tracking,omitempty"`
-	VideoClicks        *VideoClicks        `xml:",omitempty"`
+	Icons	      []Icon
+	TrackingEvents     []Tracking	  `xml:"TrackingEvents>Tracking,omitempty"`
+	VideoClicks	*VideoClicks	`xml:",omitempty"`
 	CreativeExtensions *CreativeExtensions `xml:",omitempty"`
 }
 
@@ -370,7 +403,7 @@ type NonLinearWrapper struct {
 	// The creativeView should always be requested when present.
 	TrackingEvents []Tracking `xml:"TrackingEvents>Tracking,omitempty"`
 	// URLs to ping when user clicks on the the non-linear ad.
-	NonLinearClickTracking []string            `xml:",omitempty"`
+	NonLinearClickTracking []string	    `xml:",omitempty"`
 	CreativeExtensions     *CreativeExtensions `xml:",omitempty"`
 }
 
@@ -491,7 +524,7 @@ type MediaFile struct {
 	// (for Flash/Flex), “initParams” (for Silverlight) and “GetVariables” (variables
 	// placed in key/value pairs on the asset request).
 	APIFramework string `xml:"apiFramework,attr,omitempty"`
-	URI          string `xml:",chardata"`
+	URI	  string `xml:",chardata"`
 }
 
 // Extensions defines extensions
