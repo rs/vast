@@ -96,7 +96,7 @@ type InLine struct {
 	Survey string `xml:",omitempty"`
 	// A URI representing an error-tracking pixel; this element can occur multiple
 	// times.
-	Errors []string `xml:"Error,omitempty"`
+	Errors []Error `xml:",omitempty"`
 	// Provides a value that represents a price that can be used by real-time bidding
 	// (RTB) systems. VAST is not designed to handle RTB since other methods exist,
 	// but this element is offered for custom solutions if needed.
@@ -106,6 +106,10 @@ type InLine struct {
 	// XML elements from VAST elements. The following example includes a custom
 	// xml element within the Extensions element.
 	Extensions *Extensions `xml:",omitempty"`
+}
+
+type Error struct {
+	URI string `xml:",cdata"`
 }
 
 // Impression is a URI that directs the video player to a tracking resource file that
@@ -147,7 +151,7 @@ type Wrapper struct {
 	Impressions []Impression `xml:"Impression"`
 	// A URI representing an error-tracking pixel; this element can occur multiple
 	// times.
-	Errors []string `xml:"Error,omitempty"`
+	Errors []Error `xml:",omitempty"`
 	// The container for one or more <Creative> elements
 	Creatives []CreativeWrapper `xml:"Creatives>Creative"`
 	// XML node for custom extensions, as defined by the ad server. When used, a
