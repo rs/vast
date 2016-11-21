@@ -72,7 +72,8 @@ type InLine struct {
 	// The name of the ad server that returned the ad
 	AdSystem *AdSystem
 	// The common name of the ad
-	AdTitle string
+	AdTitle *AdTitle
+
 	// One or more URIs that directs the video player to a tracking resource file that the
 	// video player should request when the first frame of the ad is displayed
 	Impressions []Impression `xml:"Impression"`
@@ -111,7 +112,7 @@ type InLine struct {
 // the video player should request when the first frame of the ad is displayed
 type Impression struct {
 	ID  string `xml:"id,attr,omitempty"`
-	URI string `xml:",chardata"`
+	URI string `xml:",cdata"`
 }
 
 // Pricing provides a value that represents a price that can be used by real-time
@@ -159,7 +160,11 @@ type Wrapper struct {
 // AdSystem contains information about the system that returned the ad
 type AdSystem struct {
 	Version string `xml:"version,attr,omitempty"`
-	Name    string `xml:",chardata"`
+	Name    string `xml:",cdata"`
+}
+
+type AdTitle struct {
+	Name string `xml:",cdata"`
 }
 
 // Creative is a file that is part of a VAST ad.
@@ -217,7 +222,7 @@ type CompanionAdsWrapper struct {
 	// Provides information about which companion creative to display.
 	// All means that the player must attempt to display all. Any means the player
 	// must attempt to play at least one. None means all companions are optional
-	Required   string	     `xml:"required,attr,omitempty"`
+	Required   string             `xml:"required,attr,omitempty"`
 	Companions []CompanionWrapper `xml:"Companion,omitempty"`
 }
 
@@ -245,20 +250,20 @@ type Linear struct {
 	// begins playing.
 	SkipOffset *Offset `xml:"skipoffset,attr,omitempty"`
 	// Duration in standard time format, hh:mm:ss
-	Duration	   Duration
+	Duration           Duration
 	AdParameters       *AdParameters `xml:",omitempty"`
-	Icons	      []Icon
-	TrackingEvents     []Tracking	  `xml:"TrackingEvents>Tracking,omitempty"`
-	VideoClicks	*VideoClicks	`xml:",omitempty"`
-	MediaFiles	 []MediaFile	 `xml:"MediaFiles>MediaFile,omitempty"`
+	Icons              []Icon
+	TrackingEvents     []Tracking          `xml:"TrackingEvents>Tracking,omitempty"`
+	VideoClicks        *VideoClicks        `xml:",omitempty"`
+	MediaFiles         []MediaFile         `xml:"MediaFiles>MediaFile,omitempty"`
 	CreativeExtensions *CreativeExtensions `xml:",omitempty"`
 }
 
 // LinearWrapper defines a wrapped linear creative
 type LinearWrapper struct {
-	Icons	      []Icon
-	TrackingEvents     []Tracking	  `xml:"TrackingEvents>Tracking,omitempty"`
-	VideoClicks	*VideoClicks	`xml:",omitempty"`
+	Icons              []Icon
+	TrackingEvents     []Tracking          `xml:"TrackingEvents>Tracking,omitempty"`
+	VideoClicks        *VideoClicks        `xml:",omitempty"`
 	CreativeExtensions *CreativeExtensions `xml:",omitempty"`
 }
 
@@ -403,7 +408,7 @@ type NonLinearWrapper struct {
 	// The creativeView should always be requested when present.
 	TrackingEvents []Tracking `xml:"TrackingEvents>Tracking,omitempty"`
 	// URLs to ping when user clicks on the the non-linear ad.
-	NonLinearClickTracking []string	    `xml:",omitempty"`
+	NonLinearClickTracking []string            `xml:",omitempty"`
 	CreativeExtensions     *CreativeExtensions `xml:",omitempty"`
 }
 
@@ -451,7 +456,7 @@ type Tracking struct {
 	// The time during the video at which this url should be pinged. Must be present for
 	// progress event. Must match (\d{2}:[0-5]\d:[0-5]\d(\.\d\d\d)?|1?\d?\d(\.?\d)*%)
 	Offset *Offset `xml:"offset,attr,omitempty"`
-	URI    string  `xml:",chardata"`
+	URI    string  `xml:",cdata"`
 }
 
 // StaticResource is the URL to a static file, such as an image or SWF file
@@ -486,7 +491,7 @@ type VideoClicks struct {
 // VideoClick defines a click URL for a linear creative
 type VideoClick struct {
 	ID  string `xml:"id,attr,omitempty"`
-	URI string `xml:",chardata"`
+	URI string `xml:",cdata"`
 }
 
 // MediaFile defines a reference to a linear creative asset
@@ -524,7 +529,7 @@ type MediaFile struct {
 	// (for Flash/Flex), “initParams” (for Silverlight) and “GetVariables” (variables
 	// placed in key/value pairs on the asset request).
 	APIFramework string `xml:"apiFramework,attr,omitempty"`
-	URI	  string `xml:",chardata"`
+	URI          string `xml:",cdata"`
 }
 
 // Extensions defines extensions
