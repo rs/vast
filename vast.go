@@ -468,21 +468,21 @@ type StaticResource struct {
 	// Mime type of static resource
 	CreativeType string `xml:"creativeType,attr,omitempty"`
 	// URL to a static file, such as an image or SWF file
-	URI string `xml:",chardata"`
+	URI string `xml:",cdata"`
 }
 
 // HTMLResource is a container for HTML data
 type HTMLResource struct {
 	// Specifies whether the HTML is XML-encoded
 	XMLEncoded bool   `xml:"xmlEncoded,attr,omitempty"`
-	HTML       []byte `xml:",chardata"`
+	HTML       []byte `xml:",cdata"`
 }
 
 // AdParameters defines arbitrary ad parameters
 type AdParameters struct {
 	// Specifies whether the parameters are XML-encoded
 	XMLEncoded bool   `xml:"xmlEncoded,attr,omitempty"`
-	Parameters []byte `xml:",chardata"`
+	Parameters []byte `xml:",cdata"`
 }
 
 // VideoClicks contains types of video clicks
