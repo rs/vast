@@ -40,11 +40,11 @@ func TestInlineLinear(t *testing.T) {
 			inline := ad.InLine
 			assert.Equal(t, "Acudeo Compatible", inline.AdSystem.Name)
 			assert.Equal(t, "1.0", inline.AdSystem.Version)
-			assert.Equal(t, "VAST 2.0 Instream Test 1", inline.AdTitle)
+			assert.Equal(t, "VAST 2.0 Instream Test 1", inline.AdTitle.Name)
 			assert.Equal(t, "VAST 2.0 Instream Test 1", inline.Description)
-			if assert.Len(t, inline.Errors, 2) {
-				assert.Equal(t, "http://myErrorURL/error", inline.Errors[0])
-				assert.Equal(t, "http://myErrorURL/error2", inline.Errors[1])
+			if assert.Len(t, inline.Error, 2) {
+				assert.Equal(t, "http://myErrorURL/error", inline.Error[0].URI)
+				assert.Equal(t, "http://myErrorURL/error2", inline.Error[1].URI)
 			}
 			if assert.Len(t, inline.Impressions, 2) {
 				assert.Equal(t, "http://myTrackingURL/impression", inline.Impressions[0].URI)
@@ -137,11 +137,11 @@ func TestInlineNonLinear(t *testing.T) {
 		if assert.NotNil(t, ad.InLine) {
 			inline := ad.InLine
 			assert.Equal(t, "Acudeo Compatible", inline.AdSystem.Name)
-			assert.Equal(t, "NonLinear Test Campaign 1", inline.AdTitle)
+			assert.Equal(t, "NonLinear Test Campaign 1", inline.AdTitle.Name)
 			assert.Equal(t, "NonLinear Test Campaign 1", inline.Description)
 			assert.Equal(t, "http://mySurveyURL/survey", inline.Survey)
-			if assert.Len(t, inline.Errors, 1) {
-				assert.Equal(t, "http://myErrorURL/error", inline.Errors[0])
+			if assert.Len(t, inline.Error, 1) {
+				assert.Equal(t, "http://myErrorURL/error", inline.Error[0].URI)
 			}
 			if assert.Len(t, inline.Impressions, 1) {
 				assert.Equal(t, "http://myTrackingURL/impression", inline.Impressions[0].URI)
@@ -218,8 +218,8 @@ func TestWrapperLinear(t *testing.T) {
 			wrapper := ad.Wrapper
 			assert.Equal(t, "http://demo.tremormedia.com/proddev/vast/vast_inline_linear.xml", wrapper.VASTAdTagURI)
 			assert.Equal(t, "Acudeo Compatible", wrapper.AdSystem.Name)
-			if assert.Len(t, wrapper.Errors, 1) {
-				assert.Equal(t, "http://myErrorURL/wrapper/error", wrapper.Errors[0])
+			if assert.Len(t, wrapper.Error, 1) {
+				assert.Equal(t, "http://myErrorURL/wrapper/error", wrapper.Error[0].URI)
 			}
 			if assert.Len(t, wrapper.Impressions, 1) {
 				assert.Equal(t, "http://myTrackingURL/wrapper/impression", wrapper.Impressions[0].URI)
@@ -282,8 +282,8 @@ func TestWrapperNonLinear(t *testing.T) {
 			wrapper := ad.Wrapper
 			assert.Equal(t, "http://demo.tremormedia.com/proddev/vast/vast_inline_nonlinear2.xml", wrapper.VASTAdTagURI)
 			assert.Equal(t, "Acudeo Compatible", wrapper.AdSystem.Name)
-			if assert.Len(t, wrapper.Errors, 1) {
-				assert.Equal(t, "http://myErrorURL/wrapper/error", wrapper.Errors[0])
+			if assert.Len(t, wrapper.Error, 1) {
+				assert.Equal(t, "http://myErrorURL/wrapper/error", wrapper.Error[0].URI)
 			}
 			if assert.Len(t, wrapper.Impressions, 1) {
 				assert.Equal(t, "http://myTrackingURL/wrapper/impression", wrapper.Impressions[0].URI)
