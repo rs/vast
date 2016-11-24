@@ -254,7 +254,7 @@ type Linear struct {
 	// begins playing.
 	SkipOffset *Offset `xml:"skipoffset,attr,omitempty"`
 	// Duration in standard time format, hh:mm:ss
-	Duration           Duration
+	Duration           string
 	AdParameters       *AdParameters `xml:",omitempty"`
 	Icons              []Icon
 	TrackingEvents     []Tracking          `xml:"TrackingEvents>Tracking,omitempty"`
@@ -433,7 +433,7 @@ type Icon struct {
 	// Start time at which the player should display the icon. Expressed in standard time format hh:mm:ss.
 	Offset Offset `xml:"offset,attr"`
 	// duration for which the player must display the icon. Expressed in standard time format hh:mm:ss.
-	Duration Duration `xml:"duration,attr"`
+	Duration string `xml:"duration,attr"`
 	// The apiFramework defines the method to use for communication with the icon element
 	APIFramework string `xml:"apiFramework,attr,omitempty"`
 	// URL to open as destination page when user clicks on the icon.
