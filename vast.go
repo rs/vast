@@ -106,6 +106,8 @@ type InLine struct {
 	// XML elements from VAST elements. The following example includes a custom
 	// xml element within the Extensions element.
 	Extensions *Extensions `xml:",omitempty"`
+	// Custom XML node for SuperSonic social links
+	SuperSonicExtentions []SuperSonicExtention `xml:"Extentions>Extention,omitempty"`
 }
 
 type Error struct {
@@ -549,4 +551,27 @@ type CreativeExtensions struct {
 // Extension represent aribtrary XML provided by the platform to extend the VAST response
 type Extension struct {
 	Data []byte `xml:",innerxml"`
+}
+
+// Custom implementation of Extensions node for SuperSonic social links
+type SuperSonicExtention struct {
+	CustomXml []SocialData `xml:"CustomXml>SocialData,omitempty"`
+}
+
+type SocialData struct {
+	TargetLink SocialTargetLink
+	Icon SocialIcon
+	TrackLink SocialTrackLink
+}
+
+type SocialTargetLink struct {
+	URI string `xml:",cdata"`
+}
+
+type SocialIcon struct {
+	URI string `xml:",cdata"`
+}
+
+type SocialTrackLink struct {
+	URI string `xml:",cdata"`
 }

@@ -6,7 +6,6 @@ import (
 	"os"
 	"strings"
 	"testing"
-	"time"
 
 	"github.com/stretchr/testify/assert"
 )
@@ -58,7 +57,7 @@ func TestInlineLinear(t *testing.T) {
 				assert.Nil(t, crea1.CompanionAds)
 				if assert.NotNil(t, crea1.Linear) {
 					linear := crea1.Linear
-					assert.Equal(t, Duration(30*time.Second), linear.Duration)
+					assert.Equal(t, "00:00:30", linear.Duration)
 					if assert.Len(t, linear.TrackingEvents, 6) {
 						assert.Equal(t, linear.TrackingEvents[0].Event, "creativeView")
 						assert.Equal(t, linear.TrackingEvents[0].URI, "http://myTrackingURL/creativeView")
