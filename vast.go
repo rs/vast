@@ -294,7 +294,8 @@ type Companion struct {
 	// Used to match companion creative to publisher placement areas on the page.
 	AdSlotID string `xml:"adSlotId,attr,omitempty"`
 	// URL to open as destination page when user clicks on the the companion banner ad.
-	CompanionClickThrough string `xml:",omitempty"`
+	CompanionClickThrough  string   `xml:",cdata"`
+	CompanionClickTracking []string `xml:",cdata"`
 	// Alt text to be displayed when companion is rendered in HTML environment.
 	AltText string `xml:",omitempty"`
 	// The creativeView should always be requested when present. For Companions
@@ -560,8 +561,8 @@ type SuperSonicExtention struct {
 
 type SocialData struct {
 	TargetLink SocialTargetLink
-	Icon SocialIcon
-	TrackLink SocialTrackLink
+	Icon       SocialIcon
+	TrackLink  SocialTrackLink
 }
 
 type SocialTargetLink struct {
