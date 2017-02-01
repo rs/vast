@@ -107,7 +107,6 @@ type InLine struct {
 	// xml element within the Extensions element.
 	Extensions *Extensions `xml:",omitempty"`
 	// Custom XML node for SuperSonic social links
-	SuperSonicExtentions []SuperSonicExtention `xml:"Extentions>Extention,omitempty"`
 }
 
 type Error struct {
@@ -294,7 +293,7 @@ type Companion struct {
 	// Used to match companion creative to publisher placement areas on the page.
 	AdSlotID string `xml:"adSlotId,attr,omitempty"`
 	// URL to open as destination page when user clicks on the the companion banner ad.
-	CompanionClickThrough string `xml:",cdata"`
+	CompanionClickThrough *CompanionClickThrough `xml:",omitempty"`
 	// Alt text to be displayed when companion is rendered in HTML environment.
 	AltText string `xml:",omitempty"`
 	// The creativeView should always be requested when present. For Companions
@@ -540,7 +539,7 @@ type MediaFile struct {
 
 // Extensions defines extensions
 type Extensions struct {
-	Extensions []Extension `xml:",omitempty"`
+	Extensions []Extension `xml:"Extension,omitempty"`
 }
 
 // CreativeExtensions defines extensions for creatives
@@ -553,25 +552,7 @@ type Extension struct {
 	Data []byte `xml:",innerxml"`
 }
 
-// Custom implementation of Extensions node for SuperSonic social links
-type SuperSonicExtention struct {
-	CustomXml []SocialData `xml:"CustomXml>SocialData,omitempty"`
-}
-
-type SocialData struct {
-	TargetLink SocialTargetLink
-	Icon       SocialIcon
-	TrackLink  SocialTrackLink
-}
-
-type SocialTargetLink struct {
-	URI string `xml:",cdata"`
-}
-
-type SocialIcon struct {
-	URI string `xml:",cdata"`
-}
-
-type SocialTrackLink struct {
+type CompanionClickThrough struct {
+	// URL to a static file, such as an image or SWF file
 	URI string `xml:",cdata"`
 }
