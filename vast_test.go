@@ -122,6 +122,28 @@ func TestInlineLinear(t *testing.T) {
 	}
 }
 
+func TestInlineLinearDurationUndefined(t *testing.T) {
+	v, err := loadFixture("testdata/vast_inline_linear-duration_undefined.xml")
+	if !assert.NoError(t, err) {
+		return
+	}
+
+	assert.Equal(t, "2.0", v.Version)
+	if assert.Len(t, v.Ads, 1) {
+		ad := v.Ads[0]
+		if assert.NotNil(t, ad.InLine) {
+			inline := ad.InLine
+			if assert.Len(t, inline.Creatives, 1) {
+				crea1 := inline.Creatives[0]
+				if assert.NotNil(t, crea1.Linear) {
+					linear := crea1.Linear
+					assert.Equal(t, Duration(0), linear.Duration)
+				}
+			}
+		}
+	}
+}
+
 func TestInlineNonLinear(t *testing.T) {
 	v, err := loadFixture("testdata/vast_inline_nonlinear.xml")
 	if !assert.NoError(t, err) {
