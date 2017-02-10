@@ -51,6 +51,14 @@ func TestDurationUnmarshal(t *testing.T) {
 	if assert.NoError(t, d.UnmarshalText([]byte("00:00:00.123"))) {
 		assert.Equal(t, Duration(123*time.Millisecond), d)
 	}
+	d = 0
+	if assert.NoError(t, d.UnmarshalText([]byte("undefined"))) {
+		assert.Equal(t, Duration(0), d)
+	}
+	d = 0
+	if assert.NoError(t, d.UnmarshalText([]byte(""))) {
+		assert.Equal(t, Duration(0), d)
+	}
 	assert.EqualError(t, d.UnmarshalText([]byte("00:00:60")), "invalid duration: 00:00:60")
 	assert.EqualError(t, d.UnmarshalText([]byte("00:60:00")), "invalid duration: 00:60:00")
 	assert.EqualError(t, d.UnmarshalText([]byte("00:00:00.-1")), "invalid duration: 00:00:00.-1")

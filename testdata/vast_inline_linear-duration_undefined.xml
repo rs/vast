@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<VAST version="2.0">
+  <Ad id="601364">
+  <InLine>
+    <AdSystem version="1.0">Acudeo Compatible</AdSystem>
+    <AdTitle>VAST 2.0 Instream Test 1</AdTitle>
+	<Creatives>
+		<Creative AdID="601364">
+			<Linear>
+				<Duration>undefined</Duration>
+				<MediaFiles>
+					<MediaFile delivery="progressive" type="video/x-flv" bitrate="500" width="400" height="300" scalable="true" maintainAspectRatio="true">http://cdnp.tremormedia.com/video/acudeo/Carrot_400x300_500kb.flv</MediaFile>
+				</MediaFiles>
+			</Linear>
+		</Creative>
+	</Creatives>
+  </InLine>
+  </Ad>
+</VAST>

@@ -24,7 +24,12 @@ func (dur Duration) MarshalText() ([]byte, error) {
 
 // UnmarshalText implements the encoding.TextUnmarshaler interface.
 func (dur *Duration) UnmarshalText(data []byte) (err error) {
-	parts := strings.SplitN(string(data), ":", 3)
+	s := string(data)
+	if s == "" || strings.ToLower(s) == "undefined" {
+		*dur = 0
+		return nil
+	}
+	parts := strings.SplitN(s, ":", 3)
 	if len(parts) != 3 {
 		return fmt.Errorf("invalid duration: %s", data)
 	}
