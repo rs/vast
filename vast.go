@@ -387,7 +387,7 @@ type Icon struct {
 	XPosition string `xml:"xPosition,attr"`
 	// The vertical alignment location (in pixels) or a specific alignment.
 	// Must match ([0-9]*|top|bottom)
-	YPosition string `xml:"xPosition,attr"`
+	YPosition string `xml:"yPosition,attr"`
 	// Start time at which the player should display the icon. Expressed in standard time format hh:mm:ss.
 	Offset Offset `xml:"offset,attr"`
 	// duration for which the player must display the icon. Expressed in standard time format hh:mm:ss.
