@@ -1,6 +1,39 @@
 // Package vast implements IAB VAST 3.0 specification http://www.iab.net/media/file/VASTv3.0.pdf
 package vast
 
+import (
+	"bytes"
+	"encoding/xml"
+	"strings"
+)
+
+// MarshalXML is a custom XML marshalling method, with some fixes on top of the native encoding/xml package
+func (v *VAST) MarshalXML() ([]byte, error) {
+	data, err := xml.Marshal(v)
+	if err != nil {
+		return nil, err
+	}
+	strXML := string(data)
+	strXML = strings.Replace(strXML, "_xmlns", "xmlns", -1)
+	strXML = strings.Replace(strXML, ` xmlns:xmlns="xmlns"`, "", -1)
+	strXML = xml.Header + strXML
+	strXML = strings.Replace(strXML, "\n", "", -1)
+	strXML = strings.Replace(strXML, "\t", "", -1)
+	strXML = strings.TrimSpace(strXML)
+	return []byte(strXML), nil
+}
+
+// FromXML is a custom XML unmarshalling method, with some fixes on top of the native encoding/xml package
+func FromXML(xmlStr []byte) (*VAST, error) {
+	xmlStr = bytes.Replace(xmlStr, []byte("\n"), []byte(""), -1)
+	xmlStr = bytes.Replace(xmlStr, []byte("\t"), []byte(""), -1)
+	var v VAST
+	if err := xml.Unmarshal(xmlStr, &v); err != nil {
+		return nil, err
+	}
+	return &v, nil
+}
+
 // VAST is the root <VAST> tag
 type VAST struct {
 	// The version of the VAST spec (should be either "2.0" or "3.0")
@@ -39,7 +72,8 @@ type InLine struct {
 	// The name of the ad server that returned the ad
 	AdSystem *AdSystem
 	// The common name of the ad
-	AdTitle string
+	AdTitle *AdTitle
+
 	// One or more URIs that directs the video player to a tracking resource file that the
 	// video player should request when the first frame of the ad is displayed
 	Impressions []Impression `xml:"Impression"`
@@ -62,7 +96,7 @@ type InLine struct {
 	Survey string `xml:",omitempty"`
 	// A URI representing an error-tracking pixel; this element can occur multiple
 	// times.
-	Errors []string `xml:"Error,omitempty"`
+	Error []Error `xml:",omitempty"`
 	// Provides a value that represents a price that can be used by real-time bidding
 	// (RTB) systems. VAST is not designed to handle RTB since other methods exist,
 	// but this element is offered for custom solutions if needed.
@@ -74,11 +108,15 @@ type InLine struct {
 	Extensions *Extensions `xml:",omitempty"`
 }
 
+type Error struct {
+	URI string `xml:",cdata"`
+}
+
 // Impression is a URI that directs the video player to a tracking resource file that
 // the video player should request when the first frame of the ad is displayed
 type Impression struct {
 	ID  string `xml:"id,attr,omitempty"`
-	URI string `xml:",chardata"`
+	URI string `xml:",cdata"`
 }
 
 // Pricing provides a value that represents a price that can be used by real-time
@@ -113,7 +151,7 @@ type Wrapper struct {
 	Impressions []Impression `xml:"Impression"`
 	// A URI representing an error-tracking pixel; this element can occur multiple
 	// times.
-	Errors []string `xml:"Error,omitempty"`
+	Error []Error `xml:",omitempty"`
 	// The container for one or more <Creative> elements
 	Creatives []CreativeWrapper `xml:"Creatives>Creative"`
 	// XML node for custom extensions, as defined by the ad server. When used, a
@@ -126,7 +164,11 @@ type Wrapper struct {
 // AdSystem contains information about the system that returned the ad
 type AdSystem struct {
 	Version string `xml:"version,attr,omitempty"`
-	Name    string `xml:",chardata"`
+	Name    string `xml:",cdata"`
+}
+
+type AdTitle struct {
+	Name string `xml:",cdata"`
 }
 
 // Creative is a file that is part of a VAST ad.
@@ -212,7 +254,7 @@ type Linear struct {
 	// begins playing.
 	SkipOffset *Offset `xml:"skipoffset,attr,omitempty"`
 	// Duration in standard time format, hh:mm:ss
-	Duration           Duration
+	Duration           string
 	AdParameters       *AdParameters `xml:",omitempty"`
 	Icons              []Icon
 	TrackingEvents     []Tracking          `xml:"TrackingEvents>Tracking,omitempty"`
@@ -391,7 +433,7 @@ type Icon struct {
 	// Start time at which the player should display the icon. Expressed in standard time format hh:mm:ss.
 	Offset Offset `xml:"offset,attr"`
 	// duration for which the player must display the icon. Expressed in standard time format hh:mm:ss.
-	Duration Duration `xml:"duration,attr"`
+	Duration string `xml:"duration,attr"`
 	// The apiFramework defines the method to use for communication with the icon element
 	APIFramework string `xml:"apiFramework,attr,omitempty"`
 	// URL to open as destination page when user clicks on the icon.
@@ -418,7 +460,7 @@ type Tracking struct {
 	// The time during the video at which this url should be pinged. Must be present for
 	// progress event. Must match (\d{2}:[0-5]\d:[0-5]\d(\.\d\d\d)?|1?\d?\d(\.?\d)*%)
 	Offset *Offset `xml:"offset,attr,omitempty"`
-	URI    string  `xml:",chardata"`
+	URI    string  `xml:",cdata"`
 }
 
 // StaticResource is the URL to a static file, such as an image or SWF file
@@ -426,21 +468,21 @@ type StaticResource struct {
 	// Mime type of static resource
 	CreativeType string `xml:"creativeType,attr,omitempty"`
 	// URL to a static file, such as an image or SWF file
-	URI string `xml:",chardata"`
+	URI string `xml:",cdata"`
 }
 
 // HTMLResource is a container for HTML data
 type HTMLResource struct {
 	// Specifies whether the HTML is XML-encoded
 	XMLEncoded bool   `xml:"xmlEncoded,attr,omitempty"`
-	HTML       []byte `xml:",chardata"`
+	HTML       []byte `xml:",cdata"`
 }
 
 // AdParameters defines arbitrary ad parameters
 type AdParameters struct {
 	// Specifies whether the parameters are XML-encoded
 	XMLEncoded bool   `xml:"xmlEncoded,attr,omitempty"`
-	Parameters []byte `xml:",chardata"`
+	Parameters []byte `xml:",cdata"`
 }
 
 // VideoClicks contains types of video clicks
@@ -453,7 +495,7 @@ type VideoClicks struct {
 // VideoClick defines a click URL for a linear creative
 type VideoClick struct {
 	ID  string `xml:"id,attr,omitempty"`
-	URI string `xml:",chardata"`
+	URI string `xml:",cdata"`
 }
 
 // MediaFile defines a reference to a linear creative asset
@@ -491,7 +533,7 @@ type MediaFile struct {
 	// (for Flash/Flex), “initParams” (for Silverlight) and “GetVariables” (variables
 	// placed in key/value pairs on the asset request).
 	APIFramework string `xml:"apiFramework,attr,omitempty"`
-	URI          string `xml:",chardata"`
+	URI          string `xml:",cdata"`
 }
 
 // Extensions defines extensions
