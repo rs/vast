@@ -71,7 +71,7 @@ type InLine struct {
 	// custom element should be nested under <Extensions> to help separate custom
 	// XML elements from VAST elements. The following example includes a custom
 	// xml element within the Extensions element.
-	Extensions *Extensions `xml:",omitempty"`
+	Extensions []Extension `xml:"Extensions>Extension,omitempty"`
 }
 
 // Impression is a URI that directs the video player to a tracking resource file that
@@ -120,7 +120,7 @@ type Wrapper struct {
 	// custom element should be nested under <Extensions> to help separate custom
 	// XML elements from VAST elements. The following example includes a custom
 	// xml element within the Extensions element.
-	Extensions *Extensions `xml:",omitempty"`
+	Extensions []Extension `xml:"Extensions>Extension,omitempty"`
 }
 
 // AdSystem contains information about the system that returned the ad
@@ -494,11 +494,6 @@ type MediaFile struct {
 	URI          string `xml:",chardata"`
 }
 
-// Extensions defines extensions
-type Extensions struct {
-	Extensions []Extension `xml:",omitempty"`
-}
-
 // CreativeExtensions defines extensions for creatives
 type CreativeExtensions struct {
 	Extensions []Extension `xml:"CreativeExtension,omitempty"`
@@ -506,5 +501,7 @@ type CreativeExtensions struct {
 
 // Extension represent aribtrary XML provided by the platform to extend the VAST response
 type Extension struct {
-	Data []byte `xml:",innerxml"`
+	Type           string     `xml:"type,attr,omitempty"`
+	CustomTracking []Tracking `xml:"CustomTracking>Tracking,omitempty"`
+	Data           []byte     `xml:",innerxml"`
 }
