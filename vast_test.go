@@ -24,6 +24,100 @@ func loadFixture(path string) (*VAST, error) {
 	return &v, err
 }
 
+func TestCreativeExtensions(t *testing.T) {
+	v, err := loadFixture("testdata/creative_extensions.xml")
+	if !assert.NoError(t, err) {
+		return
+	}
+
+	assert.Equal(t, "3.0", v.Version)
+	if assert.Len(t, v.Ads, 1) {
+		ad := v.Ads[0]
+		assert.Equal(t, "abc123", ad.ID)
+		if assert.NotNil(t, ad.InLine) {
+			if assert.Len(t, ad.InLine.Creatives, 1) {
+				if assert.Len(t, ad.InLine.Creatives[0].CreativeExtensions, 4) {
+					var ext Extension
+					// asserting first extension
+					ext = ad.InLine.Creatives[0].CreativeExtensions[0]
+					assert.Equal(t, "geo", ext.Type)
+					assert.Empty(t, ext.CustomTracking)
+					assert.Equal(t, "\n              <Country>US</Country>\n              <Bandwidth>3</Bandwidth>\n              <BandwidthKbps>1680</BandwidthKbps>\n            ", string(ext.Data))
+					// asserting second extension
+					ext = ad.InLine.Creatives[0].CreativeExtensions[1]
+					assert.Equal(t, "activeview", ext.Type)
+					if assert.Len(t, ext.CustomTracking, 2) {
+						// first tracker
+						assert.Equal(t, "viewable_impression", ext.CustomTracking[0].Event)
+						assert.Equal(t, "https://pubads.g.doubleclick.net/pagead/conversion/?ai=test&label=viewable_impression&acvw=[VIEWABILITY]&gv=[GOOGLE_VIEWABILITY]&ad_mt=[AD_MT]", ext.CustomTracking[0].URI)
+						// second tracker
+						assert.Equal(t, "abandon", ext.CustomTracking[1].Event)
+						assert.Equal(t, "https://pubads.g.doubleclick.net/pagead/conversion/?ai=test&label=video_abandon&acvw=[VIEWABILITY]&gv=[GOOGLE_VIEWABILITY]", ext.CustomTracking[1].URI)
+					}
+					assert.Empty(t, string(ext.Data))
+					// asserting third extension
+					ext = ad.InLine.Creatives[0].CreativeExtensions[2]
+					assert.Equal(t, "DFP", ext.Type)
+					assert.Empty(t, ext.CustomTracking)
+					assert.Equal(t, "\n              <SkippableAdType>Generic</SkippableAdType>\n            ", string(ext.Data))
+					// asserting fourth extension
+					ext = ad.InLine.Creatives[0].CreativeExtensions[3]
+					assert.Equal(t, "metrics", ext.Type)
+					assert.Empty(t, ext.CustomTracking)
+					assert.Equal(t, "\n              <FeEventId>MubmWKCWLs_tiQPYiYrwBw</FeEventId>\n              <AdEventId>CIGpsPCTkdMCFdN-Ygod-xkCKQ</AdEventId>\n            ", string(ext.Data))
+				}
+			}
+		}
+	}
+}
+
+func TestInlineExtensions(t *testing.T) {
+	v, err := loadFixture("testdata/inline_extensions.xml")
+	if !assert.NoError(t, err) {
+		return
+	}
+
+	assert.Equal(t, "3.0", v.Version)
+	if assert.Len(t, v.Ads, 1) {
+		ad := v.Ads[0]
+		assert.Equal(t, "708365173", ad.ID)
+		if assert.NotNil(t, ad.InLine) {
+			if assert.NotNil(t, ad.InLine.Extensions) {
+				if assert.Len(t, ad.InLine.Extensions, 4) {
+					var ext Extension
+					// asserting first extension
+					ext = ad.InLine.Extensions[0]
+					assert.Equal(t, "geo", ext.Type)
+					assert.Empty(t, ext.CustomTracking)
+					assert.Equal(t, "\n          <Country>US</Country>\n          <Bandwidth>3</Bandwidth>\n          <BandwidthKbps>1680</BandwidthKbps>\n        ", string(ext.Data))
+					// asserting second extension
+					ext = ad.InLine.Extensions[1]
+					assert.Equal(t, "activeview", ext.Type)
+					if assert.Len(t, ext.CustomTracking, 2) {
+						// first tracker
+						assert.Equal(t, "viewable_impression", ext.CustomTracking[0].Event)
+						assert.Equal(t, "https://pubads.g.doubleclick.net/pagead/conversion/?ai=test&label=viewable_impression&acvw=[VIEWABILITY]&gv=[GOOGLE_VIEWABILITY]&ad_mt=[AD_MT]", ext.CustomTracking[0].URI)
+						// second tracker
+						assert.Equal(t, "abandon", ext.CustomTracking[1].Event)
+						assert.Equal(t, "https://pubads.g.doubleclick.net/pagead/conversion/?ai=test&label=video_abandon&acvw=[VIEWABILITY]&gv=[GOOGLE_VIEWABILITY]", ext.CustomTracking[1].URI)
+					}
+					assert.Empty(t, string(ext.Data))
+					// asserting third extension
+					ext = ad.InLine.Extensions[2]
+					assert.Equal(t, "DFP", ext.Type)
+					assert.Equal(t, "\n          <SkippableAdType>Generic</SkippableAdType>\n        ", string(ext.Data))
+					assert.Empty(t, ext.CustomTracking)
+					// asserting fourth extension
+					ext = ad.InLine.Extensions[3]
+					assert.Equal(t, "metrics", ext.Type)
+					assert.Equal(t, "\n          <FeEventId>MubmWKCWLs_tiQPYiYrwBw</FeEventId>\n          <AdEventId>CIGpsPCTkdMCFdN-Ygod-xkCKQ</AdEventId>\n        ", string(ext.Data))
+					assert.Empty(t, ext.CustomTracking)
+				}
+			}
+		}
+	}
+}
+
 func TestInlineLinear(t *testing.T) {
 	v, err := loadFixture("testdata/vast_inline_linear.xml")
 	if !assert.NoError(t, err) {

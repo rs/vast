@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<VAST version="3.0">
+  <Ad id="abc123">
+    <InLine>
+      <Creatives>
+        <Creative>
+          <CreativeExtensions>
+            <CreativeExtension type="geo">
+              <Country>US</Country>
+              <Bandwidth>3</Bandwidth>
+              <BandwidthKbps>1680</BandwidthKbps>
+            </CreativeExtension>
+            <CreativeExtension type="activeview">
+              <CustomTracking>
+                <Tracking event="viewable_impression"><![CDATA[https://pubads.g.doubleclick.net/pagead/conversion/?ai=test&label=viewable_impression&acvw=[VIEWABILITY]&gv=[GOOGLE_VIEWABILITY]&ad_mt=[AD_MT]]]></Tracking>
+                <Tracking event="abandon"><![CDATA[https://pubads.g.doubleclick.net/pagead/conversion/?ai=test&label=video_abandon&acvw=[VIEWABILITY]&gv=[GOOGLE_VIEWABILITY]]]></Tracking>
+              </CustomTracking>
+            </CreativeExtension>
+            <CreativeExtension type="DFP">
+              <SkippableAdType>Generic</SkippableAdType>
+            </CreativeExtension>
+            <CreativeExtension type="metrics">
+              <FeEventId>MubmWKCWLs_tiQPYiYrwBw</FeEventId>
+              <AdEventId>CIGpsPCTkdMCFdN-Ygod-xkCKQ</AdEventId>
+            </CreativeExtension>
+          </CreativeExtensions>
+        </Creative>
+      </Creatives>
+    </InLine>
+  </Ad>
+</VAST>
