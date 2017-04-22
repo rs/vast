@@ -1,0 +1,3 @@
+# ignore vscode files
+.vscode/
+debug.test
