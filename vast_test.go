@@ -199,7 +199,7 @@ func TestInlineLinear(t *testing.T) {
 							assert.Equal(t, "creativeView", comp1.TrackingEvents[0].Event)
 							assert.Equal(t, "http://myTrackingURL/firstCompanionCreativeView", comp1.TrackingEvents[0].URI)
 						}
-						assert.Equal(t, "http://www.tremormedia.com", comp1.CompanionClickThrough)
+						assert.Equal(t, "http://www.tremormedia.com", comp1.CompanionClickThrough.Val)
 
 						comp2 := crea2.CompanionAds.Companions[1]
 						assert.Equal(t, 728, comp2.Width)
@@ -208,7 +208,7 @@ func TestInlineLinear(t *testing.T) {
 							assert.Equal(t, "image/jpeg", comp2.StaticResource.CreativeType)
 							assert.Equal(t, "http://demo.tremormedia.com/proddev/vast/728x90_banner1.jpg", comp2.StaticResource.URI)
 						}
-						assert.Equal(t, "http://www.tremormedia.com", comp2.CompanionClickThrough)
+						assert.Equal(t, "http://www.tremormedia.com", comp2.CompanionClickThrough.Val)
 					}
 				}
 			}
@@ -280,7 +280,7 @@ func TestInlineNonLinear(t *testing.T) {
 						assert.Equal(t, "http://demo.tremormedia.com/proddev/vast/50x300_static.jpg", strings.TrimSpace(nonlin.NonLinears[0].StaticResource.URI))
 						assert.Equal(t, "image/jpeg", nonlin.NonLinears[1].StaticResource.CreativeType)
 						assert.Equal(t, "http://demo.tremormedia.com/proddev/vast/50x450_static.jpg", strings.TrimSpace(nonlin.NonLinears[1].StaticResource.URI))
-						assert.Equal(t, "http://www.tremormedia.com", strings.TrimSpace(nonlin.NonLinears[1].NonLinearClickThrough))
+						assert.Equal(t, "http://www.tremormedia.com", strings.TrimSpace(nonlin.NonLinears[1].NonLinearClickThrough.Val))
 					}
 				}
 
@@ -297,7 +297,7 @@ func TestInlineNonLinear(t *testing.T) {
 							assert.Equal(t, "application/x-shockwave-flash", comp1.StaticResource.CreativeType)
 							assert.Equal(t, "http://demo.tremormedia.com/proddev/vast/300x250_companion_1.swf", comp1.StaticResource.URI)
 						}
-						assert.Equal(t, "http://www.tremormedia.com", comp1.CompanionClickThrough)
+						assert.Equal(t, "http://www.tremormedia.com", comp1.CompanionClickThrough.Val)
 
 						comp2 := crea2.CompanionAds.Companions[1]
 						assert.Equal(t, 728, comp2.Width)
@@ -310,7 +310,7 @@ func TestInlineNonLinear(t *testing.T) {
 							assert.Equal(t, "creativeView", comp2.TrackingEvents[0].Event)
 							assert.Equal(t, "http://myTrackingURL/secondCompanion", comp2.TrackingEvents[0].URI)
 						}
-						assert.Equal(t, "http://www.tremormedia.com", comp2.CompanionClickThrough)
+						assert.Equal(t, "http://www.tremormedia.com", comp2.CompanionClickThrough.Val)
 					}
 				}
 			}
@@ -332,10 +332,10 @@ func TestWrapperLinear(t *testing.T) {
 		assert.Nil(t, ad.InLine)
 		if assert.NotNil(t, ad.Wrapper) {
 			wrapper := ad.Wrapper
-			assert.Equal(t, "http://demo.tremormedia.com/proddev/vast/vast_inline_linear.xml", wrapper.VASTAdTagURI)
+			assert.Equal(t, "http://demo.tremormedia.com/proddev/vast/vast_inline_linear.xml", wrapper.VASTAdTagURI.Val)
 			assert.Equal(t, "Acudeo Compatible", wrapper.AdSystem.Name)
 			if assert.Len(t, wrapper.Errors, 1) {
-				assert.Equal(t, "http://myErrorURL/wrapper/error", wrapper.Errors[0])
+				assert.Equal(t, "http://myErrorURL/wrapper/error", wrapper.Errors[0].Val)
 			}
 			if assert.Len(t, wrapper.Impressions, 1) {
 				assert.Equal(t, "http://myTrackingURL/wrapper/impression", wrapper.Impressions[0].URI)
@@ -396,10 +396,10 @@ func TestWrapperNonLinear(t *testing.T) {
 		assert.Nil(t, ad.InLine)
 		if assert.NotNil(t, ad.Wrapper) {
 			wrapper := ad.Wrapper
-			assert.Equal(t, "http://demo.tremormedia.com/proddev/vast/vast_inline_nonlinear2.xml", wrapper.VASTAdTagURI)
+			assert.Equal(t, "http://demo.tremormedia.com/proddev/vast/vast_inline_nonlinear2.xml", wrapper.VASTAdTagURI.Val)
 			assert.Equal(t, "Acudeo Compatible", wrapper.AdSystem.Name)
 			if assert.Len(t, wrapper.Errors, 1) {
-				assert.Equal(t, "http://myErrorURL/wrapper/error", wrapper.Errors[0])
+				assert.Equal(t, "http://myErrorURL/wrapper/error", wrapper.Errors[0].Val)
 			}
 			if assert.Len(t, wrapper.Impressions, 1) {
 				assert.Equal(t, "http://myTrackingURL/wrapper/impression", wrapper.Impressions[0].URI)
