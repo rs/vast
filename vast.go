@@ -261,6 +261,8 @@ type Companion struct {
 	AdSlotID string `xml:"adSlotId,attr,omitempty"`
 	// URL to open as destination page when user clicks on the the companion banner ad.
 	CompanionClickThrough string `xml:",omitempty"`
+	// URLs to ping when user clicks on the the companion banner ad.
+	CompanionClickTracking []string `xml:",omitempty"`
 	// Alt text to be displayed when companion is rendered in HTML environment.
 	AltText string `xml:",omitempty"`
 	// The creativeView should always be requested when present. For Companions
