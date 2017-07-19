@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <VAST version="2.0">
   <Ad id="602833">
-  <Wrapper>
+  <Wrapper fallbackOnNoAd="true" allowMultipleAds="true">
     <AdSystem>Acudeo Compatible</AdSystem>
     <VASTAdTagURI>http://demo.tremormedia.com/proddev/vast/vast_inline_linear.xml</VASTAdTagURI>
     <Impression>http://myTrackingURL/wrapper/impression</Impression>
