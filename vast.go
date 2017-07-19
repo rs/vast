@@ -121,6 +121,10 @@ type Wrapper struct {
 	// XML elements from VAST elements. The following example includes a custom
 	// xml element within the Extensions element.
 	Extensions []Extension `xml:"Extensions>Extension,omitempty"`
+
+	FallbackOnNoAd           bool `xml:"fallbackOnNoAd,attr,omitempty"`
+	AllowMultipleAds         bool `xml:"allowMultipleAds,attr,omitempty"`
+	FollowAdditionalWrappers bool `xml:"followAdditionalWrappers,attr,omitempty"`
 }
 
 // AdSystem contains information about the system that returned the ad
