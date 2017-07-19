@@ -28,6 +28,8 @@ type Ad struct {
 	Sequence int      `xml:"sequence,attr,omitempty"`
 	InLine   *InLine  `xml:",omitempty"`
 	Wrapper  *Wrapper `xml:",omitempty"`
+
+	TestID string `xml:"testid,attr,omitempty"`
 }
 
 // InLine is a vast <InLine> ad element containing actual ad definition
