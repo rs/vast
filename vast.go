@@ -66,7 +66,7 @@ type InLine struct {
 	Survey string `xml:",omitempty"`
 	// A URI representing an error-tracking pixel; this element can occur multiple
 	// times.
-	Errors []string `xml:"Error,omitempty"`
+	Errors []CDATA `xml:"Error,omitempty"`
 	// Provides a value that represents a price that can be used by real-time bidding
 	// (RTB) systems. VAST is not designed to handle RTB since other methods exist,
 	// but this element is offered for custom solutions if needed.
@@ -82,7 +82,7 @@ type InLine struct {
 // the video player should request when the first frame of the ad is displayed
 type Impression struct {
 	ID  string `xml:"id,attr,omitempty"`
-	URI string `xml:",cdata"`
+	URI *CDATA `xml:",omitempty"`
 }
 
 // Pricing provides a value that represents a price that can be used by real-time
@@ -125,6 +125,10 @@ type Wrapper struct {
 	// XML elements from VAST elements. The following example includes a custom
 	// xml element within the Extensions element.
 	Extensions []Extension `xml:"Extensions>Extension,omitempty"`
+
+	FallbackOnNoAd           bool `xml:"fallbackOnNoAd,attr,omitempty"`
+	AllowMultipleAds         bool `xml:"allowMultipleAds,attr,omitempty"`
+	FollowAdditionalWrappers bool `xml:"followAdditionalWrappers,attr,omitempty"`
 }
 
 // AdSystem contains information about the system that returned the ad
@@ -265,6 +269,8 @@ type Companion struct {
 	AdSlotID string `xml:"adSlotId,attr,omitempty"`
 	// URL to open as destination page when user clicks on the the companion banner ad.
 	CompanionClickThrough *CDATA `xml:",omitempty"`
+	// URLs to ping when user clicks on the the companion banner ad.
+	CompanionClickTracking []CDATA `xml:",omitempty"`
 	// Alt text to be displayed when companion is rendered in HTML environment.
 	AltText string `xml:",omitempty"`
 	// The creativeView should always be requested when present. For Companions
@@ -427,7 +433,7 @@ type Tracking struct {
 	// The time during the video at which this url should be pinged. Must be present for
 	// progress event. Must match (\d{2}:[0-5]\d:[0-5]\d(\.\d\d\d)?|1?\d?\d(\.?\d)*%)
 	Offset *Offset `xml:"offset,attr,omitempty"`
-	URI    string `xml:",cdata"`
+	URI    *CDATA  `xml:",omitempty"`
 }
 
 // StaticResource is the URL to a static file, such as an image or SWF file
@@ -435,7 +441,7 @@ type StaticResource struct {
 	// Mime type of static resource
 	CreativeType string `xml:"creativeType,attr,omitempty"`
 	// URL to a static file, such as an image or SWF file
-	URI string `xml:",cdata"`
+	URI *CDATA `xml:",omitempty"`
 }
 
 // HTMLResource is a container for HTML data
@@ -462,7 +468,7 @@ type VideoClicks struct {
 // VideoClick defines a click URL for a linear creative
 type VideoClick struct {
 	ID  string `xml:"id,attr,omitempty"`
-	URI string `xml:",cdata"`
+	URI *CDATA `xml:",omitempty"`
 }
 
 // MediaFile defines a reference to a linear creative asset
@@ -500,5 +506,5 @@ type MediaFile struct {
 	// (for Flash/Flex), “initParams” (for Silverlight) and “GetVariables” (variables
 	// placed in key/value pairs on the asset request).
 	APIFramework string `xml:"apiFramework,attr,omitempty"`
-	URI          string `xml:",cdata"`
+	URI          *CDATA `xml:",omitempty"`
 }

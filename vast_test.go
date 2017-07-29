@@ -277,9 +277,9 @@ func TestInlineNonLinear(t *testing.T) {
 					}
 					if assert.Len(t, nonlin.NonLinears, 2) {
 						assert.Equal(t, "image/jpeg", nonlin.NonLinears[0].StaticResource.CreativeType)
-						assert.Equal(t, "http://demo.tremormedia.com/proddev/vast/50x300_static.jpg", strings.TrimSpace(nonlin.NonLinears[0].StaticResource.URI))
+						assert.Equal(t, "http://demo.tremormedia.com/proddev/vast/50x300_static.jpg", strings.TrimSpace(nonlin.NonLinears[0].StaticResource.URI.Val))
 						assert.Equal(t, "image/jpeg", nonlin.NonLinears[1].StaticResource.CreativeType)
-						assert.Equal(t, "http://demo.tremormedia.com/proddev/vast/50x450_static.jpg", strings.TrimSpace(nonlin.NonLinears[1].StaticResource.URI))
+						assert.Equal(t, "http://demo.tremormedia.com/proddev/vast/50x450_static.jpg", strings.TrimSpace(nonlin.NonLinears[1].StaticResource.URI.Val))
 						assert.Equal(t, "http://www.tremormedia.com", strings.TrimSpace(nonlin.NonLinears[1].NonLinearClickThrough.Val))
 					}
 				}
@@ -333,6 +333,10 @@ func TestWrapperLinear(t *testing.T) {
 		if assert.NotNil(t, ad.Wrapper) {
 			wrapper := ad.Wrapper
 			assert.Equal(t, "http://demo.tremormedia.com/proddev/vast/vast_inline_linear.xml", wrapper.VASTAdTagURI.Val)
+			assert.Equal(t, true, wrapper.FallbackOnNoAd)
+			assert.Equal(t, true, wrapper.AllowMultipleAds)
+			assert.Equal(t, true, wrapper.FollowAdditionalWrappers)
+			assert.Equal(t, "http://demo.tremormedia.com/proddev/vast/vast_inline_linear.xml", wrapper.VASTAdTagURI)
 			assert.Equal(t, "Acudeo Compatible", wrapper.AdSystem.Name)
 			if assert.Len(t, wrapper.Errors, 1) {
 				assert.Equal(t, "http://myErrorURL/wrapper/error", wrapper.Errors[0].Val)
