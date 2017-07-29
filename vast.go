@@ -13,7 +13,11 @@ type VAST struct {
 	Ads []Ad `xml:"Ad"`
 	// Contains a URI to a tracking resource that the video player should request
 	// upon receiving a “no ad” response
-	Errors []string `xml:"Error"`
+	Errors []CDATA `xml:"Error"`
+}
+
+type CDATA struct {
+	Val string `xml:",cdata"`
 }
 
 // Ad represent an <Ad> child tag in a VAST document
@@ -62,7 +66,7 @@ type InLine struct {
 	Survey string `xml:",omitempty"`
 	// A URI representing an error-tracking pixel; this element can occur multiple
 	// times.
-	Errors []string `xml:"Error,omitempty"`
+	Errors []CDATA `xml:"Error,omitempty"`
 	// Provides a value that represents a price that can be used by real-time bidding
 	// (RTB) systems. VAST is not designed to handle RTB since other methods exist,
 	// but this element is offered for custom solutions if needed.
@@ -78,7 +82,7 @@ type InLine struct {
 // the video player should request when the first frame of the ad is displayed
 type Impression struct {
 	ID  string `xml:"id,attr,omitempty"`
-	URI string `xml:",chardata"`
+	URI *CDATA `xml:",omitempty"`
 }
 
 // Pricing provides a value that represents a price that can be used by real-time
@@ -107,13 +111,13 @@ type Wrapper struct {
 	// The name of the ad server that returned the ad
 	AdSystem *AdSystem
 	// URL of ad tag of downstream Secondary Ad Server
-	VASTAdTagURI string
+	VASTAdTagURI *CDATA
 	// One or more URIs that directs the video player to a tracking resource file that the
 	// video player should request when the first frame of the ad is displayed
 	Impressions []Impression `xml:"Impression"`
 	// A URI representing an error-tracking pixel; this element can occur multiple
 	// times.
-	Errors []string `xml:"Error,omitempty"`
+	Errors []CDATA `xml:"Error,omitempty"`
 	// The container for one or more <Creative> elements
 	Creatives []CreativeWrapper `xml:"Creatives>Creative"`
 	// XML node for custom extensions, as defined by the ad server. When used, a
@@ -264,9 +268,9 @@ type Companion struct {
 	// Used to match companion creative to publisher placement areas on the page.
 	AdSlotID string `xml:"adSlotId,attr,omitempty"`
 	// URL to open as destination page when user clicks on the the companion banner ad.
-	CompanionClickThrough string `xml:",omitempty"`
+	CompanionClickThrough *CDATA `xml:",omitempty"`
 	// URLs to ping when user clicks on the the companion banner ad.
-	CompanionClickTracking []string `xml:",omitempty"`
+	CompanionClickTracking []CDATA `xml:",omitempty"`
 	// Alt text to be displayed when companion is rendered in HTML environment.
 	AltText string `xml:",omitempty"`
 	// The creativeView should always be requested when present. For Companions
@@ -278,7 +282,7 @@ type Companion struct {
 	// URL to a static file, such as an image or SWF file
 	StaticResource *StaticResource `xml:",omitempty"`
 	// URL source for an IFrame to display the companion element
-	IFrameResource string `xml:",omitempty"`
+	IFrameResource *CDATA `xml:",omitempty"`
 	// HTML to display the companion element
 	HTMLResource *HTMLResource `xml:",omitempty"`
 }
@@ -304,9 +308,9 @@ type CompanionWrapper struct {
 	// Used to match companion creative to publisher placement areas on the page.
 	AdSlotID string `xml:"adSlotId,attr,omitempty"`
 	// URL to open as destination page when user clicks on the the companion banner ad.
-	CompanionClickThrough string `xml:",omitempty"`
+	CompanionClickThrough *CDATA `xml:",omitempty"`
 	// URLs to ping when user clicks on the the companion banner ad.
-	CompanionClickTracking []string `xml:",omitempty"`
+	CompanionClickTracking []CDATA `xml:",omitempty"`
 	// Alt text to be displayed when companion is rendered in HTML environment.
 	AltText string `xml:",omitempty"`
 	// The creativeView should always be requested when present. For Companions
@@ -318,7 +322,7 @@ type CompanionWrapper struct {
 	// URL to a static file, such as an image or SWF file
 	StaticResource *StaticResource `xml:",omitempty"`
 	// URL source for an IFrame to display the companion element
-	IFrameResource string `xml:",omitempty"`
+	IFrameResource *CDATA `xml:",omitempty"`
 	// HTML to display the companion element
 	HTMLResource *HTMLResource `xml:",omitempty"`
 }
@@ -345,15 +349,15 @@ type NonLinear struct {
 	// The apiFramework defines the method to use for communication with the nonlinear element.
 	APIFramework string `xml:"apiFramework,attr,omitempty"`
 	// URLs to ping when user clicks on the the non-linear ad.
-	NonLinearClickTracking []string `xml:",omitempty"`
+	NonLinearClickTracking []CDATA `xml:",omitempty"`
 	// URL to open as destination page when user clicks on the non-linear ad unit.
-	NonLinearClickThrough string `xml:",omitempty"`
+	NonLinearClickThrough *CDATA `xml:",omitempty"`
 	// Data to be passed into the video ad.
 	AdParameters *AdParameters `xml:",omitempty"`
 	// URL to a static file, such as an image or SWF file
 	StaticResource *StaticResource `xml:",omitempty"`
 	// URL source for an IFrame to display the companion element
-	IFrameResource string `xml:",omitempty"`
+	IFrameResource *CDATA `xml:",omitempty"`
 	// HTML to display the companion element
 	HTMLResource *HTMLResource `xml:",omitempty"`
 }
@@ -382,7 +386,7 @@ type NonLinearWrapper struct {
 	// The creativeView should always be requested when present.
 	TrackingEvents []Tracking `xml:"TrackingEvents>Tracking,omitempty"`
 	// URLs to ping when user clicks on the the non-linear ad.
-	NonLinearClickTracking []string `xml:",omitempty"`
+	NonLinearClickTracking []CDATA `xml:",omitempty"`
 }
 
 // Icon represents advertising industry initiatives like AdChoices.
@@ -406,13 +410,13 @@ type Icon struct {
 	// The apiFramework defines the method to use for communication with the icon element
 	APIFramework string `xml:"apiFramework,attr,omitempty"`
 	// URL to open as destination page when user clicks on the icon.
-	IconClickThrough string `xml:"IconClicks>IconClickThrough,omitempty"`
+	IconClickThrough *CDATA `xml:"IconClicks>IconClickThrough,omitempty"`
 	// URLs to ping when user clicks on the the icon.
-	IconClickTrackings []string `xml:"IconClicks>IconClickTracking,omitempty"`
+	IconClickTrackings []CDATA `xml:"IconClicks>IconClickTracking,omitempty"`
 	// URL to a static file, such as an image or SWF file
 	StaticResource *StaticResource `xml:",omitempty"`
 	// URL source for an IFrame to display the companion element
-	IFrameResource string `xml:",omitempty"`
+	IFrameResource *CDATA `xml:",omitempty"`
 	// HTML to display the companion element
 	HTMLResource *HTMLResource `xml:",omitempty"`
 }
@@ -429,7 +433,7 @@ type Tracking struct {
 	// The time during the video at which this url should be pinged. Must be present for
 	// progress event. Must match (\d{2}:[0-5]\d:[0-5]\d(\.\d\d\d)?|1?\d?\d(\.?\d)*%)
 	Offset *Offset `xml:"offset,attr,omitempty"`
-	URI    string  `xml:",chardata"`
+	URI    *CDATA  `xml:",omitempty"`
 }
 
 // StaticResource is the URL to a static file, such as an image or SWF file
@@ -437,7 +441,7 @@ type StaticResource struct {
 	// Mime type of static resource
 	CreativeType string `xml:"creativeType,attr,omitempty"`
 	// URL to a static file, such as an image or SWF file
-	URI string `xml:",chardata"`
+	URI *CDATA `xml:",omitempty"`
 }
 
 // HTMLResource is a container for HTML data
@@ -464,7 +468,7 @@ type VideoClicks struct {
 // VideoClick defines a click URL for a linear creative
 type VideoClick struct {
 	ID  string `xml:"id,attr,omitempty"`
-	URI string `xml:",chardata"`
+	URI *CDATA `xml:",omitempty"`
 }
 
 // MediaFile defines a reference to a linear creative asset
@@ -502,5 +506,5 @@ type MediaFile struct {
 	// (for Flash/Flex), “initParams” (for Silverlight) and “GetVariables” (variables
 	// placed in key/value pairs on the asset request).
 	APIFramework string `xml:"apiFramework,attr,omitempty"`
-	URI          string `xml:",chardata"`
+	URI          *CDATA `xml:",omitempty"`
 }
