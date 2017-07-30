@@ -11,21 +11,28 @@ import (
 	"github.com/stretchr/testify/assert"
 )
 
-func loadFixture(path string) (*VAST, error) {
+func loadFixture(path string) (*VAST, string, string, error) {
 	xmlFile, err := os.Open(path)
 	if err != nil {
-		return nil, err
+		return nil, "", "", err
 	}
 	defer xmlFile.Close()
 	b, _ := ioutil.ReadAll(xmlFile)
 
 	var v VAST
 	err = xml.Unmarshal(b, &v)
-	return &v, err
+
+	res, err := xml.MarshalIndent(v, "", "  ")
+	if err != nil {
+		return nil, "", "", err
+
+	}
+
+	return &v, string(b), string(res), err
 }
 
 func TestCreativeExtensions(t *testing.T) {
-	v, err := loadFixture("testdata/creative_extensions.xml")
+	v, _, _, err := loadFixture("testdata/creative_extensions.xml")
 	if !assert.NoError(t, err) {
 		return
 	}
@@ -72,7 +79,7 @@ func TestCreativeExtensions(t *testing.T) {
 }
 
 func TestInlineExtensions(t *testing.T) {
-	v, err := loadFixture("testdata/inline_extensions.xml")
+	v, _, _, err := loadFixture("testdata/inline_extensions.xml")
 	if !assert.NoError(t, err) {
 		return
 	}
@@ -119,7 +126,7 @@ func TestInlineExtensions(t *testing.T) {
 }
 
 func TestInlineLinear(t *testing.T) {
-	v, err := loadFixture("testdata/vast_inline_linear.xml")
+	v, _, _, err := loadFixture("testdata/vast_inline_linear.xml")
 	if !assert.NoError(t, err) {
 		return
 	}
@@ -134,11 +141,11 @@ func TestInlineLinear(t *testing.T) {
 			inline := ad.InLine
 			assert.Equal(t, "Acudeo Compatible", inline.AdSystem.Name)
 			assert.Equal(t, "1.0", inline.AdSystem.Version)
-			assert.Equal(t, "VAST 2.0 Instream Test 1", inline.AdTitle)
-			assert.Equal(t, "VAST 2.0 Instream Test 1", inline.Description)
+			assert.Equal(t, "VAST 2.0 Instream Test 1", inline.AdTitle.CDATA)
+			assert.Equal(t, "VAST 2.0 Instream Test 1", inline.Description.CDATA)
 			if assert.Len(t, inline.Errors, 2) {
-				assert.Equal(t, "http://myErrorURL/error", inline.Errors[0])
-				assert.Equal(t, "http://myErrorURL/error2", inline.Errors[1])
+				assert.Equal(t, "http://myErrorURL/error", inline.Errors[0].CDATA)
+				assert.Equal(t, "http://myErrorURL/error2", inline.Errors[1].CDATA)
 			}
 			if assert.Len(t, inline.Impressions, 2) {
 				assert.Equal(t, "http://myTrackingURL/impression", inline.Impressions[0].URI)
@@ -199,7 +206,7 @@ func TestInlineLinear(t *testing.T) {
 							assert.Equal(t, "creativeView", comp1.TrackingEvents[0].Event)
 							assert.Equal(t, "http://myTrackingURL/firstCompanionCreativeView", comp1.TrackingEvents[0].URI)
 						}
-						assert.Equal(t, "http://www.tremormedia.com", comp1.CompanionClickThrough)
+						assert.Equal(t, "http://www.tremormedia.com", comp1.CompanionClickThrough.CDATA)
 
 						comp2 := crea2.CompanionAds.Companions[1]
 						assert.Equal(t, 728, comp2.Width)
@@ -208,7 +215,7 @@ func TestInlineLinear(t *testing.T) {
 							assert.Equal(t, "image/jpeg", comp2.StaticResource.CreativeType)
 							assert.Equal(t, "http://demo.tremormedia.com/proddev/vast/728x90_banner1.jpg", comp2.StaticResource.URI)
 						}
-						assert.Equal(t, "http://www.tremormedia.com", comp2.CompanionClickThrough)
+						assert.Equal(t, "http://www.tremormedia.com", comp2.CompanionClickThrough.CDATA)
 					}
 				}
 			}
@@ -217,7 +224,7 @@ func TestInlineLinear(t *testing.T) {
 }
 
 func TestInlineLinearDurationUndefined(t *testing.T) {
-	v, err := loadFixture("testdata/vast_inline_linear-duration_undefined.xml")
+	v, _, _, err := loadFixture("testdata/vast_inline_linear-duration_undefined.xml")
 	if !assert.NoError(t, err) {
 		return
 	}
@@ -239,7 +246,7 @@ func TestInlineLinearDurationUndefined(t *testing.T) {
 }
 
 func TestInlineNonLinear(t *testing.T) {
-	v, err := loadFixture("testdata/vast_inline_nonlinear.xml")
+	v, _, _, err := loadFixture("testdata/vast_inline_nonlinear.xml")
 	if !assert.NoError(t, err) {
 		return
 	}
@@ -253,11 +260,11 @@ func TestInlineNonLinear(t *testing.T) {
 		if assert.NotNil(t, ad.InLine) {
 			inline := ad.InLine
 			assert.Equal(t, "Acudeo Compatible", inline.AdSystem.Name)
-			assert.Equal(t, "NonLinear Test Campaign 1", inline.AdTitle)
-			assert.Equal(t, "NonLinear Test Campaign 1", inline.Description)
-			assert.Equal(t, "http://mySurveyURL/survey", inline.Survey)
+			assert.Equal(t, "NonLinear Test Campaign 1", inline.AdTitle.CDATA)
+			assert.Equal(t, "NonLinear Test Campaign 1", inline.Description.CDATA)
+			assert.Equal(t, "http://mySurveyURL/survey", inline.Survey.CDATA)
 			if assert.Len(t, inline.Errors, 1) {
-				assert.Equal(t, "http://myErrorURL/error", inline.Errors[0])
+				assert.Equal(t, "http://myErrorURL/error", inline.Errors[0].CDATA)
 			}
 			if assert.Len(t, inline.Impressions, 1) {
 				assert.Equal(t, "http://myTrackingURL/impression", inline.Impressions[0].URI)
@@ -280,7 +287,7 @@ func TestInlineNonLinear(t *testing.T) {
 						assert.Equal(t, "http://demo.tremormedia.com/proddev/vast/50x300_static.jpg", strings.TrimSpace(nonlin.NonLinears[0].StaticResource.URI))
 						assert.Equal(t, "image/jpeg", nonlin.NonLinears[1].StaticResource.CreativeType)
 						assert.Equal(t, "http://demo.tremormedia.com/proddev/vast/50x450_static.jpg", strings.TrimSpace(nonlin.NonLinears[1].StaticResource.URI))
-						assert.Equal(t, "http://www.tremormedia.com", strings.TrimSpace(nonlin.NonLinears[1].NonLinearClickThrough))
+						assert.Equal(t, "http://www.tremormedia.com", strings.TrimSpace(nonlin.NonLinears[1].NonLinearClickThrough.CDATA))
 					}
 				}
 
@@ -297,7 +304,7 @@ func TestInlineNonLinear(t *testing.T) {
 							assert.Equal(t, "application/x-shockwave-flash", comp1.StaticResource.CreativeType)
 							assert.Equal(t, "http://demo.tremormedia.com/proddev/vast/300x250_companion_1.swf", comp1.StaticResource.URI)
 						}
-						assert.Equal(t, "http://www.tremormedia.com", comp1.CompanionClickThrough)
+						assert.Equal(t, "http://www.tremormedia.com", comp1.CompanionClickThrough.CDATA)
 
 						comp2 := crea2.CompanionAds.Companions[1]
 						assert.Equal(t, 728, comp2.Width)
@@ -310,7 +317,7 @@ func TestInlineNonLinear(t *testing.T) {
 							assert.Equal(t, "creativeView", comp2.TrackingEvents[0].Event)
 							assert.Equal(t, "http://myTrackingURL/secondCompanion", comp2.TrackingEvents[0].URI)
 						}
-						assert.Equal(t, "http://www.tremormedia.com", comp2.CompanionClickThrough)
+						assert.Equal(t, "http://www.tremormedia.com", comp2.CompanionClickThrough.CDATA)
 					}
 				}
 			}
@@ -319,7 +326,7 @@ func TestInlineNonLinear(t *testing.T) {
 }
 
 func TestWrapperLinear(t *testing.T) {
-	v, err := loadFixture("testdata/vast_wrapper_linear_1.xml")
+	v, _, _, err := loadFixture("testdata/vast_wrapper_linear_1.xml")
 	if !assert.NoError(t, err) {
 		return
 	}
@@ -332,13 +339,14 @@ func TestWrapperLinear(t *testing.T) {
 		assert.Nil(t, ad.InLine)
 		if assert.NotNil(t, ad.Wrapper) {
 			wrapper := ad.Wrapper
+			assert.Equal(t, "http://demo.tremormedia.com/proddev/vast/vast_inline_linear.xml", wrapper.VASTAdTagURI.CDATA)
 			assert.Equal(t, true, wrapper.FallbackOnNoAd)
 			assert.Equal(t, true, wrapper.AllowMultipleAds)
 			assert.Equal(t, true, wrapper.FollowAdditionalWrappers)
-			assert.Equal(t, "http://demo.tremormedia.com/proddev/vast/vast_inline_linear.xml", wrapper.VASTAdTagURI)
+			assert.Equal(t, "http://demo.tremormedia.com/proddev/vast/vast_inline_linear.xml", wrapper.VASTAdTagURI.CDATA)
 			assert.Equal(t, "Acudeo Compatible", wrapper.AdSystem.Name)
 			if assert.Len(t, wrapper.Errors, 1) {
-				assert.Equal(t, "http://myErrorURL/wrapper/error", wrapper.Errors[0])
+				assert.Equal(t, "http://myErrorURL/wrapper/error", wrapper.Errors[0].CDATA)
 			}
 			if assert.Len(t, wrapper.Impressions, 1) {
 				assert.Equal(t, "http://myTrackingURL/wrapper/impression", wrapper.Impressions[0].URI)
@@ -386,7 +394,7 @@ func TestWrapperLinear(t *testing.T) {
 }
 
 func TestWrapperNonLinear(t *testing.T) {
-	v, err := loadFixture("testdata/vast_wrapper_nonlinear_1.xml")
+	v, _, _, err := loadFixture("testdata/vast_wrapper_nonlinear_1.xml")
 	if !assert.NoError(t, err) {
 		return
 	}
@@ -399,10 +407,10 @@ func TestWrapperNonLinear(t *testing.T) {
 		assert.Nil(t, ad.InLine)
 		if assert.NotNil(t, ad.Wrapper) {
 			wrapper := ad.Wrapper
-			assert.Equal(t, "http://demo.tremormedia.com/proddev/vast/vast_inline_nonlinear2.xml", wrapper.VASTAdTagURI)
+			assert.Equal(t, "http://demo.tremormedia.com/proddev/vast/vast_inline_nonlinear2.xml", wrapper.VASTAdTagURI.CDATA)
 			assert.Equal(t, "Acudeo Compatible", wrapper.AdSystem.Name)
 			if assert.Len(t, wrapper.Errors, 1) {
-				assert.Equal(t, "http://myErrorURL/wrapper/error", wrapper.Errors[0])
+				assert.Equal(t, "http://myErrorURL/wrapper/error", wrapper.Errors[0].CDATA)
 			}
 			if assert.Len(t, wrapper.Impressions, 1) {
 				assert.Equal(t, "http://myTrackingURL/wrapper/impression", wrapper.Impressions[0].URI)
@@ -424,6 +432,39 @@ func TestWrapperNonLinear(t *testing.T) {
 						assert.Equal(t, "creativeView", crea2.NonLinearAds.TrackingEvents[0].Event)
 						assert.Equal(t, "http://myTrackingURL/wrapper/nonlinear/creativeView/creativeView", crea2.NonLinearAds.TrackingEvents[0].URI)
 					}
+				}
+			}
+		}
+	}
+}
+
+func TestSpotXVpaid(t *testing.T) {
+	v, _, _, err := loadFixture("testdata/spotx_vpaid.xml")
+	if !assert.NoError(t, err) {
+		return
+	}
+
+	assert.Equal(t, "2.0", v.Version)
+	if assert.Len(t, v.Ads, 1) {
+		ad := v.Ads[0]
+		assert.Equal(t, "1130507-1818483", ad.ID)
+		assert.Nil(t, ad.Wrapper)
+		if assert.NotNil(t, ad.InLine) {
+			inline := ad.InLine
+			assert.Equal(t, "SpotXchange", inline.AdSystem.Name)
+			assert.Equal(t, "IntegralAds_VAST_2_0_Ad_Wrapper", inline.AdTitle.CDATA)
+
+			if assert.Len(t, inline.Creatives, 2) {
+				crea1 := inline.Creatives[0]
+				if assert.NotNil(t, crea1.Linear) {
+					linear := crea1.Linear
+					adParam, err := os.Open("testdata/spotx_adparameters.txt")
+					if err != nil {
+						assert.FailNow(t, "Cannot open adparams file")
+					}
+					defer adParam.Close()
+					b, _ := ioutil.ReadAll(adParam)
+					assert.Equal(t, linear.AdParameters.Parameters, string(b))
 				}
 			}
 		}
