@@ -531,3 +531,42 @@ func TestSpotXVpaid(t *testing.T) {
 		}
 	}
 }
+
+func TestExtraSpacesVpaid(t *testing.T) {
+	v, _, _, err := loadFixture("testdata/extraspaces_vpaid.xml")
+	if !assert.NoError(t, err) {
+		return
+	}
+
+	assert.Equal(t, "2.0", v.Version)
+	if assert.Len(t, v.Ads, 1) {
+		ad := v.Ads[0]
+		assert.Equal(t, "1130507-1818483", ad.ID)
+		assert.Nil(t, ad.Wrapper)
+		if assert.NotNil(t, ad.InLine) {
+			inline := ad.InLine
+			assert.Equal(t, "SpotXchange", inline.AdSystem.Name)
+			assert.Equal(t, "1.0", inline.AdSystem.Version)
+			assert.Equal(t, "IntegralAds_VAST_2_0_Ad_Wrapper", inline.AdTitle.CDATA)
+			assert.Equal(t, "", inline.Description.CDATA)
+
+			if assert.Len(t, inline.Creatives, 1) {
+				crea1 := inline.Creatives[0]
+				assert.Equal(t, 1, crea1.Sequence)
+				if assert.NotNil(t, crea1.Linear) {
+					linear := crea1.Linear
+
+					assert.Equal(t, "        \n                  <VAST></VAST>\n                  \n                  ", linear.AdParameters.Parameters)
+					if assert.Len(t, crea1.Linear.MediaFiles, 1) {
+						media1 := crea1.Linear.MediaFiles[0]
+						assert.Equal(t, "progressive", media1.Delivery)
+						assert.Equal(t, "application/javascript", media1.Type)
+						assert.Equal(t, 300, media1.Width)
+						assert.Equal(t, 250, media1.Height)
+						assert.Equal(t, "\n                     https://dummy.com/dummmy.js             \n                     ", media1.URI)
+					}
+				}
+			}
+		}
+	}
+}

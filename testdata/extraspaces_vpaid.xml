@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<VAST version="2.0">
+   <Ad id="1130507-1818483">
+      <InLine>
+         <AdSystem version="1.0">SpotXchange</AdSystem>
+         <AdTitle><![CDATA[IntegralAds_VAST_2_0_Ad_Wrapper]]></AdTitle>
+         <Description />
+         <Creatives>
+            <Creative sequence="1">
+               <Linear>
+                  <Duration>00:00:16</Duration>
+                  <AdParameters>        
+                  <![CDATA[<VAST></VAST>]]>
+                  
+                  </AdParameters>
+                  <MediaFiles>
+                     <MediaFile delivery="progressive" type="application/javascript" width="300" height="250" apiFramework="VPAID">
+                     <![CDATA[https://dummy.com/dummmy.js]]>             
+                     </MediaFile>
+                  </MediaFiles>
+               </Linear>
+            </Creative>
+         </Creatives>
+      </InLine>
+   </Ad>
+</VAST>
