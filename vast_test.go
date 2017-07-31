@@ -452,10 +452,13 @@ func TestSpotXVpaid(t *testing.T) {
 		if assert.NotNil(t, ad.InLine) {
 			inline := ad.InLine
 			assert.Equal(t, "SpotXchange", inline.AdSystem.Name)
+			assert.Equal(t, "1.0", inline.AdSystem.Version)
 			assert.Equal(t, "IntegralAds_VAST_2_0_Ad_Wrapper", inline.AdTitle.CDATA)
+			assert.Equal(t, "", inline.Description.CDATA)
 
 			if assert.Len(t, inline.Creatives, 2) {
 				crea1 := inline.Creatives[0]
+				assert.Equal(t, 1, crea1.Sequence)
 				if assert.NotNil(t, crea1.Linear) {
 					linear := crea1.Linear
 					adParam, err := os.Open("testdata/spotx_adparameters.txt")
@@ -465,7 +468,65 @@ func TestSpotXVpaid(t *testing.T) {
 					defer adParam.Close()
 					b, _ := ioutil.ReadAll(adParam)
 					assert.Equal(t, linear.AdParameters.Parameters, string(b))
+					if assert.Len(t, crea1.Linear.MediaFiles, 1) {
+						media1 := crea1.Linear.MediaFiles[0]
+						assert.Equal(t, "progressive", media1.Delivery)
+						assert.Equal(t, "application/javascript", media1.Type)
+						assert.Equal(t, 300, media1.Width)
+						assert.Equal(t, 250, media1.Height)
+						assert.Equal(t, "https://cdn.spotxcdn.com/integration/instreamadbroker/v1/instreamadbroker/beta.js", media1.URI)
+					}
 				}
+				crea2 := inline.Creatives[1]
+				assert.Equal(t, 1, crea2.Sequence)
+				if assert.NotNil(t, crea2.CompanionAds) {
+					if assert.Len(t, crea2.CompanionAds.Companions, 3) {
+						companionAds1 := crea2.CompanionAds.Companions[0]
+						assert.Equal(t, 300, companionAds1.Width)
+						assert.Equal(t, 250, companionAds1.Height)
+						assert.Equal(t, "medium_rectangle", companionAds1.ID)
+						if assert.NotNil(t, companionAds1.IFrameResource) {
+							assert.Equal(t, "https://search.spotxchange.com/banner?_a=137530&amp;_p=spotx&amp;_z=1&amp;_m=eNpVz99vgjAQB%2FD%2BLTyP0rM%2FLCZ7WOKWbFF5GJr4RAotUBUwgkHZ9rdvVB8W%2B3BJv3eXT45hQhBCwAnhEkKQKA2lZCHLhJYSwExTSgSkqcpBCEIIIKBTTglaf6JQ4glleAISAxOo7LpjOwuCvu9xrip7uJaq1tdK1ThrqgB9eefWnJLibLU385hRoTQ8FylPnSNzMgUtc6EpdY73dB%2B3bVKbflwYg6xp9tYkuqmUrceoNeqUlbg9Nt0lG7HCOGkcVGdtTZ2Z5IHyneU7zHea%2F8D93A6bcPR7e2i1XizuBW4R4oJcKPDx%2B99y5TuKD%2BU23rPlrhiW849dFG%2FstnqrVsPLJYrfYTm88mi%2BZ6uheP4DQppvcA%3D%3D&amp;_l=eNplj01rwkAYhN%2FfsleLvJv9yEbooUXoxU1BDKW5yGazNUk1SZMNtVr%2Fe9VgofQyh5mHGYYqqrhiEEYykIyDABWgAi4wlAAUKKdcRIpD3zZ%2BD5MJSBpB3dQOEI6EkdmRZGVOZgSniEySO9Kar2bwNwcvVt%2B6%2BpeJrtCQbUu7dntbmHrj1m%2FOXXOKiOfYDp3xLl%2FvTPfufLs11v1n8cKeThAni8UoCDhVAparR%2FDdsGuLxrttP7XNDlBxRjORW5pxhRYjIYULc8nDyDLm8vH3%2BRxy%2BBhM7a3p%2FdhKWSgC8XcGvuNK8%2FQp2b%2BuiiKdb1AfNNfVw6eukkBXcfk8T4L0ZVnqQ3L%2FAyjAYKo%3D&amp;_t=eNotj9Fu4yAQRf0tPFdbwK5dE%2B1b1aiVnGpXlVaJKlkDTGxaYyxMtsmm%2BfeFuDzA3MO9wyBhHNFn9Z5WQCtd6vt7xrCSOa2YlLBnZUkpZZnqwYyZ8x2MRmVySZ2JRW2gNZoIorWUpeSasbq4y%2BOOulaFrrGGUtccyQ3ZO28hRO%2F66TFKayy24TRhJMZCh2%2B3ndnHi0%2BjQx9hTmlUPZquTyl%2Bd5XBDq1ydhrQ4ph4hAZka%2BwhijTRwbYeVYCxG9KzM4JXfTtPqIg4kwk8WAzo56Q0%2FjUKU4XHkI55cuHYLriFafqekF3iwE7jQAS%2FIS5m%2BSWuLGM%2FKM1AVOI8i1KQbnASBrIygq6uYHJzWACrGY8sv%2F42gbyoKlpEVAiiTDh9m9gS9NgZNyZWsjqiKprcYQz%2B6uM8X3rppVfJ2eqSfW3Wv05b%2Fvy%2Be2j4br352NqN3f55Ys2%2Fj8%2FNQ3d8WTfHhv8eXl6bn%2F8BtbOdiA%3D%3D&amp;_b=eNozYEjRB8KUpCSzJKMUQ0NLE1NjIJmaYplskmKZaplolmJplKqXUZKbw%2BAX6uODIGp83T0NI7MysiOzHCv8wj0rI3MDq3yNwnKAtEFkuKtBVDiQrvI1jqxKtwUAEJMfUw%3D%3D&amp;resource_type=iframe", companionAds1.IFrameResource.CDATA)
+						}
+						companionAds2 := crea2.CompanionAds.Companions[1]
+						assert.Equal(t, 300, companionAds2.Width)
+						assert.Equal(t, 250, companionAds2.Height)
+						assert.Equal(t, "medium_rectangle", companionAds2.ID)
+						if assert.NotNil(t, companionAds2.HTMLResource) {
+							htmlResource, err := os.Open("testdata/spotx_html_resource.html")
+							if err != nil {
+								assert.FailNow(t, "Cannot open spotx html resource file")
+							}
+							defer htmlResource.Close()
+							b, _ := ioutil.ReadAll(htmlResource)
+							assert.Equal(t, companionAds2.HTMLResource.HTML, string(b))
+						}
+						companionAds3 := crea2.CompanionAds.Companions[2]
+						assert.Equal(t, 300, companionAds3.Width)
+						assert.Equal(t, 250, companionAds3.Height)
+						assert.Equal(t, "medium_rectangle", companionAds3.ID)
+						if assert.NotNil(t, companionAds3.StaticResource) {
+							assert.Equal(t, "image/gif", companionAds3.StaticResource.CreativeType)
+							assert.Equal(t, "https://search.spotxchange.com/banner?_a=137530&amp;_p=spotx&amp;_z=1&amp;_m=eNpVz99vgjAQB%2FD%2BLTyP0rM%2FLCZ7WOKWbFF5GJr4RAotUBUwgkHZ9rdvVB8W%2B3BJv3eXT45hQhBCwAnhEkKQKA2lZCHLhJYSwExTSgSkqcpBCEIIIKBTTglaf6JQ4glleAISAxOo7LpjOwuCvu9xrip7uJaq1tdK1ThrqgB9eefWnJLibLU385hRoTQ8FylPnSNzMgUtc6EpdY73dB%2B3bVKbflwYg6xp9tYkuqmUrceoNeqUlbg9Nt0lG7HCOGkcVGdtTZ2Z5IHyneU7zHea%2F8D93A6bcPR7e2i1XizuBW4R4oJcKPDx%2B99y5TuKD%2BU23rPlrhiW849dFG%2FstnqrVsPLJYrfYTm88mi%2BZ6uheP4DQppvcA%3D%3D&amp;_l=eNplj01rwkAYhN%2FfsleLvJv9yEbooUXoxU1BDKW5yGazNUk1SZMNtVr%2Fe9VgofQyh5mHGYYqqrhiEEYykIyDABWgAi4wlAAUKKdcRIpD3zZ%2BD5MJSBpB3dQOEI6EkdmRZGVOZgSniEySO9Kar2bwNwcvVt%2B6%2BpeJrtCQbUu7dntbmHrj1m%2FOXXOKiOfYDp3xLl%2FvTPfufLs11v1n8cKeThAni8UoCDhVAparR%2FDdsGuLxrttP7XNDlBxRjORW5pxhRYjIYULc8nDyDLm8vH3%2BRxy%2BBhM7a3p%2FdhKWSgC8XcGvuNK8%2FQp2b%2BuiiKdb1AfNNfVw6eukkBXcfk8T4L0ZVnqQ3L%2FAyjAYKo%3D&amp;_t=eNotj9Fu4yAQRf0tPFdbwK5dE%2B1b1aiVnGpXlVaJKlkDTGxaYyxMtsmm%2BfeFuDzA3MO9wyBhHNFn9Z5WQCtd6vt7xrCSOa2YlLBnZUkpZZnqwYyZ8x2MRmVySZ2JRW2gNZoIorWUpeSasbq4y%2BOOulaFrrGGUtccyQ3ZO28hRO%2F66TFKayy24TRhJMZCh2%2B3ndnHi0%2BjQx9hTmlUPZquTyl%2Bd5XBDq1ydhrQ4ph4hAZka%2BwhijTRwbYeVYCxG9KzM4JXfTtPqIg4kwk8WAzo56Q0%2FjUKU4XHkI55cuHYLriFafqekF3iwE7jQAS%2FIS5m%2BSWuLGM%2FKM1AVOI8i1KQbnASBrIygq6uYHJzWACrGY8sv%2F42gbyoKlpEVAiiTDh9m9gS9NgZNyZWsjqiKprcYQz%2B6uM8X3rppVfJ2eqSfW3Wv05b%2Fvy%2Be2j4br352NqN3f55Ys2%2Fj8%2FNQ3d8WTfHhv8eXl6bn%2F8BtbOdiA%3D%3D&amp;_b=eNpFxl0LgjAUgGF%2FkSc%2FEhZ0EUje6AFFibxznuXmsklbGNKPL6%2FihYd350nnZnsA6Onh29m49za9mWASpDpw8jVxC%2BapBqAt4jzhIQUBi%2FfRT0Gsj4kJ1iXEQuEP6uZhk%2Bd%2FPsVaKUxPK6Z3haOO26xZ2gvKoi6Xa30eMas0rmWEtT5%2BAZ5CLzA%3D", companionAds3.StaticResource.URI)
+						}
+						if assert.NotNil(t, companionAds3.CompanionClickThrough) {
+							assert.Equal(t, "https://search.spotxchange.com/click?_a=137530&amp;_p=spotx&amp;_z=1&amp;_m=eNpVz99vgjAQB%2FD%2BLTyP0rM%2FLCZ7WOKWbFF5GJr4RAotUBUwgkHZ9rdvVB8W%2B3BJv3eXT45hQhBCwAnhEkKQKA2lZCHLhJYSwExTSgSkqcpBCEIIIKBTTglaf6JQ4glleAISAxOo7LpjOwuCvu9xrip7uJaq1tdK1ThrqgB9eefWnJLibLU385hRoTQ8FylPnSNzMgUtc6EpdY73dB%2B3bVKbflwYg6xp9tYkuqmUrceoNeqUlbg9Nt0lG7HCOGkcVGdtTZ2Z5IHyneU7zHea%2F8D93A6bcPR7e2i1XizuBW4R4oJcKPDx%2B99y5TuKD%2BU23rPlrhiW849dFG%2FstnqrVsPLJYrfYTm88mi%2BZ6uheP4DQppvcA%3D%3D&amp;_l=eNplj01rwkAYhN%2FfsleLvJv9yEbooUXoxU1BDKW5yGazNUk1SZMNtVr%2Fe9VgofQyh5mHGYYqqrhiEEYykIyDABWgAi4wlAAUKKdcRIpD3zZ%2BD5MJSBpB3dQOEI6EkdmRZGVOZgSniEySO9Kar2bwNwcvVt%2B6%2BpeJrtCQbUu7dntbmHrj1m%2FOXXOKiOfYDp3xLl%2FvTPfufLs11v1n8cKeThAni8UoCDhVAparR%2FDdsGuLxrttP7XNDlBxRjORW5pxhRYjIYULc8nDyDLm8vH3%2BRxy%2BBhM7a3p%2FdhKWSgC8XcGvuNK8%2FQp2b%2BuiiKdb1AfNNfVw6eukkBXcfk8T4L0ZVnqQ3L%2FAyjAYKo%3D&amp;_t=eNotj0tv3CAUhf1bWEcJYMeOPeomqhplMVOp8iwcVUI87tgkYCzMNPPo%2FPeAHRZwz8c5l4s0Wn5k9QFXHFeqVE9PhEAlclwRIfiBlCXGmGRy4HrMnO%2F5qGUm%2BDiCZ3LJXpEFpTnTCjVIKSFKQRUhdfGYxx1ULQtVQ81LVVNAd%2BjgvOUhel9ef0VptQUWzhNEoi3v4e9Drw%2Fx4lOrMESYYxzVALofUoo%2BLjJYw6SzkwELY%2BIRai6Ytsco0kRHyzzIwMfepGdn4F4ObJ5AouaKJu65hQB%2BTkrBPy0hVXAK6ZgnF05sxYxP0%2FeE5BYHdgoMaugdcjFLb3FlGbnHOONN1VznpmxQb5zgBm10gzcLmNwcVkBqQiPLl98mkBdVhYuIigZJHc7fJrIGPfTajYmVpI6oiiZ3HINffJTmay%2B19iop2dyy%2F93lj%2Bnandm1%2B3P3PrzvXl4%2Fu8v2tG3fzNbuL7tW6a59Hn7%2F3P%2F4Ap5ioKM%3D&amp;_b=eNozYMgoKSkottLXLy7IL6lIzkjMS0%2FVS87PZfAL9fFhsEwzsLQ0NzQ0S7GwMDRMNU8yNjA3TEpKTDM0M3MDArCqmih3V5PIrGxDX5d0g8gqr0x%2Fl0hDfxe3bN8sTwO%2FrLDMyKycDD8XEJ1uCwCmYiLM", companionAds3.CompanionClickThrough.CDATA)
+						}
+						if assert.NotNil(t, companionAds3.AltText) {
+							assert.Equal(t, "IntegralAds_VAST_2_0_Ad_Wrapper", companionAds3.AltText)
+						}
+
+					}
+				}
+
+			}
+			if assert.Len(t, inline.Extensions, 2) {
+				ext1 := inline.Extensions[0]
+				assert.Equal(t, "LR-Pricing", ext1.Type)
+				assert.Equal(t, "<Price model=\"CPM\" currency=\"USD\" source=\"spotxchange\"><![CDATA[3.06]]></Price>", strings.TrimSpace(string(ext1.Data)))
+				ext2 := inline.Extensions[1]
+				assert.Equal(t, "SpotX-Count", ext2.Type)
+				assert.Equal(t, "<total_available><![CDATA[1]]></total_available>", strings.TrimSpace(string(ext2.Data)))
 			}
 		}
 	}
