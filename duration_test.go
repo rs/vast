@@ -40,6 +40,10 @@ func TestDurationUnmarshal(t *testing.T) {
 		assert.Equal(t, Duration(2*time.Second), d)
 	}
 	d = 0
+	if assert.NoError(t, d.UnmarshalText([]byte(" 00:00:02 "))) {
+		assert.Equal(t, Duration(2*time.Second), d)
+	}
+	d = 0
 	if assert.NoError(t, d.UnmarshalText([]byte("00:02:00"))) {
 		assert.Equal(t, Duration(2*time.Minute), d)
 	}
