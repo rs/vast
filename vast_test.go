@@ -339,9 +339,9 @@ func TestWrapperLinear(t *testing.T) {
 		assert.Nil(t, ad.InLine)
 		if assert.NotNil(t, ad.Wrapper) {
 			wrapper := ad.Wrapper
-			assert.Equal(t, "true", wrapper.FallbackOnNoAd)
-			assert.Equal(t, "true", wrapper.AllowMultipleAds)
-			assert.Equal(t, "", wrapper.FollowAdditionalWrappers)
+			assert.Equal(t, true, *wrapper.FallbackOnNoAd)
+			assert.Equal(t, true, *wrapper.AllowMultipleAds)
+			assert.Nil(t, wrapper.FollowAdditionalWrappers)
 			assert.Equal(t, "http://demo.tremormedia.com/proddev/vast/vast_inline_linear.xml", wrapper.VASTAdTagURI.CDATA)
 			assert.Equal(t, "Acudeo Compatible", wrapper.AdSystem.Name)
 			if assert.Len(t, wrapper.Errors, 1) {
