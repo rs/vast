@@ -1,0 +1,167 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<VAST version="3.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="oxml.xsd" adaptvFailover="true">
+<Ad id="a583680">
+	<InLine>
+		<AdSystem version="1.0">Adap.tv</AdSystem>
+
+		<AdTitle><![CDATA[Adap.tv Ad Unit]]></AdTitle>
+
+		<Error><![CDATA[https://log.adaptv.advertising.com/log?event=error&sellerDealId=&buyerDealId=&platformDealId=&lastBid={lastBid}&errNo={errNo}&pricingInfo=&nF={nF}&adSourceId=583682&bidId=583680&afppId=&adSourceMediaId=2506895104104120&adSpotId=&pet=preroll&pod=-2&position=-2&marketplaceId=&app_storeurl_available=0&app_bundle=&location_available=0&adSpotTime={adSpotTime}&ext_crid=&creativeId=370666&adomain=&adomainId=24&buyerSeatId=&isMatchedUser=&optout=0&adPlanId=-2&adaptag=&key=adaptv407&buyerId=5544&campaignId=64277&pageUrl=onevideotestpage.com&adapDetD=getpublica.com&sellRepD=onevideotestpage.com&urlDetMeth=3&targDSellRep=1&mediaId=2840248&zid=&url=&id=&duration=&a.geostrings=&uid=5657249828608159512&apid=UP43fbfc0d-f630-11e7-8ea7-062ee3221f4a&pid=&htmlEnabled=false&width=660&height=371&context=&categories=&sessionId=&serverRev=712121130&playerRev={playerRev}&a.rid=194c0fac-5f7d-4d21-b9d6-97a7a7727d27&a.beid=&a.cluster=0&rtype=ah&ext_id=&a.ssc=1&a.asn=ip-10-49-136-190&a.profile_id=1&p.vw.viewable=<a.viewable>&p.vw.viewableOpportunity=1&p.vw.viewableHistorical=61.49&p.vw.psize=3&a.sdk=o2unit&a.sdkType=js&pi.sdk=&pi.sdkType=&a.appReq=0&a.platformDevice=ONLINE_VIDEO&ipAddressOverride=98.234.218.146&a.platformOs=Mac+OS+X&p.vw.active=<a.active>&a.rtbexch=&pi.sideview=&pi.flashonpage=&pi.mvoa=100&pi.avoa=&pi.sound=&pi.autoInitiation=&esVr=67.2897&esMvmr=61.4865&sadVr=67.2897&sadMvmr=61.4865&p.vw.geometric=&p.vw.framerate=&a.pub_id=&device_id_status=&a.ts=0&a.adSeq={adSeq}&isHttps=1&pubSettingId=5&eov=28963053&alephdEnabled=1&isFailoverAd=0&doubleAuction=&errorCode=%5BERRORCODE%5D]]></Error>
+
+		<Impression><![CDATA[https://log.adaptv.advertising.com/log?3a=adSuccess&51=ZX4madbHHCc_&50=ZX4madbHHCc_&mtpbr=ZX4madbHHCc_&d={adSourceGroups}&b={adSpotTime}&2c=qUsI3M4M68M_&165=ZX4madbHHCc_&157=ZX4madbHHCc_&158=ZX4madbHHCc_&16c=583680&16b=ZX4madbHHCc_&166=ZX4madbHHCc_&169=ZX4madbHHCc_&28=qUsI3M4M68M_&a8=oOt0lqLFswM_&e5=oOt0lqLFswM_&25=370666&5=583682&14=583680&11d=2506895104104120&65=preroll&6a=-2&6b=-2&ec=1&f6=iCSArrpvL%2FM_&12e=-1.0000&12f=-1.0000&130=-1.0000&131=-1.0000&15c=-1&163=NFnJzCvmQNo7ZequqMcKyQ__&164=CNCzRkR4JL4_&fa=0&ff=0&15e=ZX4madbHHCc_&10f=1515718005&91=ONLINE_VIDEO&121=3&14e=24&12c=0&12d=12&optout=0&3=-2&5c=adaptv407&5b=5544&18=64277&2e=onevideotestpage.com&2f=getpublica.com&30=onevideotestpage.com&31=3&32=1&fd=2840248&80=5657249828608159512&f8=UP43fbfc0d-f630-11e7-8ea7-062ee3221f4a&42=false&8f=660&41=371&77=712121130&67={playerRev}&d6=194c0fac-5f7d-4d21-b9d6-97a7a7727d27&bf=0&74=ah&d5=1&d8=ip-10-49-136-190&ae=1&8e=<a.viewable>&f0=1&162=61.49&68=3&d7=o2unit&c0=js&c4=0&91=ONLINE_VIDEO&45=98.234.218.146&ee=Mac+OS+X&b5=<a.active>&146=100&14c=67.2897&14d=61.4865&153=67.2897&154=61.4865&120=0&100={adSeq}&112=1&134=5&33=28963053&135=2&137=1&13d=0&14f=9zYHE4kOIKIZc1EDPjx1hw__&colo=NA&a.afv=-1&a.dfv=-2&168=}&16e=0a61ed6&16f=gayoncMgHis_&a.cv=1]]></Impression>
+
+		<Impression><![CDATA[https://sb.scorecardresearch.com/b?c1=1&c2=6034979&c3=adaptv407&c4=getpublica.com&c5=090200&c6=583682]]></Impression>
+
+		<Impression><![CDATA[https://secure-us.imrworldwide.com/cgi-bin/m?ci=us-305284&c6=vc,b01&cg=5544&tl=dav0-%5B64277%5D583680&cc=1&rnd=28963053&c3=st,a]]></Impression>
+
+		<Impression><![CDATA[https://conversions.adaptv.advertising.com/conversion/wc?adSourceId=583682&bidId=583680&afppId=&creativeId=370666&mediaId=2840248&marketplaceId=&key=adaptv407&a.pvt=0&a.rid=194c0fac-5f7d-4d21-b9d6-97a7a7727d27&a.pub_id=&nielsen_devid=&a.platformDevice=ONLINE_VIDEO&eov=28963053]]></Impression>
+
+		<Impression><![CDATA[https://idsync.rlcdn.com/396746.gif?partner_uid=UP43fbfc0d-f630-11e7-8ea7-062ee3221f4a]]></Impression>
+
+		<Impression><![CDATA[https://odr.mookie1.com/t/v2/learn?tagid=V2_4134&aolid=UP43fbfc0d-f630-11e7-8ea7-062ee3221f4a]]></Impression>
+
+		<Impression><![CDATA[https://aorta.clickagy.com/pixel.gif?advertiser_id=1gt8qx97dqpg&list=11aed5jpn7obnc&ch=111&cm=UP43fbfc0d-f630-11e7-8ea7-062ee3221f4a]]></Impression>
+
+		<Impression><![CDATA[https://sp1.convertro.com/trax/idsync/aol/apid?mapped_id=UP43fbfc0d-f630-11e7-8ea7-062ee3221f4a&redir=true]]></Impression>
+
+		<Impression><![CDATA[https://su.addthis.com/red/usync?pid=11170&puid=UP43fbfc0d-f630-11e7-8ea7-062ee3221f4a&url=https%3A%2F%2Fpixel.advertising.com%2Fups%2F19071%2Fsync%3Fuid%3D%7B%7Buid%7D%7D%26_origin%3D0]]></Impression>
+
+		<Impression><![CDATA[https://d.turn.com/r/du/id/L2NzaWQvMS9tcGlkLzMwNTU3ODEz/mpuid/UP43fbfc0d-f630-11e7-8ea7-062ee3221f4a]]></Impression>
+
+		<Impression><![CDATA[https://ads.scorecardresearch.com/p?c1=9&c2=1000009&c3=2&cs_xi=UP43fbfc0d-f630-11e7-8ea7-062ee3221f4a]]></Impression>
+
+		<Impression><![CDATA[https://ads.adap.tv/copy_cookies?]]></Impression>
+
+		<Attempt><![CDATA[https://log.adaptv.advertising.com/log?event=adAttempt&sellerDealId=&buyerDealId=&creativeId=370666&a.att1=1&adSourceId=583682&bidId=583680&afppId=&adSourceMediaId=2506895104104120&adSpotId=&pet=preroll&pod=-2&position=-2&marketplaceId=&app_storeurl_available=0&app_bundle=&a.serverquota=832&a.actcnt=80&a.descnt=100000&nurl=&location_available=0&user_id_type=3&ext_crid=&adomain=&adomainId=24&a.abMeth=12&platformDealId=&optout=0&adPlanId=-2&adaptag=&key=adaptv407&buyerId=5544&campaignId=64277&pageUrl=onevideotestpage.com&adapDetD=getpublica.com&sellRepD=onevideotestpage.com&urlDetMeth=3&targDSellRep=1&mediaId=2840248&zid=&url=&id=&duration=&a.geostrings=&uid=5657249828608159512&apid=UP43fbfc0d-f630-11e7-8ea7-062ee3221f4a&pid=&htmlEnabled=false&width=660&height=371&context=&categories=&sessionId=&serverRev=712121130&playerRev={playerRev}&a.rid=194c0fac-5f7d-4d21-b9d6-97a7a7727d27&a.beid=&a.cluster=0&rtype=ah&ext_id=&a.ssc=1&a.asn=ip-10-49-136-190&a.profile_id=1&p.vw.viewable=<a.viewable>&p.vw.viewableOpportunity=1&p.vw.viewableHistorical=61.49&p.vw.psize=3&a.sdk=o2unit&a.sdkType=js&pi.sdk=&pi.sdkType=&a.appReq=0&a.platformDevice=ONLINE_VIDEO&ipAddressOverride=98.234.218.146&a.platformOs=Mac+OS+X&p.vw.active=<a.active>&a.rtbexch=&pi.sideview=&pi.flashonpage=&pi.mvoa=100&pi.avoa=&pi.sound=&pi.autoInitiation=&esVr=67.2897&esMvmr=61.4865&sadVr=67.2897&sadMvmr=61.4865&p.vw.geometric=&p.vw.framerate=&a.pub_id=&device_id_status=&a.ts=0&a.adSeq={adSeq}&isHttps=1&pubSettingId=5&eov=28963053&doubleAuction=&nextSeatbid=&buyerSeatId=&isMatchedUser=]]></Attempt>
+
+		<Creatives>
+			<Creative>
+				<Linear>
+					<Duration><![CDATA[00:00:15.000]]></Duration>
+
+					<TrackingEvents>
+						<Tracking event="start"><![CDATA[https://log.adaptv.advertising.com/log?3a=progressDisplay0&14e=24&25=370666&5=583682&14=583680&11d=2506895104104120&65=preroll&6a=-2&6b=-2&optout=0&3=-2&5c=adaptv407&5b=5544&18=64277&2e=onevideotestpage.com&2f=getpublica.com&30=onevideotestpage.com&31=3&32=1&fd=2840248&80=5657249828608159512&f8=UP43fbfc0d-f630-11e7-8ea7-062ee3221f4a&42=false&8f=660&41=371&77=712121130&67={playerRev}&d6=194c0fac-5f7d-4d21-b9d6-97a7a7727d27&bf=0&74=ah&d5=1&d8=ip-10-49-136-190&ae=1&8e=<a.viewable>&f0=1&162=61.49&68=3&d7=o2unit&c0=js&c4=0&91=ONLINE_VIDEO&45=98.234.218.146&ee=Mac+OS+X&b5=<a.active>&146=100&14c=67.2897&14d=61.4865&153=67.2897&154=61.4865&120=0&100={adSeq}&112=1&134=5&33=28963053&a.cv=1]]></Tracking>
+
+						<Tracking event="firstQuartile"><![CDATA[https://log.adaptv.advertising.com/log?3a=progressDisplay25&14e=24&25=370666&5=583682&14=583680&11d=2506895104104120&65=preroll&6a=-2&6b=-2&optout=0&3=-2&5c=adaptv407&5b=5544&18=64277&2e=onevideotestpage.com&2f=getpublica.com&30=onevideotestpage.com&31=3&32=1&fd=2840248&80=5657249828608159512&f8=UP43fbfc0d-f630-11e7-8ea7-062ee3221f4a&42=false&8f=660&41=371&77=712121130&67={playerRev}&d6=194c0fac-5f7d-4d21-b9d6-97a7a7727d27&bf=0&74=ah&d5=1&d8=ip-10-49-136-190&ae=1&8e=<a.viewable>&f0=1&162=61.49&68=3&d7=o2unit&c0=js&c4=0&91=ONLINE_VIDEO&45=98.234.218.146&ee=Mac+OS+X&b5=<a.active>&146=100&14c=67.2897&14d=61.4865&153=67.2897&154=61.4865&120=0&100={adSeq}&112=1&134=5&33=28963053&a.cv=1]]></Tracking>
+
+						<Tracking event="midpoint"><![CDATA[https://log.adaptv.advertising.com/log?3a=progressDisplay50&14e=24&25=370666&5=583682&14=583680&11d=2506895104104120&65=preroll&6a=-2&6b=-2&optout=0&3=-2&5c=adaptv407&5b=5544&18=64277&2e=onevideotestpage.com&2f=getpublica.com&30=onevideotestpage.com&31=3&32=1&fd=2840248&80=5657249828608159512&f8=UP43fbfc0d-f630-11e7-8ea7-062ee3221f4a&42=false&8f=660&41=371&77=712121130&67={playerRev}&d6=194c0fac-5f7d-4d21-b9d6-97a7a7727d27&bf=0&74=ah&d5=1&d8=ip-10-49-136-190&ae=1&8e=<a.viewable>&f0=1&162=61.49&68=3&d7=o2unit&c0=js&c4=0&91=ONLINE_VIDEO&45=98.234.218.146&ee=Mac+OS+X&b5=<a.active>&146=100&14c=67.2897&14d=61.4865&153=67.2897&154=61.4865&120=0&100={adSeq}&112=1&134=5&33=28963053&a.cv=1]]></Tracking>
+
+						<Tracking event="thirdQuartile"><![CDATA[https://log.adaptv.advertising.com/log?3a=progressDisplay75&14e=24&25=370666&5=583682&14=583680&11d=2506895104104120&65=preroll&6a=-2&6b=-2&optout=0&3=-2&5c=adaptv407&5b=5544&18=64277&2e=onevideotestpage.com&2f=getpublica.com&30=onevideotestpage.com&31=3&32=1&fd=2840248&80=5657249828608159512&f8=UP43fbfc0d-f630-11e7-8ea7-062ee3221f4a&42=false&8f=660&41=371&77=712121130&67={playerRev}&d6=194c0fac-5f7d-4d21-b9d6-97a7a7727d27&bf=0&74=ah&d5=1&d8=ip-10-49-136-190&ae=1&8e=<a.viewable>&f0=1&162=61.49&68=3&d7=o2unit&c0=js&c4=0&91=ONLINE_VIDEO&45=98.234.218.146&ee=Mac+OS+X&b5=<a.active>&146=100&14c=67.2897&14d=61.4865&153=67.2897&154=61.4865&120=0&100={adSeq}&112=1&134=5&33=28963053&a.cv=1]]></Tracking>
+
+						<Tracking event="complete"><![CDATA[https://log.adaptv.advertising.com/log?3a=progressDisplay100&14e=24&25=370666&5=583682&14=583680&11d=2506895104104120&65=preroll&6a=-2&6b=-2&optout=0&3=-2&5c=adaptv407&5b=5544&18=64277&2e=onevideotestpage.com&2f=getpublica.com&30=onevideotestpage.com&31=3&32=1&fd=2840248&80=5657249828608159512&f8=UP43fbfc0d-f630-11e7-8ea7-062ee3221f4a&42=false&8f=660&41=371&77=712121130&67={playerRev}&d6=194c0fac-5f7d-4d21-b9d6-97a7a7727d27&bf=0&74=ah&d5=1&d8=ip-10-49-136-190&ae=1&8e=<a.viewable>&f0=1&162=61.49&68=3&d7=o2unit&c0=js&c4=0&91=ONLINE_VIDEO&45=98.234.218.146&ee=Mac+OS+X&b5=<a.active>&146=100&14c=67.2897&14d=61.4865&153=67.2897&154=61.4865&120=0&100={adSeq}&112=1&134=5&33=28963053&91=ONLINE_VIDEO&f6=iCSArrpvL%2FM_&12e=-1.0000&12f=-1.0000&130=-1.0000&131=-1.0000&15c=-1&163=NFnJzCvmQNo7ZequqMcKyQ__&164=CNCzRkR4JL4_&a.cv=1]]></Tracking>
+
+						<Tracking event="loaded"><![CDATA[https://log.adaptv.advertising.com/log?event=adLoaded&creativeId=370666&ext_crid=&adSourceId=583682&bidId=583680&afppId=&adSourceMediaId=2506895104104120&adSpotId=&pet=preroll&pod=-2&position=-2&marketplaceId=&adSpotTime={adSpotTime}&creativeLoadTime={creativeLoadTime}&playerInitTime={playerInitTime}&optout=0&adPlanId=-2&adaptag=&key=adaptv407&buyerId=5544&campaignId=64277&pageUrl=onevideotestpage.com&adapDetD=getpublica.com&sellRepD=onevideotestpage.com&urlDetMeth=3&targDSellRep=1&mediaId=2840248&zid=&url=&id=&duration=&a.geostrings=&uid=5657249828608159512&apid=UP43fbfc0d-f630-11e7-8ea7-062ee3221f4a&pid=&htmlEnabled=false&width=660&height=371&context=&categories=&sessionId=&serverRev=712121130&playerRev={playerRev}&a.rid=194c0fac-5f7d-4d21-b9d6-97a7a7727d27&a.beid=&a.cluster=0&rtype=ah&ext_id=&a.ssc=1&a.asn=ip-10-49-136-190&a.profile_id=1&p.vw.viewable=<a.viewable>&p.vw.viewableOpportunity=1&p.vw.viewableHistorical=61.49&p.vw.psize=3&a.sdk=o2unit&a.sdkType=js&pi.sdk=&pi.sdkType=&a.appReq=0&a.platformDevice=ONLINE_VIDEO&ipAddressOverride=98.234.218.146&a.platformOs=Mac+OS+X&p.vw.active=<a.active>&a.rtbexch=&pi.sideview=&pi.flashonpage=&pi.mvoa=100&pi.avoa=&pi.sound=&pi.autoInitiation=&esVr=67.2897&esMvmr=61.4865&sadVr=67.2897&sadMvmr=61.4865&p.vw.geometric=&p.vw.framerate=&a.pub_id=&device_id_status=&a.ts=0&a.adSeq={adSeq}&isHttps=1&pubSettingId=5&eov=28963053&doubleAuction=]]></Tracking>
+
+						<Tracking event="stopped"><![CDATA[https://log.adaptv.advertising.com/log?event=stopped&lastBid={lastBid}&adSourceId=583682&bidId=583680&afppId=&adSourceMediaId=2506895104104120&adSpotId=&pet=preroll&pod=-2&position=-2&marketplaceId=&optout=0&adPlanId=-2&adaptag=&key=adaptv407&buyerId=5544&campaignId=64277&pageUrl=onevideotestpage.com&adapDetD=getpublica.com&sellRepD=onevideotestpage.com&urlDetMeth=3&targDSellRep=1&mediaId=2840248&zid=&url=&id=&duration=&a.geostrings=&uid=5657249828608159512&apid=UP43fbfc0d-f630-11e7-8ea7-062ee3221f4a&pid=&htmlEnabled=false&width=660&height=371&context=&categories=&sessionId=&serverRev=712121130&playerRev={playerRev}&a.rid=194c0fac-5f7d-4d21-b9d6-97a7a7727d27&a.beid=&a.cluster=0&rtype=ah&ext_id=&a.ssc=1&a.asn=ip-10-49-136-190&a.profile_id=1&p.vw.viewable=<a.viewable>&p.vw.viewableOpportunity=1&p.vw.viewableHistorical=61.49&p.vw.psize=3&a.sdk=o2unit&a.sdkType=js&pi.sdk=&pi.sdkType=&a.appReq=0&a.platformDevice=ONLINE_VIDEO&ipAddressOverride=98.234.218.146&a.platformOs=Mac+OS+X&p.vw.active=<a.active>&a.rtbexch=&pi.sideview=&pi.flashonpage=&pi.mvoa=100&pi.avoa=&pi.sound=&pi.autoInitiation=&esVr=67.2897&esMvmr=61.4865&sadVr=67.2897&sadMvmr=61.4865&p.vw.geometric=&p.vw.framerate=&a.pub_id=&device_id_status=&a.ts=0&a.adSeq={adSeq}&isHttps=1&pubSettingId=5&eov=28963053]]></Tracking>
+
+						<Tracking event="linearChange"><![CDATA[https://log.adaptv.advertising.com/log?event=linearChange&adSourceId=583682&bidId=583680&afppId=&adSourceMediaId=2506895104104120&adSpotId=&pet=preroll&pod=-2&position=-2&marketplaceId=&optout=0&adPlanId=-2&adaptag=&key=adaptv407&buyerId=5544&campaignId=64277&pageUrl=onevideotestpage.com&adapDetD=getpublica.com&sellRepD=onevideotestpage.com&urlDetMeth=3&targDSellRep=1&mediaId=2840248&zid=&url=&id=&duration=&a.geostrings=&uid=5657249828608159512&apid=UP43fbfc0d-f630-11e7-8ea7-062ee3221f4a&pid=&htmlEnabled=false&width=660&height=371&context=&categories=&sessionId=&serverRev=712121130&playerRev={playerRev}&a.rid=194c0fac-5f7d-4d21-b9d6-97a7a7727d27&a.beid=&a.cluster=0&rtype=ah&ext_id=&a.ssc=1&a.asn=ip-10-49-136-190&a.profile_id=1&p.vw.viewable=<a.viewable>&p.vw.viewableOpportunity=1&p.vw.viewableHistorical=61.49&p.vw.psize=3&a.sdk=o2unit&a.sdkType=js&pi.sdk=&pi.sdkType=&a.appReq=0&a.platformDevice=ONLINE_VIDEO&ipAddressOverride=98.234.218.146&a.platformOs=Mac+OS+X&p.vw.active=<a.active>&a.rtbexch=&pi.sideview=&pi.flashonpage=&pi.mvoa=100&pi.avoa=&pi.sound=&pi.autoInitiation=&esVr=67.2897&esMvmr=61.4865&sadVr=67.2897&sadMvmr=61.4865&p.vw.geometric=&p.vw.framerate=&a.pub_id=&device_id_status=&a.ts=0&a.adSeq={adSeq}&isHttps=1&pubSettingId=5&eov=28963053]]></Tracking>
+
+						<Tracking event="acceptInvitation"><![CDATA[https://log.adaptv.advertising.com/log?event=acceptInvitation&creativeId=370666&adSourceId=583682&bidId=583680&afppId=&adSourceMediaId=2506895104104120&adSpotId=&pet=preroll&pod=-2&position=-2&marketplaceId=&optout=0&adPlanId=-2&adaptag=&key=adaptv407&buyerId=5544&campaignId=64277&pageUrl=onevideotestpage.com&adapDetD=getpublica.com&sellRepD=onevideotestpage.com&urlDetMeth=3&targDSellRep=1&mediaId=2840248&zid=&url=&id=&duration=&a.geostrings=&uid=5657249828608159512&apid=UP43fbfc0d-f630-11e7-8ea7-062ee3221f4a&pid=&htmlEnabled=false&width=660&height=371&context=&categories=&sessionId=&serverRev=712121130&playerRev={playerRev}&a.rid=194c0fac-5f7d-4d21-b9d6-97a7a7727d27&a.beid=&a.cluster=0&rtype=ah&ext_id=&a.ssc=1&a.asn=ip-10-49-136-190&a.profile_id=1&p.vw.viewable=<a.viewable>&p.vw.viewableOpportunity=1&p.vw.viewableHistorical=61.49&p.vw.psize=3&a.sdk=o2unit&a.sdkType=js&pi.sdk=&pi.sdkType=&a.appReq=0&a.platformDevice=ONLINE_VIDEO&ipAddressOverride=98.234.218.146&a.platformOs=Mac+OS+X&p.vw.active=<a.active>&a.rtbexch=&pi.sideview=&pi.flashonpage=&pi.mvoa=100&pi.avoa=&pi.sound=&pi.autoInitiation=&esVr=67.2897&esMvmr=61.4865&sadVr=67.2897&sadMvmr=61.4865&p.vw.geometric=&p.vw.framerate=&a.pub_id=&device_id_status=&a.ts=0&a.adSeq={adSeq}&isHttps=1&pubSettingId=5&eov=28963053]]></Tracking>
+
+						<Tracking event="pause"><![CDATA[https://log.adaptv.advertising.com/log?event=paused&creativeId=370666&adomain=&adomainId=24&ext_crid=&adSourceId=583682&bidId=583680&afppId=&adSourceMediaId=2506895104104120&adSpotId=&pet=preroll&pod=-2&position=-2&marketplaceId=&optout=0&adPlanId=-2&adaptag=&key=adaptv407&buyerId=5544&campaignId=64277&pageUrl=onevideotestpage.com&adapDetD=getpublica.com&sellRepD=onevideotestpage.com&urlDetMeth=3&targDSellRep=1&mediaId=2840248&zid=&url=&id=&duration=&a.geostrings=&uid=5657249828608159512&apid=UP43fbfc0d-f630-11e7-8ea7-062ee3221f4a&pid=&htmlEnabled=false&width=660&height=371&context=&categories=&sessionId=&serverRev=712121130&playerRev={playerRev}&a.rid=194c0fac-5f7d-4d21-b9d6-97a7a7727d27&a.beid=&a.cluster=0&rtype=ah&ext_id=&a.ssc=1&a.asn=ip-10-49-136-190&a.profile_id=1&p.vw.viewable=<a.viewable>&p.vw.viewableOpportunity=1&p.vw.viewableHistorical=61.49&p.vw.psize=3&a.sdk=o2unit&a.sdkType=js&pi.sdk=&pi.sdkType=&a.appReq=0&a.platformDevice=ONLINE_VIDEO&ipAddressOverride=98.234.218.146&a.platformOs=Mac+OS+X&p.vw.active=<a.active>&a.rtbexch=&pi.sideview=&pi.flashonpage=&pi.mvoa=100&pi.avoa=&pi.sound=&pi.autoInitiation=&esVr=67.2897&esMvmr=61.4865&sadVr=67.2897&sadMvmr=61.4865&p.vw.geometric=&p.vw.framerate=&a.pub_id=&device_id_status=&a.ts=0&a.adSeq={adSeq}&isHttps=1&pubSettingId=5&eov=28963053]]></Tracking>
+
+						<Tracking event="resume"><![CDATA[https://log.adaptv.advertising.com/log?event=playing&creativeId=370666&adomain=&adomainId=24&ext_crid=&adSourceId=583682&bidId=583680&afppId=&adSourceMediaId=2506895104104120&adSpotId=&pet=preroll&pod=-2&position=-2&marketplaceId=&optout=0&adPlanId=-2&adaptag=&key=adaptv407&buyerId=5544&campaignId=64277&pageUrl=onevideotestpage.com&adapDetD=getpublica.com&sellRepD=onevideotestpage.com&urlDetMeth=3&targDSellRep=1&mediaId=2840248&zid=&url=&id=&duration=&a.geostrings=&uid=5657249828608159512&apid=UP43fbfc0d-f630-11e7-8ea7-062ee3221f4a&pid=&htmlEnabled=false&width=660&height=371&context=&categories=&sessionId=&serverRev=712121130&playerRev={playerRev}&a.rid=194c0fac-5f7d-4d21-b9d6-97a7a7727d27&a.beid=&a.cluster=0&rtype=ah&ext_id=&a.ssc=1&a.asn=ip-10-49-136-190&a.profile_id=1&p.vw.viewable=<a.viewable>&p.vw.viewableOpportunity=1&p.vw.viewableHistorical=61.49&p.vw.psize=3&a.sdk=o2unit&a.sdkType=js&pi.sdk=&pi.sdkType=&a.appReq=0&a.platformDevice=ONLINE_VIDEO&ipAddressOverride=98.234.218.146&a.platformOs=Mac+OS+X&p.vw.active=<a.active>&a.rtbexch=&pi.sideview=&pi.flashonpage=&pi.mvoa=100&pi.avoa=&pi.sound=&pi.autoInitiation=&esVr=67.2897&esMvmr=61.4865&sadVr=67.2897&sadMvmr=61.4865&p.vw.geometric=&p.vw.framerate=&a.pub_id=&device_id_status=&a.ts=0&a.adSeq={adSeq}&isHttps=1&pubSettingId=5&eov=28963053]]></Tracking>
+					</TrackingEvents>
+
+					<VideoClicks>
+						<ClickThrough><![CDATA[https://log.adaptv.advertising.com/log?3a=click&d3={a.cPos}&25=370666&5=583682&14=583680&11d=2506895104104120&65=preroll&6a=-2&6b=-2&91=ONLINE_VIDEO&14e=24&optout=0&3=-2&5c=adaptv407&5b=5544&18=64277&2e=onevideotestpage.com&2f=getpublica.com&30=onevideotestpage.com&31=3&32=1&fd=2840248&80=5657249828608159512&f8=UP43fbfc0d-f630-11e7-8ea7-062ee3221f4a&42=false&8f=660&41=371&77=712121130&67={playerRev}&d6=194c0fac-5f7d-4d21-b9d6-97a7a7727d27&bf=0&74=ah&d5=1&d8=ip-10-49-136-190&ae=1&8e=<a.viewable>&f0=1&162=61.49&68=3&d7=o2unit&c0=js&c4=0&91=ONLINE_VIDEO&45=98.234.218.146&ee=Mac+OS+X&b5=<a.active>&146=100&14c=67.2897&14d=61.4865&153=67.2897&154=61.4865&120=0&100={adSeq}&112=1&134=5&33=28963053&f6=iCSArrpvL%2FM_&12e=-1.0000&12f=-1.0000&130=-1.0000&131=-1.0000&15c=-1&163=NFnJzCvmQNo7ZequqMcKyQ__&164=CNCzRkR4JL4_&a.cv=1&rUrl=http%3A%2F%2Fwww.adap.tv]]></ClickThrough>
+
+						<ClickTracking><![CDATA[https://conversions.adaptv.advertising.com/conversion/wc?adSourceId=583682&bidId=583680&afppId=&creativeId=370666&mediaId=2840248&marketplaceId=&key=adaptv407&a.pvt=0&a.rid=194c0fac-5f7d-4d21-b9d6-97a7a7727d27&a.pub_id=&nielsen_devid=&a.platformDevice=ONLINE_VIDEO&eov=28963053&a.click=true]]></ClickTracking>
+					</VideoClicks>
+
+					<AdParameters><![CDATA[cd=%7B%22adTagUrl%22%3A%22%22%2C%22countdownText%22%3A%22Ad+will+end+in+__SECONDS__+seconds%22%2C%22companionId%22%3A%22%22%2C%22muteButtonEnabled%22%3Atrue%2C%22startMuted%22%3Atrue%2C%22showPlayButtonOnPause%22%3Afalse%2C%22skipAdEnabled%22%3Afalse%7D]]></AdParameters>
+
+					<MediaFiles>
+						<MediaFile delivery="progressive" width="864" height="480" bitrate="935" type="video/mp4"><![CDATA[https://cdn.adap.tv/adaptv407/onebyaol-08312015160042-176-12142016153538-541.mp4]]></MediaFile>
+
+						<MediaFile delivery="progressive" width="640" height="360" bitrate="512" type="video/mp4"><![CDATA[https://cdn.adap.tv/adaptv407/onebyaol-08312015160042-176-14-640x360-512-12142016154413-602.MP4]]></MediaFile>
+
+						<MediaFile delivery="progressive" width="640" height="360" bitrate="1024" type="video/mp4"><![CDATA[https://cdn.adap.tv/adaptv407/onebyaol-08312015160042-176-14-640x360-1024-12142016154416-827.MP4]]></MediaFile>
+
+						<MediaFile delivery="progressive" width="960" height="540" bitrate="512" type="video/mp4"><![CDATA[https://cdn.adap.tv/adaptv407/onebyaol-08312015160042-176-14-960x540-512-12142016154421-284.MP4]]></MediaFile>
+
+						<MediaFile delivery="progressive" width="960" height="540" bitrate="1024" type="video/mp4"><![CDATA[https://cdn.adap.tv/adaptv407/onebyaol-08312015160042-176-14-960x540-1024-12142016154424-61.MP4]]></MediaFile>
+
+						<MediaFile delivery="progressive" width="640" height="360" bitrate="512" type="video/webm"><![CDATA[https://cdn.adap.tv/adaptv407/onebyaol-08312015160042-176-14-640x360-512-12142016154428-69.WEBM]]></MediaFile>
+
+						<MediaFile delivery="progressive" width="640" height="360" bitrate="1024" type="video/webm"><![CDATA[https://cdn.adap.tv/adaptv407/onebyaol-08312015160042-176-14-640x360-1024-12142016154431-226.WEBM]]></MediaFile>
+
+						<MediaFile delivery="progressive" width="960" height="540" bitrate="512" type="video/webm"><![CDATA[https://cdn.adap.tv/adaptv407/onebyaol-08312015160042-176-14-960x540-512-12142016154434-3.WEBM]]></MediaFile>
+
+						<MediaFile delivery="progressive" width="960" height="540" bitrate="1024" type="video/webm"><![CDATA[https://cdn.adap.tv/adaptv407/onebyaol-08312015160042-176-14-960x540-1024-12142016154438-848.WEBM]]></MediaFile>
+
+						<MediaFile delivery="progressive" width="640" height="360" bitrate="512" type="video/x-flv"><![CDATA[https://cdn.adap.tv/adaptv407/onebyaol-08312015160042-176-14-640x360-512-12142016154441-675.FLV]]></MediaFile>
+
+						<MediaFile delivery="progressive" width="640" height="360" bitrate="1024" type="video/x-flv"><![CDATA[https://cdn.adap.tv/adaptv407/onebyaol-08312015160042-176-14-640x360-1024-12142016154445-770.FLV]]></MediaFile>
+
+						<MediaFile delivery="progressive" width="960" height="540" bitrate="512" type="video/x-flv"><![CDATA[https://cdn.adap.tv/adaptv407/onebyaol-08312015160042-176-14-960x540-512-12142016154448-862.FLV]]></MediaFile>
+
+						<MediaFile delivery="progressive" width="960" height="540" bitrate="1024" type="video/x-flv"><![CDATA[https://cdn.adap.tv/adaptv407/onebyaol-08312015160042-176-14-960x540-1024-12142016154452-29.FLV]]></MediaFile>
+					</MediaFiles>
+
+					<Icons>
+						<Icon program="DAA" width="77" height="15" xPosition="right" yPosition="top" offset="00:00:00">
+							<StaticResource creativeType="image/png"><![CDATA[https://s.aolcdn.com/ads/adchoices.png]]></StaticResource>
+
+							<IconClicks>
+								<IconClickThrough><![CDATA[https://adinfo.aol.com]]></IconClickThrough>
+							</IconClicks>
+						</Icon>
+					</Icons>
+				</Linear>
+			</Creative>
+		</Creatives>
+
+		<Extensions>
+			<Extension type="OneSource creative">
+				<CreativeId><![CDATA[370666]]></CreativeId>
+			</Extension>
+
+			<Extension type="adaptv_scripts">			</Extension>
+
+			<Extension type="ad_chromes">
+				<AdChromes>
+					<AdChrome type="MoatChrome"><![CDATA[classpath://tv.adap.adchrome.MoatChrome]]>
+						<orgId><![CDATA[5544]]></orgId>
+
+						<buyerId><![CDATA[5544]]></buyerId>
+
+						<campaignId><![CDATA[64277]]></campaignId>
+
+						<adId><![CDATA[583680]]></adId>
+
+						<marketplaceId><![CDATA[]]></marketplaceId>
+
+						<pageUrl><![CDATA[getpublica.com]]></pageUrl>
+
+						<duration><![CDATA[00:00:15.000]]></duration>
+
+						<params><![CDATA[&creativeId=370666&sellerDealId=&adSourceId=583682&bidId=583680&afppId=&adSourceMediaId=2506895104104120&adSpotId=&pet=preroll&pod=-2&position=-2&marketplaceId=&optout=0&adPlanId=-2&adaptag=&key=adaptv407&buyerId=5544&campaignId=64277&pageUrl=onevideotestpage.com&adapDetD=getpublica.com&sellRepD=onevideotestpage.com&urlDetMeth=3&targDSellRep=1&mediaId=2840248&zid=&url=&id=&duration=&a.geostrings=&uid=5657249828608159512&apid=UP43fbfc0d-f630-11e7-8ea7-062ee3221f4a&pid=&htmlEnabled=false&width=660&height=371&context=&categories=&sessionId=&serverRev=712121130&playerRev={playerRev}&a.rid=194c0fac-5f7d-4d21-b9d6-97a7a7727d27&a.beid=&a.cluster=0&rtype=ah&ext_id=&a.ssc=1&a.asn=ip-10-49-136-190&a.profile_id=1&p.vw.viewable=<a.viewable>&p.vw.viewableOpportunity=1&p.vw.viewableHistorical=61.49&p.vw.psize=3&a.sdk=o2unit&a.sdkType=js&pi.sdk=&pi.sdkType=&a.appReq=0&a.platformDevice=ONLINE_VIDEO&ipAddressOverride=98.234.218.146&a.platformOs=Mac+OS+X&p.vw.active=<a.active>&a.rtbexch=&pi.sideview=&pi.flashonpage=&pi.mvoa=100&pi.avoa=&pi.sound=&pi.autoInitiation=&esVr=67.2897&esMvmr=61.4865&sadVr=67.2897&sadMvmr=61.4865&p.vw.geometric=&p.vw.framerate=&a.pub_id=&device_id_status=&a.ts=0&a.adSeq={adSeq}&isHttps=1&pubSettingId=5&eov=28963053]]></params>
+					</AdChrome>
+				</AdChromes>
+			</Extension>
+
+			<Extension type="adaptv_iab_viewable_beacons">
+				<Beacon type="iab_viewable"><![CDATA[https://log.adaptv.advertising.com/log?event=iabViewable&creativeId=370666&sellerDealId=&aud_demo_in_target=iCSArrpvL%2FM_&convr=-1.0000&ctr=-1.0000&cr=-1.0000&vr=-1.0000&modelViewRates=&viewModelId=-1&mtbc=NFnJzCvmQNo7ZequqMcKyQ__&mtbt=CNCzRkR4JL4_&adSourceId=583682&bidId=583680&afppId=&adSourceMediaId=2506895104104120&adSpotId=&pet=preroll&pod=-2&position=-2&marketplaceId=&optout=0&adPlanId=-2&adaptag=&key=adaptv407&buyerId=5544&campaignId=64277&pageUrl=onevideotestpage.com&adapDetD=getpublica.com&sellRepD=onevideotestpage.com&urlDetMeth=3&targDSellRep=1&mediaId=2840248&zid=&url=&id=&duration=&a.geostrings=&uid=5657249828608159512&apid=UP43fbfc0d-f630-11e7-8ea7-062ee3221f4a&pid=&htmlEnabled=false&width=660&height=371&context=&categories=&sessionId=&serverRev=712121130&playerRev={playerRev}&a.rid=194c0fac-5f7d-4d21-b9d6-97a7a7727d27&a.beid=&a.cluster=0&rtype=ah&ext_id=&a.ssc=1&a.asn=ip-10-49-136-190&a.profile_id=1&p.vw.viewable=<a.viewable>&p.vw.viewableOpportunity=1&p.vw.viewableHistorical=61.49&p.vw.psize=3&a.sdk=o2unit&a.sdkType=js&pi.sdk=&pi.sdkType=&a.appReq=0&a.platformDevice=ONLINE_VIDEO&ipAddressOverride=98.234.218.146&a.platformOs=Mac+OS+X&p.vw.active=<a.active>&a.rtbexch=&pi.sideview=&pi.flashonpage=&pi.mvoa=100&pi.avoa=&pi.sound=&pi.autoInitiation=&esVr=67.2897&esMvmr=61.4865&sadVr=67.2897&sadMvmr=61.4865&p.vw.geometric=&p.vw.framerate=&a.pub_id=&device_id_status=&a.ts=0&a.adSeq={adSeq}&isHttps=1&pubSettingId=5&eov=28963053&doubleAuction=]]></Beacon>
+
+				<Beacon type="iab_detection_started"><![CDATA[https://log.adaptv.advertising.com/log?event=iabDetectionStarted&creativeId=370666&sellerDealId=&adSourceId=583682&bidId=583680&afppId=&adSourceMediaId=2506895104104120&adSpotId=&pet=preroll&pod=-2&position=-2&marketplaceId=&optout=0&adPlanId=-2&adaptag=&key=adaptv407&buyerId=5544&campaignId=64277&pageUrl=onevideotestpage.com&adapDetD=getpublica.com&sellRepD=onevideotestpage.com&urlDetMeth=3&targDSellRep=1&mediaId=2840248&zid=&url=&id=&duration=&a.geostrings=&uid=5657249828608159512&apid=UP43fbfc0d-f630-11e7-8ea7-062ee3221f4a&pid=&htmlEnabled=false&width=660&height=371&context=&categories=&sessionId=&serverRev=712121130&playerRev={playerRev}&a.rid=194c0fac-5f7d-4d21-b9d6-97a7a7727d27&a.beid=&a.cluster=0&rtype=ah&ext_id=&a.ssc=1&a.asn=ip-10-49-136-190&a.profile_id=1&p.vw.viewable=<a.viewable>&p.vw.viewableOpportunity=1&p.vw.viewableHistorical=61.49&p.vw.psize=3&a.sdk=o2unit&a.sdkType=js&pi.sdk=&pi.sdkType=&a.appReq=0&a.platformDevice=ONLINE_VIDEO&ipAddressOverride=98.234.218.146&a.platformOs=Mac+OS+X&p.vw.active=<a.active>&a.rtbexch=&pi.sideview=&pi.flashonpage=&pi.mvoa=100&pi.avoa=&pi.sound=&pi.autoInitiation=&esVr=67.2897&esMvmr=61.4865&sadVr=67.2897&sadMvmr=61.4865&p.vw.geometric=&p.vw.framerate=&a.pub_id=&device_id_status=&a.ts=0&a.adSeq={adSeq}&isHttps=1&pubSettingId=5&eov=28963053&doubleAuction=]]></Beacon>
+
+				<Beacon type="iab_detection_failed"><![CDATA[https://log.adaptv.advertising.com/log?event=iabDetectionFailed&creativeId=370666&sellerDealId=&adSourceId=583682&bidId=583680&afppId=&adSourceMediaId=2506895104104120&adSpotId=&pet=preroll&pod=-2&position=-2&marketplaceId=&optout=0&adPlanId=-2&adaptag=&key=adaptv407&buyerId=5544&campaignId=64277&pageUrl=onevideotestpage.com&adapDetD=getpublica.com&sellRepD=onevideotestpage.com&urlDetMeth=3&targDSellRep=1&mediaId=2840248&zid=&url=&id=&duration=&a.geostrings=&uid=5657249828608159512&apid=UP43fbfc0d-f630-11e7-8ea7-062ee3221f4a&pid=&htmlEnabled=false&width=660&height=371&context=&categories=&sessionId=&serverRev=712121130&playerRev={playerRev}&a.rid=194c0fac-5f7d-4d21-b9d6-97a7a7727d27&a.beid=&a.cluster=0&rtype=ah&ext_id=&a.ssc=1&a.asn=ip-10-49-136-190&a.profile_id=1&p.vw.viewable=<a.viewable>&p.vw.viewableOpportunity=1&p.vw.viewableHistorical=61.49&p.vw.psize=3&a.sdk=o2unit&a.sdkType=js&pi.sdk=&pi.sdkType=&a.appReq=0&a.platformDevice=ONLINE_VIDEO&ipAddressOverride=98.234.218.146&a.platformOs=Mac+OS+X&p.vw.active=<a.active>&a.rtbexch=&pi.sideview=&pi.flashonpage=&pi.mvoa=100&pi.avoa=&pi.sound=&pi.autoInitiation=&esVr=67.2897&esMvmr=61.4865&sadVr=67.2897&sadMvmr=61.4865&p.vw.geometric=&p.vw.framerate=&a.pub_id=&device_id_status=&a.ts=0&a.adSeq={adSeq}&isHttps=1&pubSettingId=5&eov=28963053&doubleAuction=]]></Beacon>
+			</Extension>
+
+			<Extension type="ad_duration"><![CDATA[00:00:15.000]]></Extension>
+
+			<Extension type="one_video_inventory_attributes">
+				<adLoadedTimeout><![CDATA[30000]]></adLoadedTimeout>
+
+				<breakLoadedTimeout><![CDATA[15000]]></breakLoadedTimeout>
+
+				<maxWrapperLevels><![CDATA[3]]></maxWrapperLevels>
+			</Extension>
+
+			<Extension type="one_video_adomain"><![CDATA[aol.com]]></Extension>
+		</Extensions>
+	</InLine>
+</Ad>
+</VAST>
