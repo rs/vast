@@ -569,3 +569,43 @@ func TestExtraSpacesVpaid(t *testing.T) {
 		}
 	}
 }
+
+func TestIcons(t *testing.T) {
+	v, _, _, err := loadFixture("testdata/vast_adaptv_attempt_attr.xml")
+	if !assert.NoError(t, err) {
+		return
+	}
+
+	assert.Equal(t, "3.0", v.Version)
+	if assert.Len(t, v.Ads, 1) {
+		ad := v.Ads[0]
+		assert.Equal(t, "a583680", ad.ID)
+		assert.Nil(t, ad.Wrapper)
+		if assert.NotNil(t, ad.InLine) {
+			inline := ad.InLine
+			assert.Equal(t, "Adap.tv", inline.AdSystem.Name)
+			assert.Equal(t, "1.0", inline.AdSystem.Version)
+			assert.Equal(t, "Adap.tv Ad Unit", inline.AdTitle.CDATA)
+			assert.Equal(t, "", inline.Description.CDATA)
+
+			if assert.Len(t, inline.Creatives, 1) {
+				crea1 := inline.Creatives[0]
+				if assert.NotNil(t, crea1.Linear) {
+					if assert.Len(t, crea1.Linear.Icons, 1) {
+						icon1 := crea1.Linear.Icons[0]
+						assert.Equal(t, "DAA", icon1.Program)
+						assert.Equal(t, 77, icon1.Width)
+						assert.Equal(t, 15, icon1.Height)
+						assert.Equal(t, "right", icon1.XPosition)
+						assert.Equal(t, "top", icon1.YPosition)
+						if assert.NotNil(t, icon1.StaticResource) {
+							assert.Equal(t, "image/png", icon1.StaticResource.CreativeType)
+							assert.Equal(t, "https://s.aolcdn.com/ads/adchoices.png", icon1.StaticResource.URI)
+							assert.Equal(t, "https://adinfo.aol.com", icon1.IconClickThrough.CDATA)
+						}
+					}
+				}
+			}
+		}
+	}
+}
