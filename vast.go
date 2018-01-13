@@ -235,7 +235,7 @@ type Linear struct {
 	// Duration in standard time format, hh:mm:ss
 	Duration       Duration
 	AdParameters   *AdParameters `xml:",omitempty"`
-	Icons          []Icon        `xml:"Icons>Icon,omitempty"`
+	Icons          []*Icon       `xml:"Icons>Icon,omitempty"`
 	TrackingEvents []Tracking    `xml:"TrackingEvents>Tracking,omitempty"`
 	VideoClicks    *VideoClicks  `xml:",omitempty"`
 	MediaFiles     []MediaFile   `xml:"MediaFiles>MediaFile,omitempty"`
@@ -243,7 +243,7 @@ type Linear struct {
 
 // LinearWrapper defines a wrapped linear creative
 type LinearWrapper struct {
-	Icons          []Icon       `xml:"Icons>Icon,omitempty"`
+	Icons          []*Icon      `xml:"Icons>Icon,omitempty"`
 	TrackingEvents []Tracking   `xml:"TrackingEvents>Tracking,omitempty"`
 	VideoClicks    *VideoClicks `xml:",omitempty"`
 }
