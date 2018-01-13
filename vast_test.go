@@ -591,8 +591,8 @@ func TestIcons(t *testing.T) {
 			if assert.Len(t, inline.Creatives, 1) {
 				crea1 := inline.Creatives[0]
 				if assert.NotNil(t, crea1.Linear) {
-					if assert.Len(t, crea1.Linear.Icons, 1) {
-						icon1 := crea1.Linear.Icons[0]
+					if assert.Len(t, crea1.Linear.Icons.Icon, 1) {
+						icon1 := crea1.Linear.Icons.Icon[0]
 						assert.Equal(t, "DAA", icon1.Program)
 						assert.Equal(t, 77, icon1.Width)
 						assert.Equal(t, 15, icon1.Height)
