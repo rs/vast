@@ -591,8 +591,8 @@ func TestIcons(t *testing.T) {
 			if assert.Len(t, inline.Creatives, 1) {
 				crea1 := inline.Creatives[0]
 				if assert.NotNil(t, crea1.Linear) {
-					if assert.Len(t, crea1.Linear.Icons, 1) {
-						icon1 := crea1.Linear.Icons[0]
+					if assert.Len(t, crea1.Linear.Icons.Icon, 1) {
+						icon1 := crea1.Linear.Icons.Icon[0]
 						assert.Equal(t, "DAA", icon1.Program)
 						assert.Equal(t, 77, icon1.Width)
 						assert.Equal(t, 15, icon1.Height)
@@ -605,6 +605,31 @@ func TestIcons(t *testing.T) {
 						}
 					}
 				}
+			}
+		}
+	}
+}
+
+func TestAttemptAttr(t *testing.T) {
+	v, _, _, err := loadFixture("testdata/vast_adaptv_attempt_attr.xml")
+	if !assert.NoError(t, err) {
+		return
+	}
+
+	assert.Equal(t, "3.0", v.Version)
+	if assert.Len(t, v.Ads, 1) {
+		ad := v.Ads[0]
+		assert.Equal(t, "a583680", ad.ID)
+		assert.Nil(t, ad.Wrapper)
+		if assert.NotNil(t, ad.InLine) {
+			inline := ad.InLine
+			assert.Equal(t, "Adap.tv", inline.AdSystem.Name)
+			assert.Equal(t, "1.0", inline.AdSystem.Version)
+			assert.Equal(t, "Adap.tv Ad Unit", inline.AdTitle.CDATA)
+			assert.Equal(t, "", inline.Description.CDATA)
+
+			if assert.NotNil(t, inline.Attempt) {
+				assert.Equal(t, "https://log.adaptv.advertising.com/log?event=adAttempt&sellerDealId=&buyerDealId=&creativeId=370666&a.att1=1&adSourceId=583682&bidId=583680&afppId=&adSourceMediaId=2506895104104120&adSpotId=&pet=preroll&pod=-2&position=-2&marketplaceId=&app_storeurl_available=0&app_bundle=&a.serverquota=832&a.actcnt=80&a.descnt=100000&nurl=&location_available=0&user_id_type=3&ext_crid=&adomain=&adomainId=24&a.abMeth=12&platformDealId=&optout=0&adPlanId=-2&adaptag=&key=adaptv407&buyerId=5544&campaignId=64277&pageUrl=onevideotestpage.com&adapDetD=getpublica.com&sellRepD=onevideotestpage.com&urlDetMeth=3&targDSellRep=1&mediaId=2840248&zid=&url=&id=&duration=&a.geostrings=&uid=5657249828608159512&apid=UP43fbfc0d-f630-11e7-8ea7-062ee3221f4a&pid=&htmlEnabled=false&width=660&height=371&context=&categories=&sessionId=&serverRev=712121130&playerRev={playerRev}&a.rid=194c0fac-5f7d-4d21-b9d6-97a7a7727d27&a.beid=&a.cluster=0&rtype=ah&ext_id=&a.ssc=1&a.asn=ip-10-49-136-190&a.profile_id=1&p.vw.viewable=<a.viewable>&p.vw.viewableOpportunity=1&p.vw.viewableHistorical=61.49&p.vw.psize=3&a.sdk=o2unit&a.sdkType=js&pi.sdk=&pi.sdkType=&a.appReq=0&a.platformDevice=ONLINE_VIDEO&ipAddressOverride=98.234.218.146&a.platformOs=Mac+OS+X&p.vw.active=<a.active>&a.rtbexch=&pi.sideview=&pi.flashonpage=&pi.mvoa=100&pi.avoa=&pi.sound=&pi.autoInitiation=&esVr=67.2897&esMvmr=61.4865&sadVr=67.2897&sadMvmr=61.4865&p.vw.geometric=&p.vw.framerate=&a.pub_id=&device_id_status=&a.ts=0&a.adSeq={adSeq}&isHttps=1&pubSettingId=5&eov=28963053&doubleAuction=&nextSeatbid=&buyerSeatId=&isMatchedUser=", inline.Attempt.URI)
 			}
 		}
 	}

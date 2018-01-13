@@ -1,6 +1,8 @@
 // Package vast implements IAB VAST 3.0 specification http://www.iab.net/media/file/VASTv3.0.pdf
 package vast
 
+import "encoding/xml"
+
 // VAST is the root <VAST> tag
 type VAST struct {
 	// The version of the VAST spec (should be either "2.0" or "3.0")
@@ -48,6 +50,8 @@ type InLine struct {
 	// One or more URIs that directs the video player to a tracking resource file that the
 	// video player should request when the first frame of the ad is displayed
 	Impressions []Impression `xml:"Impression"`
+	// Custom node used by Adap.tv
+	Attempt *Attempt
 	// The container for one or more <Creative> elements
 	Creatives []Creative `xml:"Creatives>Creative"`
 	// A string value that provides a longer description of the ad.
@@ -86,6 +90,13 @@ type Impression struct {
 	URI string `xml:",cdata"`
 }
 
+// Attempt is a custom node used by Adap.tv
+type Attempt struct {
+	XMLName xml.Name `xml:"Attempt,omitempty"`
+	ID      string   `xml:"id,attr,omitempty"`
+	URI     string   `xml:",cdata"`
+}
+
 // Pricing provides a value that represents a price that can be used by real-time
 // bidding (RTB) systems. VAST is not designed to handle RTB since other methods
 // exist,  but this element is offered for custom solutions if needed.
@@ -116,6 +127,8 @@ type Wrapper struct {
 	// One or more URIs that directs the video player to a tracking resource file that the
 	// video player should request when the first frame of the ad is displayed
 	Impressions []Impression `xml:"Impression"`
+	// Custom node used by Adap.tv
+	Attempt *Attempt
 	// A URI representing an error-tracking pixel; this element can occur multiple
 	// times.
 	Errors []CDATAString `xml:"Error,omitempty"`
@@ -235,15 +248,15 @@ type Linear struct {
 	// Duration in standard time format, hh:mm:ss
 	Duration       Duration
 	AdParameters   *AdParameters `xml:",omitempty"`
-	Icons          []Icon        `xml:"Icons>Icon,omitempty"`
-	TrackingEvents []Tracking    `xml:"TrackingEvents>Tracking,omitempty"`
-	VideoClicks    *VideoClicks  `xml:",omitempty"`
-	MediaFiles     []MediaFile   `xml:"MediaFiles>MediaFile,omitempty"`
+	Icons          *Icons
+	TrackingEvents []Tracking   `xml:"TrackingEvents>Tracking,omitempty"`
+	VideoClicks    *VideoClicks `xml:",omitempty"`
+	MediaFiles     []MediaFile  `xml:"MediaFiles>MediaFile,omitempty"`
 }
 
 // LinearWrapper defines a wrapped linear creative
 type LinearWrapper struct {
-	Icons          []Icon       `xml:"Icons>Icon,omitempty"`
+	Icons          *Icons
 	TrackingEvents []Tracking   `xml:"TrackingEvents>Tracking,omitempty"`
 	VideoClicks    *VideoClicks `xml:",omitempty"`
 }
@@ -388,6 +401,11 @@ type NonLinearWrapper struct {
 	TrackingEvents []Tracking `xml:"TrackingEvents>Tracking,omitempty"`
 	// URLs to ping when user clicks on the the non-linear ad.
 	NonLinearClickTracking []CDATAString `xml:",omitempty"`
+}
+
+type Icons struct {
+	XMLName xml.Name `xml:"Icons,omitempty"`
+	Icon    []Icon   `xml:"Icon,omitempty"`
 }
 
 // Icon represents advertising industry initiatives like AdChoices.
