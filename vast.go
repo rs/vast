@@ -88,6 +88,13 @@ type Impression struct {
 	URI string `xml:",cdata"`
 }
 
+// Attempt is a custom node used by Adap.tv
+type Attempt struct {
+	XMLName xml.Name `xml:"Attempt,omitempty"`
+	ID      string   `xml:"id,attr,omitempty"`
+	URI     string   `xml:",cdata"`
+}
+
 // Pricing provides a value that represents a price that can be used by real-time
 // bidding (RTB) systems. VAST is not designed to handle RTB since other methods
 // exist,  but this element is offered for custom solutions if needed.
@@ -118,6 +125,8 @@ type Wrapper struct {
 	// One or more URIs that directs the video player to a tracking resource file that the
 	// video player should request when the first frame of the ad is displayed
 	Impressions []Impression `xml:"Impression"`
+	// Custom node used by Adap.tv
+	Attempt *Attempt
 	// A URI representing an error-tracking pixel; this element can occur multiple
 	// times.
 	Errors []CDATAString `xml:"Error,omitempty"`
