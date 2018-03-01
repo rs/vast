@@ -19,14 +19,18 @@ func (v *VAST) MarshalXML() ([]byte, error) {
 	strXML = xml.Header + strXML
 	strXML = strings.Replace(strXML, "\n", "", -1)
 	strXML = strings.Replace(strXML, "\t", "", -1)
+	strXML = strings.Replace(strXML, "<MediaFiles></MediaFiles>", "", -1)
 	strXML = strings.TrimSpace(strXML)
 	return []byte(strXML), nil
+
 }
 
 // FromXML is a custom XML unmarshalling method, with some fixes on top of the native encoding/xml package
 func FromXML(xmlStr []byte) (*VAST, error) {
 	xmlStr = bytes.Replace(xmlStr, []byte("\n"), []byte(""), -1)
 	xmlStr = bytes.Replace(xmlStr, []byte("\t"), []byte(""), -1)
+	xmlStr = bytes.Replace(xmlStr, []byte("<MediaFiles></MediaFiles>"), []byte(""), -1)
+
 	var v VAST
 	if err := xml.Unmarshal(xmlStr, &v); err != nil {
 		return nil, err
