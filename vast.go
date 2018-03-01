@@ -19,6 +19,7 @@ func (v *VAST) MarshalXML() ([]byte, error) {
 	strXML = xml.Header + strXML
 	strXML = strings.Replace(strXML, "\n", "", -1)
 	strXML = strings.Replace(strXML, "\t", "", -1)
+	strXML = strings.Replace(strXML, "<MediaFiles></MediaFiles>", "", -1)
 	strXML = strings.TrimSpace(strXML)
 	return []byte(strXML), nil
 }
