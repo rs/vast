@@ -45,7 +45,7 @@ func (e *Extension) UnmarshalXML(dec *xml.Decoder, start xml.StartElement) error
 	// copy the type and the customTracking
 	e.Type = e2.Type
 	e.CustomTracking = e2.CustomTracking
-	// copy the data only of customTraking is empty
+	// copy the data only of customTracking is empty
 	if len(e.CustomTracking) == 0 {
 		e.Data = e2.Data
 	}

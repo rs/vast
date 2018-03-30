@@ -196,7 +196,7 @@ type CreativeWrapper struct {
 	AdID string `xml:"AdID,attr,omitempty"`
 	// If present, defines a linear creative
 	Linear *LinearWrapper `xml:",omitempty"`
-	// If defined, defins companions creatives
+	// If defined, defines companions creatives
 	CompanionAds *CompanionAdsWrapper `xml:"CompanionAds,omitempty"`
 	// If defined, defines non linear creatives
 	NonLinearAds *NonLinearAdsWrapper `xml:"NonLinearAds,omitempty"`
@@ -265,7 +265,7 @@ type Companion struct {
 	// Pixel dimensions of expanding companion ad when in expanded state.
 	ExpandedWidth int `xml:"expandedWidth,attr"`
 	// Pixel dimensions of expanding companion ad when in expanded state.
-	ExpandeHeight int `xml:"expandedHeight,attr"`
+	ExpandedHeight int `xml:"expandedHeight,attr"`
 	// The apiFramework defines the method to use for communication with the companion.
 	APIFramework string `xml:"apiFramework,attr,omitempty"`
 	// Used to match companion creative to publisher placement areas on the page.
@@ -305,7 +305,7 @@ type CompanionWrapper struct {
 	// Pixel dimensions of expanding companion ad when in expanded state.
 	ExpandedWidth int `xml:"expandedWidth,attr"`
 	// Pixel dimensions of expanding companion ad when in expanded state.
-	ExpandeHeight int `xml:"expandedHeight,attr"`
+	ExpandedHeight int `xml:"expandedHeight,attr"`
 	// The apiFramework defines the method to use for communication with the companion.
 	APIFramework string `xml:"apiFramework,attr,omitempty"`
 	// Used to match companion creative to publisher placement areas on the page.
@@ -341,7 +341,7 @@ type NonLinear struct {
 	// Pixel dimensions of expanding nonlinear ad when in expanded state.
 	ExpandedWidth int `xml:"expandedWidth,attr"`
 	// Pixel dimensions of expanding nonlinear ad when in expanded state.
-	ExpandeHeight int `xml:"expandedHeight,attr"`
+	ExpandedHeight int `xml:"expandedHeight,attr"`
 	// Whether it is acceptable to scale the image.
 	Scalable bool `xml:"scalable,attr,omitempty"`
 	// Whether the ad must have its aspect ratio maintained when scales.
@@ -376,7 +376,7 @@ type NonLinearWrapper struct {
 	// Pixel dimensions of expanding nonlinear ad when in expanded state.
 	ExpandedWidth int `xml:"expandedWidth,attr"`
 	// Pixel dimensions of expanding nonlinear ad when in expanded state.
-	ExpandeHeight int `xml:"expandedHeight,attr"`
+	ExpandedHeight int `xml:"expandedHeight,attr"`
 	// Whether it is acceptable to scale the image.
 	Scalable bool `xml:"scalable,attr,omitempty"`
 	// Whether the ad must have its aspect ratio maintained when scales.
