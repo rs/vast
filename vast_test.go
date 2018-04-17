@@ -91,15 +91,16 @@ func TestInlineExtensions(t *testing.T) {
 		assert.Equal(t, "708365173", ad.ID)
 		if assert.NotNil(t, ad.InLine) {
 			if assert.NotNil(t, ad.InLine.Extensions) {
-				if assert.Len(t, ad.InLine.Extensions, 4) {
+				exts := *ad.InLine.Extensions
+				if assert.Len(t, exts, 4) {
 					var ext Extension
 					// asserting first extension
-					ext = ad.InLine.Extensions[0]
+					ext = exts[0]
 					assert.Equal(t, "geo", ext.Type)
 					assert.Empty(t, ext.CustomTracking)
 					assert.Equal(t, "\n          <Country>US</Country>\n          <Bandwidth>3</Bandwidth>\n          <BandwidthKbps>1680</BandwidthKbps>\n        ", string(ext.Data))
 					// asserting second extension
-					ext = ad.InLine.Extensions[1]
+					ext = exts[1]
 					assert.Equal(t, "activeview", ext.Type)
 					if assert.Len(t, ext.CustomTracking, 2) {
 						// first tracker
@@ -111,12 +112,12 @@ func TestInlineExtensions(t *testing.T) {
 					}
 					assert.Empty(t, string(ext.Data))
 					// asserting third extension
-					ext = ad.InLine.Extensions[2]
+					ext = exts[2]
 					assert.Equal(t, "DFP", ext.Type)
 					assert.Equal(t, "\n          <SkippableAdType>Generic</SkippableAdType>\n        ", string(ext.Data))
 					assert.Empty(t, ext.CustomTracking)
 					// asserting fourth extension
-					ext = ad.InLine.Extensions[3]
+					ext = exts[3]
 					assert.Equal(t, "metrics", ext.Type)
 					assert.Equal(t, "\n          <FeEventId>MubmWKCWLs_tiQPYiYrwBw</FeEventId>\n          <AdEventId>CIGpsPCTkdMCFdN-Ygod-xkCKQ</AdEventId>\n        ", string(ext.Data))
 					assert.Empty(t, ext.CustomTracking)
@@ -520,11 +521,12 @@ func TestSpotXVpaid(t *testing.T) {
 				}
 
 			}
-			if assert.Len(t, inline.Extensions, 2) {
-				ext1 := inline.Extensions[0]
+			exts := *inline.Extensions
+			if assert.Len(t, exts, 2) {
+				ext1 := exts[0]
 				assert.Equal(t, "LR-Pricing", ext1.Type)
 				assert.Equal(t, "<Price model=\"CPM\" currency=\"USD\" source=\"spotxchange\"><![CDATA[3.06]]></Price>", strings.TrimSpace(string(ext1.Data)))
-				ext2 := inline.Extensions[1]
+				ext2 := exts[1]
 				assert.Equal(t, "SpotX-Count", ext2.Type)
 				assert.Equal(t, "<total_available><![CDATA[1]]></total_available>", strings.TrimSpace(string(ext2.Data)))
 			}

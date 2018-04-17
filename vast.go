@@ -78,7 +78,7 @@ type InLine struct {
 	// custom element should be nested under <Extensions> to help separate custom
 	// XML elements from VAST elements. The following example includes a custom
 	// xml element within the Extensions element.
-	Extensions []Extension `xml:"Extensions>Extension,omitempty"`
+	Extensions *[]Extension `xml:"Extensions>Extension,omitempty"`
 }
 
 // Impression is a URI that directs the video player to a tracking resource file that
