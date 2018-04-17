@@ -167,7 +167,7 @@ type Creative struct {
 	// of VAST.
 	// The nested <CreativeExtension> includes an attribute for type, which
 	// specifies the MIME type needed to execute the extension.
-	CreativeExtensions []Extension `xml:"CreativeExtensions>CreativeExtension,omitempty"`
+	CreativeExtensions *[]Extension `xml:"CreativeExtensions>CreativeExtension,omitempty"`
 }
 
 // CompanionAds contains companions creatives
