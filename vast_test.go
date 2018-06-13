@@ -612,3 +612,28 @@ func TestIcons(t *testing.T) {
 		}
 	}
 }
+
+func TestUniversalAdID(t *testing.T) {
+	v, _, _, err := loadFixture("testdata/vast4_universal_ad_id.xml")
+	if !assert.NoError(t, err) {
+		return
+	}
+
+	assert.Equal(t, "4.0", v.Version)
+	if assert.Len(t, v.Ads, 1) {
+		ad := v.Ads[0]
+		assert.Equal(t, "20008", ad.ID)
+		if assert.NotNil(t, ad.InLine) {
+			if assert.NotNil(t, ad.InLine.Extensions) {
+				if assert.Len(t, ad.InLine.Creatives, 1) {
+					if assert.NotNil(t, ad.InLine.Creatives[0].UniversalAdID) {
+						creative := ad.InLine.Creatives[0]
+						assert.Equal(t, "Ad-ID", creative.UniversalAdID.IDRegistry)
+						assert.Equal(t, "8465", creative.UniversalAdID.IDValue)
+						assert.Equal(t, "8465", creative.UniversalAdID.ID)
+					}
+				}
+			}
+		}
+	}
+}
