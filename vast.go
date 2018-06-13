@@ -156,6 +156,8 @@ type Creative struct {
 	CompanionAds *CompanionAds `xml:",omitempty"`
 	// If defined, defines non linear creatives
 	NonLinearAds *NonLinearAds `xml:",omitempty"`
+	// If present, provides a VAST 4.x universal ad id
+	UniversalAdID *UniversalAdID `xml:"UniversalAdId,omitempty"`
 	// When an API framework is needed to execute creative, a
 	// <CreativeExtensions> element can be added under the <Creative>. This
 	// extension can be used to load an executable creative with or without using
@@ -515,4 +517,11 @@ type MediaFile struct {
 	// placed in key/value pairs on the asset request).
 	APIFramework string `xml:"apiFramework,attr,omitempty"`
 	URI          string `xml:",cdata"`
+}
+
+// UniversalAdID describes a VAST 4.x universal ad id.
+type UniversalAdID struct {
+	IDRegistry string `xml:"idRegistry,attr"`
+	IDValue    string `xml:"idValue,attr"`
+	ID         string `xml:",cdata"`
 }
