@@ -257,17 +257,17 @@ type Companion struct {
 	// Optional identifier
 	ID string `xml:"id,attr,omitempty"`
 	// Pixel dimensions of companion slot.
-	Width int `xml:"width,attr"`
+	Width int `xml:"width,attr,omitempty"`
 	// Pixel dimensions of companion slot.
-	Height int `xml:"height,attr"`
+	Height int `xml:"height,attr,omitempty"`
 	// Pixel dimensions of the companion asset.
-	AssetWidth int `xml:"assetWidth,attr"`
+	AssetWidth int `xml:"assetWidth,attr,omitempty"`
 	// Pixel dimensions of the companion asset.
-	AssetHeight int `xml:"assetHeight,attr"`
+	AssetHeight int `xml:"assetHeight,attr,omitempty"`
 	// Pixel dimensions of expanding companion ad when in expanded state.
-	ExpandedWidth int `xml:"expandedWidth,attr"`
+	ExpandedWidth int `xml:"expandedWidth,attr,omitempty"`
 	// Pixel dimensions of expanding companion ad when in expanded state.
-	ExpandedHeight int `xml:"expandedHeight,attr"`
+	ExpandedHeight int `xml:"expandedHeight,attr,omitempty"`
 	// The apiFramework defines the method to use for communication with the companion.
 	APIFramework string `xml:"apiFramework,attr,omitempty"`
 	// Used to match companion creative to publisher placement areas on the page.
