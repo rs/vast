@@ -293,7 +293,8 @@ type Companion struct {
 	// Used to match companion creative to publisher placement areas on the page.
 	AdSlotID string `xml:"adSlotId,attr,omitempty"`
 	// URL to open as destination page when user clicks on the the companion banner ad.
-	CompanionClickThrough *CompanionClickThrough `xml:",omitempty"`
+	CompanionClickThrough  *CompanionClickThrough    `xml:",omitempty"`
+	CompanionClickTracking []*CompanionClickTracking `xml:",omitempty"`
 	// Alt text to be displayed when companion is rendered in HTML environment.
 	AltText string `xml:",omitempty"`
 	// The creativeView should always be requested when present. For Companions
@@ -553,6 +554,11 @@ type Extension struct {
 }
 
 type CompanionClickThrough struct {
+	// URL to a static file, such as an image or SWF file
+	URI string `xml:",cdata"`
+}
+
+type CompanionClickTracking struct {
 	// URL to a static file, such as an image or SWF file
 	URI string `xml:",cdata"`
 }
