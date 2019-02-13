@@ -23,6 +23,27 @@ func (v *VAST) MarshalXML() ([]byte, error) {
 	return []byte(strXML), nil
 }
 
+func (v *VAST) GetMediaFile() (*MediaFile, string) {
+	if len(v.Ads) == 0 {
+		return nil, ""
+	}
+	for _, ad := range v.Ads {
+		if ad.InLine == nil {
+			return nil, ""
+		}
+		inline := ad.InLine
+		for _, creative := range inline.Creatives {
+			if creative.Linear != nil {
+				linear := creative.Linear
+				for i := range linear.MediaFiles {
+					return &linear.MediaFiles[i], linear.Duration
+				}
+			}
+		}
+	}
+	return nil, ""
+}
+
 // FromXML is a custom XML unmarshalling method, with some fixes on top of the native encoding/xml package
 func FromXML(xmlStr []byte) (*VAST, error) {
 	xmlStr = bytes.Replace(xmlStr, []byte("\n"), []byte(""), -1)
