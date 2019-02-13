@@ -4,6 +4,7 @@ package vast
 import (
 	"bytes"
 	"encoding/xml"
+	"github.com/pkg/errors"
 	"strings"
 )
 
@@ -561,4 +562,24 @@ type CompanionClickThrough struct {
 type CompanionClickTracking struct {
 	// URL to a static file, such as an image or SWF file
 	URI string `xml:",cdata"`
+}
+
+func (v *VAST) GetDuration() (string, error) {
+	ads := v.Ads
+	if len(ads) == 0 {
+		return "", errors.New("no Ads in Vast")
+	}
+	inline := ads[0].InLine
+	if inline == nil {
+		return "", errors.New("no Inline in Vast")
+	}
+	creatives := inline.Creatives
+	if len(creatives) == 0 {
+		return "", errors.New("no Creatives in Vast")
+	}
+	linear := creatives[0].Linear
+	if linear == nil {
+		return "", errors.New("no Linear object in first creative")
+	}
+	return linear.Duration, nil
 }
