@@ -21,6 +21,7 @@ func addVastExtension(extensions *Extensions, extension *Extension) *Extensions 
 }
 
 func (ad *Ad) AddCompanion(companion *Companion) {
+	//todo: must check for nils: if something is nil, create it!
 	if ad.InLine != nil {
 		//add companion to a creative and append the creative
 	}
@@ -30,14 +31,36 @@ func (ad *Ad) AddCompanion(companion *Companion) {
 	}
 }
 
-func (ad *Ad) AddImpression() {
-
+func (ad *Ad) AddImpressions(impression ...Impression) {
+	//todo: add more validation logic, this is just an example.
+	if ad.InLine != nil {
+		if ad.InLine.Impressions == nil {
+			ad.InLine.Impressions = make([]Impression, 0, len(impression))
+		}
+		ad.InLine.Impressions = append(ad.InLine.Impressions, impression...)
+	}
+	if ad.Wrapper != nil {
+		if ad.Wrapper.Impressions == nil {
+			ad.Wrapper.Impressions = make([]Impression, 0, len(impression))
+		}
+		ad.Wrapper.Impressions = append(ad.Wrapper.Impressions, impression...)
+	}
 }
 
-func (ad *Ad) AddClick() {
-
+func (ad *Ad) AddErrors(error ...Error) {
+	//todo: similar to AddImpressions
 }
 
-func (ad *Ad) AddX() {
+func (ad *Ad) AddTrackingEvents(trackingEvents ...Tracking) {
+	//todo: need to append to both inline & wrapper, to each creative! (must check for nils: if something is nil, create it!!!!!)
+	//if Creatives is nil, create create an array of 1 creative and the create a linear & TrackingEvents
+	for _, c := range ad.InLine.Creatives {
+		//must check for nils: if something is nil, create it!
+		c.Linear.TrackingEvents = append(c.Linear.TrackingEvents, trackingEvents...)
+	}
+}
 
+func (ad *Ad) AddClickTrackings(videoClicks ...VideoClick) {
+	//todo: similar to AddTrackingEvents
+	//todo: must check for nils: if something is nil, create it!
 }
