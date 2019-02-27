@@ -19,3 +19,25 @@ func addVastExtension(extensions *Extensions, extension *Extension) *Extensions 
 	extensions.Extensions = append(extensions.Extensions, *extension)
 	return extensions
 }
+
+func (ad *Ad) AddCompanion(companion *Companion) {
+	if ad.InLine != nil {
+		//add companion to a creative and append the creative
+	}
+	if ad.Wrapper != nil {
+		//add WrapperCompanion to a WrapperCreative and append the WrapperCreative
+
+	}
+}
+
+func (ad *Ad) AddImpression() {
+
+}
+
+func (ad *Ad) AddClick() {
+
+}
+
+func (ad *Ad) AddX() {
+
+}
