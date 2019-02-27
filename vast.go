@@ -122,7 +122,7 @@ type InLine struct {
 	Survey string `xml:",omitempty"`
 	// A URI representing an error-tracking pixel; this element can occur multiple
 	// times.
-	Error []Error `xml:",omitempty"`
+	Errors []Error `xml:",omitempty"`
 	// Provides a value that represents a price that can be used by real-time bidding
 	// (RTB) systems. VAST is not designed to handle RTB since other methods exist,
 	// but this element is offered for custom solutions if needed.
@@ -178,7 +178,7 @@ type Wrapper struct {
 	Impressions []Impression `xml:"Impression"`
 	// A URI representing an error-tracking pixel; this element can occur multiple
 	// times.
-	Error []Error `xml:",omitempty"`
+	Errors []Error `xml:",omitempty"`
 	// The container for one or more <Creative> elements
 	Creatives []CreativeWrapper `xml:"Creatives>Creative"`
 	// XML node for custom extensions, as defined by the ad server. When used, a
@@ -674,8 +674,8 @@ func (v *VAST) formatVastStrings() {
 				}
 			}
 		}
-		for i := range inline.Error {
-			err := &inline.Error[i]
+		for i := range inline.Errors {
+			err := &inline.Errors[i]
 			err.URI = formatVastString(err.URI)
 		}
 	}
