@@ -136,3 +136,12 @@ func (ad *Ad) AddClickTrackings(videoClicks ...VideoClick) {
 		}
 	}
 }
+
+func (ad *Ad) SetAdSystem(name, version string) {
+	if ad.InLine != nil {
+		ad.InLine.AdSystem = &AdSystem{Name: name, Version: version}
+	}
+	if ad.Wrapper != nil {
+		ad.Wrapper.AdSystem = &AdSystem{Name: name, Version: version}
+	}
+}
