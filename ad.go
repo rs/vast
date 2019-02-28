@@ -21,7 +21,9 @@ func addVastExtension(extensions *Extensions, extension *Extension) *Extensions 
 }
 
 func (ad *Ad) AddCompanion(companion *Companion) {
-	//todo: must check for nils: if something is nil, create it! - why?
+	if companion == nil {
+		return
+	}
 	if inLine := ad.InLine; inLine != nil {
 		//add companion to a creative and append the creative
 		inLine.Creatives = append(inLine.Creatives, Creative{
