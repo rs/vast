@@ -21,6 +21,9 @@ func addVastExtension(extensions *Extensions, extension *Extension) *Extensions 
 }
 
 func (ad *Ad) AddCompanion(companion *Companion) {
+	if companion == nil {
+		return
+	}
 	if inLine := ad.InLine; inLine != nil {
 		//add companion to a creative and append the creative
 		inLine.Creatives = append(inLine.Creatives, Creative{
@@ -155,5 +158,14 @@ func (ad *Ad) AddClickTrackings(clickTrackings ...VideoClick) {
 			}
 			videoClicks.ClickTrackings = append(videoClicks.ClickTrackings, clickTrackings...)
 		}
+	}
+}
+
+func (ad *Ad) SetAdSystem(name, version string) {
+	if ad.InLine != nil {
+		ad.InLine.AdSystem = &AdSystem{Name: name, Version: version}
+	}
+	if ad.Wrapper != nil {
+		ad.Wrapper.AdSystem = &AdSystem{Name: name, Version: version}
 	}
 }
