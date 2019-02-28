@@ -21,46 +21,116 @@ func addVastExtension(extensions *Extensions, extension *Extension) *Extensions 
 }
 
 func (ad *Ad) AddCompanion(companion *Companion) {
-	//todo: must check for nils: if something is nil, create it!
-	if ad.InLine != nil {
+	//todo: must check for nils: if something is nil, create it! - why?
+	if inLine := ad.InLine; inLine != nil {
 		//add companion to a creative and append the creative
+		inLine.Creatives = append(inLine.Creatives, Creative{
+			CompanionAds: &CompanionAds{
+				Companions: []Companion{*companion},
+			},
+		})
 	}
-	if ad.Wrapper != nil {
+	if wrapper := ad.Wrapper; wrapper != nil {
 		//add WrapperCompanion to a WrapperCreative and append the WrapperCreative
-
+		wrapper.Creatives = append(wrapper.Creatives, CreativeWrapper{
+			CompanionAds: &CompanionAdsWrapper{
+				Companions: []CompanionWrapper{{
+					StaticResource:        companion.StaticResource,
+					CompanionClickThrough: companion.CompanionClickThrough.URI,
+					TrackingEvents:        companion.TrackingEvents,
+				}},
+			},
+		})
 	}
 }
 
-func (ad *Ad) AddImpressions(impression ...Impression) {
+func (ad *Ad) AddImpressions(impressions ...Impression) {
 	//todo: add more validation logic, this is just an example.
-	if ad.InLine != nil {
-		if ad.InLine.Impressions == nil {
-			ad.InLine.Impressions = make([]Impression, 0, len(impression))
-		}
-		ad.InLine.Impressions = append(ad.InLine.Impressions, impression...)
+	if len(impressions) == 0 {
+		return
 	}
-	if ad.Wrapper != nil {
-		if ad.Wrapper.Impressions == nil {
-			ad.Wrapper.Impressions = make([]Impression, 0, len(impression))
+	if inline := ad.InLine; inline != nil {
+		if inline.Impressions == nil {
+			inline.Impressions = make([]Impression, 0, len(impressions))
 		}
-		ad.Wrapper.Impressions = append(ad.Wrapper.Impressions, impression...)
+		inline.Impressions = append(inline.Impressions, impressions...)
+	}
+	if wrapper := ad.Wrapper; wrapper != nil {
+		if wrapper.Impressions == nil {
+			wrapper.Impressions = make([]Impression, 0, len(impressions))
+		}
+		wrapper.Impressions = append(wrapper.Impressions, impressions...)
 	}
 }
 
-func (ad *Ad) AddErrors(error ...Error) {
-	//todo: similar to AddImpressions
+func (ad *Ad) AddErrors(errors ...Error) {
+	if len(errors) == 0 {
+		return
+	}
+	if inline := ad.InLine; inline != nil {
+		if ad.InLine.Errors == nil {
+			ad.InLine.Errors = make([]Error, 0, len(errors))
+		}
+		ad.InLine.Errors = append(ad.InLine.Errors, errors...)
+	}
+	if wrapper := ad.Wrapper; wrapper != nil {
+		if wrapper.Errors == nil {
+			wrapper.Errors = make([]Error, 0, len(errors))
+		}
+		wrapper.Errors = append(wrapper.Errors, errors...)
+	}
 }
 
 func (ad *Ad) AddTrackingEvents(trackingEvents ...Tracking) {
-	//todo: need to append to both inline & wrapper, to each creative! (must check for nils: if something is nil, create it!!!!!)
-	//if Creatives is nil, create create an array of 1 creative and the create a linear & TrackingEvents
-	for _, c := range ad.InLine.Creatives {
-		//must check for nils: if something is nil, create it!
-		c.Linear.TrackingEvents = append(c.Linear.TrackingEvents, trackingEvents...)
+	// (must check for nils: if something is nil, create it!!!!!) - TODO why??
+	//if Creatives is nil, create create an array of 1 creative and
+	// the create a linear & TrackingEvent -
+	if inline := ad.InLine; inline != nil {
+		for i := range inline.Creatives {
+			c := &inline.Creatives[i]
+			linear := c.Linear
+			if linear == nil {
+				continue
+			}
+			linear.TrackingEvents = append(linear.TrackingEvents, trackingEvents...)
+		}
+	}
+	if wrapper := ad.Wrapper; wrapper != nil {
+		for i := range wrapper.Creatives {
+			c := &wrapper.Creatives[i]
+			linear := c.Linear
+			if linear == nil {
+				continue
+			}
+			linear.TrackingEvents = append(linear.TrackingEvents, trackingEvents...)
+		}
 	}
 }
 
+// TODO: 2 options:
+// 1. send full  *VideoClicks
+// 2. update separately: ClickThroughs, ClickTrackings, CustomClicks
 func (ad *Ad) AddClickTrackings(videoClicks ...VideoClick) {
 	//todo: similar to AddTrackingEvents
 	//todo: must check for nils: if something is nil, create it!
+	if inline := ad.InLine; inline != nil {
+		for i := range inline.Creatives {
+			c := &inline.Creatives[i]
+			linear := c.Linear
+			if linear == nil {
+				continue
+			}
+			//linear.VideoClicks = append(linear.VideoClicks, videoClicks...)
+		}
+	}
+	if wrapper := ad.Wrapper; wrapper != nil {
+		for i := range wrapper.Creatives {
+			c := &wrapper.Creatives[i]
+			linear := c.Linear
+			if linear == nil {
+				continue
+			}
+			//linear.VideoClicks = append(linear.TrackingEvents, trackingEvents...)
+		}
+	}
 }
