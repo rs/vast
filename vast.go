@@ -661,10 +661,11 @@ func (v *VAST) formatVastStrings() {
 						click := &linear.VideoClicks.ClickTrackings[i]
 						click.URI = formatVastString(click.URI)
 					}
-				}
-				for i := range linear.VideoClicks.ClickTrackings {
-					click := &linear.VideoClicks.ClickTrackings[i]
-					click.URI = formatVastString(click.URI)
+
+					for i := range linear.VideoClicks.ClickTrackings {
+						click := &linear.VideoClicks.ClickTrackings[i]
+						click.URI = formatVastString(click.URI)
+					}
 				}
 				for i := range linear.MediaFiles {
 					media := &linear.MediaFiles[i]

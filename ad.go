@@ -83,6 +83,9 @@ func (ad *Ad) AddErrors(errors ...Error) {
 }
 
 func (ad *Ad) AddTrackingEvents(trackingEvents ...Tracking) {
+	if len(trackingEvents) == 0 {
+		return
+	}
 	if inline := ad.InLine; inline != nil {
 		for i := range inline.Creatives {
 			c := &inline.Creatives[i]
@@ -106,6 +109,9 @@ func (ad *Ad) AddTrackingEvents(trackingEvents ...Tracking) {
 }
 
 func (ad *Ad) AddCompanionTrackingEvents(trackingEvents ...Tracking) {
+	if len(trackingEvents) == 0 {
+		return
+	}
 	if inline := ad.InLine; inline != nil {
 		for i := range inline.Creatives {
 			c := &inline.Creatives[i]
@@ -145,6 +151,9 @@ func (ad *Ad) AddCompanionTrackingEvents(trackingEvents ...Tracking) {
 }
 
 func (ad *Ad) AddClickTrackings(clickTrackings ...VideoClick) {
+	if len(clickTrackings) == 0 {
+		return
+	}
 	if inline := ad.InLine; inline != nil {
 		for i := range inline.Creatives {
 			c := &inline.Creatives[i]
