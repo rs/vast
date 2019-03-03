@@ -69,16 +69,16 @@ func (ad *Ad) AddErrors(errors ...Error) {
 		return
 	}
 	if inline := ad.InLine; inline != nil {
-		if ad.InLine.Errors == nil {
-			ad.InLine.Errors = make([]Error, 0, len(errors))
+		if ad.InLine.Error == nil {
+			ad.InLine.Error = make([]Error, 0, len(errors))
 		}
-		ad.InLine.Errors = append(ad.InLine.Errors, errors...)
+		ad.InLine.Error = append(ad.InLine.Error, errors...)
 	}
 	if wrapper := ad.Wrapper; wrapper != nil {
-		if wrapper.Errors == nil {
-			wrapper.Errors = make([]Error, 0, len(errors))
+		if wrapper.Error == nil {
+			wrapper.Error = make([]Error, 0, len(errors))
 		}
-		wrapper.Errors = append(wrapper.Errors, errors...)
+		wrapper.Error = append(wrapper.Error, errors...)
 	}
 }
 
