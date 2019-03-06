@@ -164,6 +164,7 @@ func (ad *Ad) AddClickTrackings(clickTrackings ...VideoClick) {
 			videoClicks := linear.VideoClicks
 			if videoClicks == nil {
 				videoClicks = &VideoClicks{}
+				linear.VideoClicks = videoClicks
 			}
 			videoClicks.ClickTrackings = append(videoClicks.ClickTrackings, clickTrackings...)
 		}
