@@ -171,6 +171,27 @@ func (ad *Ad) AddClickTrackings(clickTrackings ...VideoClick) {
 	}
 }
 
+func (ad *Ad) AddClickThrough(clickThroughs ...VideoClick) {
+	if len(clickThroughs) == 0 {
+		return
+	}
+	if inline := ad.InLine; inline != nil {
+		for i := range inline.Creatives {
+			c := &inline.Creatives[i]
+			linear := c.Linear
+			if linear == nil {
+				continue
+			}
+			videoClicks := linear.VideoClicks
+			if videoClicks == nil {
+				videoClicks = &VideoClicks{}
+				linear.VideoClicks = videoClicks
+			}
+			videoClicks.ClickThroughs = append(videoClicks.ClickTrackings, clickThroughs...)
+		}
+	}
+}
+
 func (ad *Ad) SetAdSystem(name, version string) {
 	if ad.InLine != nil {
 		ad.InLine.AdSystem = &AdSystem{Name: name, Version: version}
