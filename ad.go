@@ -187,7 +187,7 @@ func (ad *Ad) AddClickThrough(clickThroughs ...VideoClick) {
 				videoClicks = &VideoClicks{}
 				linear.VideoClicks = videoClicks
 			}
-			videoClicks.ClickThroughs = append(videoClicks.ClickTrackings, clickThroughs...)
+			videoClicks.ClickThroughs = append(videoClicks.ClickThroughs, clickThroughs...)
 		}
 	}
 }
