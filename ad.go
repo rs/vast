@@ -88,7 +88,7 @@ func (ad *Ad) AddTrackingEvents(trackingEvents ...Tracking) {
 	}
 	if inline := ad.InLine; inline != nil {
 		if len(inline.Creatives) == 0 {
-			inline.Creatives = append(inline.Creatives, Creative{})
+			inline.Creatives = []Creative{{Linear: &Linear{}}}
 		}
 		for i := range inline.Creatives {
 			c := &inline.Creatives[i]
@@ -101,7 +101,7 @@ func (ad *Ad) AddTrackingEvents(trackingEvents ...Tracking) {
 	}
 	if wrapper := ad.Wrapper; wrapper != nil {
 		if len(wrapper.Creatives) == 0 {
-			wrapper.Creatives = append(wrapper.Creatives, CreativeWrapper{})
+			wrapper.Creatives = []CreativeWrapper{{Linear: &LinearWrapper{}}}
 		}
 		for i := range wrapper.Creatives {
 			c := &wrapper.Creatives[i]
@@ -173,6 +173,27 @@ func (ad *Ad) AddClickTrackings(clickTrackings ...VideoClick) {
 				linear.VideoClicks = videoClicks
 			}
 			videoClicks.ClickTrackings = append(videoClicks.ClickTrackings, clickTrackings...)
+		}
+	}
+	if wrapper := ad.Wrapper; wrapper != nil {
+		if len(wrapper.Creatives) == 0 {
+			wrapper.Creatives = []CreativeWrapper{{Linear: &LinearWrapper{}}}
+		}
+		for i := range wrapper.Creatives {
+			c := &wrapper.Creatives[i]
+			cAds := c.CompanionAds
+			if cAds == nil || len(cAds.Companions) == 0 {
+				continue
+			}
+			for j := range cAds.Companions {
+				cAd := &cAds.Companions[j]
+				cAdsTrackingEvents := cAd.TrackingEvents
+				if len(cAdsTrackingEvents) == 0 {
+					cAdsTrackingEvents = []Tracking{}
+				}
+				cAdsTrackingEvents = append(cAdsTrackingEvents, trackingEvents...)
+				cAd.TrackingEvents = cAdsTrackingEvents
+			}
 		}
 	}
 }
