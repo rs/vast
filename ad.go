@@ -175,27 +175,6 @@ func (ad *Ad) AddClickTrackings(clickTrackings ...VideoClick) {
 			videoClicks.ClickTrackings = append(videoClicks.ClickTrackings, clickTrackings...)
 		}
 	}
-	if wrapper := ad.Wrapper; wrapper != nil {
-		if len(wrapper.Creatives) == 0 {
-			wrapper.Creatives = []CreativeWrapper{{Linear: &LinearWrapper{}}}
-		}
-		for i := range wrapper.Creatives {
-			c := &wrapper.Creatives[i]
-			cAds := c.CompanionAds
-			if cAds == nil || len(cAds.Companions) == 0 {
-				continue
-			}
-			for j := range cAds.Companions {
-				cAd := &cAds.Companions[j]
-				cAdsTrackingEvents := cAd.TrackingEvents
-				if len(cAdsTrackingEvents) == 0 {
-					cAdsTrackingEvents = []Tracking{}
-				}
-				cAdsTrackingEvents = append(cAdsTrackingEvents, trackingEvents...)
-				cAd.TrackingEvents = cAdsTrackingEvents
-			}
-		}
-	}
 }
 
 func (ad *Ad) AddClickThrough(clickThroughs ...VideoClick) {
