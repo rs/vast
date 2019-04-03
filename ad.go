@@ -1,5 +1,15 @@
 package vast
 
+func (ad *Ad) GetExtensions() *Extensions {
+	if ad.InLine != nil {
+		return ad.InLine.Extensions
+	}
+	if ad.Wrapper != nil {
+		return ad.Wrapper.Extensions
+	}
+	return nil
+}
+
 func (ad *Ad) AddExtension(extension *Extension) {
 	if extension == nil {
 		return
