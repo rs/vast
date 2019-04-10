@@ -97,15 +97,12 @@ func (ad *Ad) AddTrackingEvents(trackingEvents ...Tracking) {
 		return
 	}
 	if inline := ad.InLine; inline != nil {
-		if len(inline.Creatives) == 0 {
-			inline.Creatives = []Creative{{Linear: &Linear{}}}
-		}
 		for i := range inline.Creatives {
 			c := &inline.Creatives[i]
-			if c.Linear == nil {
-				c.Linear = new(Linear)
-			}
 			linear := c.Linear
+			if linear == nil {
+				continue
+			}
 			linear.TrackingEvents = append(linear.TrackingEvents, trackingEvents...)
 		}
 	}
@@ -115,10 +112,10 @@ func (ad *Ad) AddTrackingEvents(trackingEvents ...Tracking) {
 		}
 		for i := range wrapper.Creatives {
 			c := &wrapper.Creatives[i]
-			if c.Linear == nil {
-				c.Linear = new(LinearWrapper)
-			}
 			linear := c.Linear
+			if linear == nil {
+				continue
+			}
 			linear.TrackingEvents = append(linear.TrackingEvents, trackingEvents...)
 		}
 	}
@@ -171,15 +168,12 @@ func (ad *Ad) AddClickTrackings(clickTrackings ...VideoClick) {
 		return
 	}
 	if inline := ad.InLine; inline != nil {
-		if len(inline.Creatives) == 0 {
-			inline.Creatives = []Creative{{Linear: &Linear{}}}
-		}
 		for i := range inline.Creatives {
 			c := &inline.Creatives[i]
-			if c.Linear == nil {
-				c.Linear = new(Linear)
-			}
 			linear := c.Linear
+			if linear == nil {
+				continue
+			}
 			videoClicks := linear.VideoClicks
 			if videoClicks == nil {
 				videoClicks = &VideoClicks{}
@@ -194,10 +188,11 @@ func (ad *Ad) AddClickTrackings(clickTrackings ...VideoClick) {
 		}
 		for i := range wrapper.Creatives {
 			c := &wrapper.Creatives[i]
-			if c.Linear == nil {
-				c.Linear = new(LinearWrapper)
+			linear := c.Linear
+			if linear == nil {
+				continue
 			}
-			videoClicks := c.Linear.VideoClicks
+			videoClicks := linear.VideoClicks
 			if videoClicks == nil {
 				videoClicks = &VideoClicks{}
 				c.Linear.VideoClicks = videoClicks
@@ -214,10 +209,10 @@ func (ad *Ad) AddClickThrough(clickThroughs ...VideoClick) {
 	if inline := ad.InLine; inline != nil {
 		for i := range inline.Creatives {
 			c := &inline.Creatives[i]
-			if c.Linear == nil {
-				c.Linear = new(Linear)
-			}
 			linear := c.Linear
+			if linear == nil {
+				continue
+			}
 			videoClicks := linear.VideoClicks
 			if videoClicks == nil {
 				videoClicks = &VideoClicks{}
