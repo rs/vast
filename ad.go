@@ -170,6 +170,52 @@ func (ad *Ad) AddClickTrackings(clickTrackings ...VideoClick) {
 	}
 }
 
+func (ad *Ad) AddCompanionClickTrackings(CompanionClickTrackings ...*CompanionClickTracking) {
+	if len(CompanionClickTrackings) == 0 {
+		return
+	}
+	if inline := ad.InLine; inline != nil {
+		for i := range inline.Creatives {
+			c := &inline.Creatives[i]
+			cAds := c.CompanionAds
+			if cAds == nil || len(cAds.Companions) == 0 {
+				continue
+			}
+			for j := range cAds.Companions {
+				cAd := &cAds.Companions[j]
+				cAdsClickTrackings := cAd.CompanionClickTracking
+				if len(cAdsClickTrackings) == 0 {
+					cAdsClickTrackings = []*CompanionClickTracking{}
+				}
+				cAdsClickTrackings = append(cAdsClickTrackings, CompanionClickTrackings...)
+				cAd.CompanionClickTracking = cAdsClickTrackings
+			}
+		}
+	}
+	if wrapper := ad.Wrapper; wrapper != nil {
+		for i := range wrapper.Creatives {
+			c := &wrapper.Creatives[i]
+			cAds := c.CompanionAds
+			if cAds == nil || len(cAds.Companions) == 0 {
+				continue
+			}
+			for j := range cAds.Companions {
+				cAd := &cAds.Companions[j]
+				cAdsClickTrackings := cAd.CompanionClickTracking
+				if len(cAdsClickTrackings) == 0 {
+					cAdsClickTrackings = []string{}
+				}
+				CompanionClickTrackingStrings := make([]string, 0, len(CompanionClickTrackings))
+				for i, companionClickTracking := range CompanionClickTrackings {
+					CompanionClickTrackingStrings[i] = companionClickTracking.URI
+				}
+				cAdsClickTrackings = append(cAdsClickTrackings, CompanionClickTrackingStrings...)
+				cAd.CompanionClickTracking = cAdsClickTrackings
+			}
+		}
+	}
+}
+
 func (ad *Ad) SetAdSystem(name, version string) {
 	if ad.InLine != nil {
 		ad.InLine.AdSystem = &AdSystem{Name: name, Version: version}
