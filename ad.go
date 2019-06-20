@@ -1,6 +1,9 @@
 package vast
 
 func (ad *Ad) AddExtension(extension *Extension) {
+	if extension == nil {
+		return
+	}
 	if ad.InLine != nil {
 		ad.InLine.Extensions = addVastExtension(ad.InLine.Extensions, extension)
 	}
@@ -10,11 +13,8 @@ func (ad *Ad) AddExtension(extension *Extension) {
 }
 
 func addVastExtension(extensions *Extensions, extension *Extension) *Extensions {
-	if extension == nil {
-		return nil
-	}
 	if extensions == nil {
-		extensions = &Extensions{}
+		extensions = new(Extensions)
 	}
 	extensions.Extensions = append(extensions.Extensions, *extension)
 	return extensions
@@ -164,8 +164,30 @@ func (ad *Ad) AddClickTrackings(clickTrackings ...VideoClick) {
 			videoClicks := linear.VideoClicks
 			if videoClicks == nil {
 				videoClicks = &VideoClicks{}
+				linear.VideoClicks = videoClicks
 			}
 			videoClicks.ClickTrackings = append(videoClicks.ClickTrackings, clickTrackings...)
+		}
+	}
+}
+
+func (ad *Ad) AddClickThrough(clickThroughs ...VideoClick) {
+	if len(clickThroughs) == 0 {
+		return
+	}
+	if inline := ad.InLine; inline != nil {
+		for i := range inline.Creatives {
+			c := &inline.Creatives[i]
+			linear := c.Linear
+			if linear == nil {
+				continue
+			}
+			videoClicks := linear.VideoClicks
+			if videoClicks == nil {
+				videoClicks = &VideoClicks{}
+				linear.VideoClicks = videoClicks
+			}
+			videoClicks.ClickThroughs = append(videoClicks.ClickThroughs, clickThroughs...)
 		}
 	}
 }
