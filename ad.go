@@ -107,6 +107,9 @@ func (ad *Ad) AddTrackingEvents(trackingEvents ...Tracking) {
 		}
 	}
 	if wrapper := ad.Wrapper; wrapper != nil {
+		if len(wrapper.Creatives) == 0 {
+			wrapper.Creatives = []CreativeWrapper{{Linear: &LinearWrapper{}}}
+		}
 		for i := range wrapper.Creatives {
 			c := &wrapper.Creatives[i]
 			linear := c.Linear
@@ -177,6 +180,24 @@ func (ad *Ad) AddClickTrackings(clickTrackings ...VideoClick) {
 				linear.VideoClicks = videoClicks
 			}
 			videoClicks.ClickTrackings = append(videoClicks.ClickTrackings, clickTrackings...)
+		}
+	}
+	if wrapper := ad.Wrapper; wrapper != nil {
+		if len(wrapper.Creatives) == 0 {
+			wrapper.Creatives = []CreativeWrapper{{Linear: &LinearWrapper{}}}
+		}
+		for i := range wrapper.Creatives {
+			c := &wrapper.Creatives[i]
+			linear := c.Linear
+			if linear == nil {
+				continue
+			}
+			videoClicks := linear.VideoClicks
+			if videoClicks == nil {
+				videoClicks = &VideoClicks{}
+				c.Linear.VideoClicks = videoClicks
+			}
+			c.Linear.VideoClicks.ClickTrackings = append(c.Linear.VideoClicks.ClickTrackings, clickTrackings...)
 		}
 	}
 }
