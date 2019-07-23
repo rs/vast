@@ -46,6 +46,35 @@ func (v *VAST) GetMediaFile() (*MediaFile, string) {
 	return nil, ""
 }
 
+func (v *VAST) GetClickTroughURL() string {
+	if len(v.Ads) == 0 {
+		return ""
+	}
+	for _, ad := range v.Ads {
+		if ad.InLine == nil {
+			continue
+		}
+		inline := ad.InLine
+		for _, creative := range inline.Creatives {
+			linear := creative.Linear
+			if linear == nil {
+				continue
+			}
+			vc := linear.VideoClicks
+			if vc == nil {
+				continue
+			}
+			clickThrough := vc.ClickThroughs
+			for _, ct := range clickThrough {
+				if uri := ct.URI; uri != "" {
+					return uri
+				}
+			}
+		}
+	}
+	return ""
+}
+
 // FromXML is a custom XML unmarshalling method, with some fixes on top of the native encoding/xml package
 func FromXML(xmlStr []byte) (*VAST, error) {
 	xmlStr = bytes.Replace(xmlStr, []byte("\n"), []byte(""), -1)
