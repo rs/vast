@@ -540,6 +540,7 @@ type MediaFile struct {
 
 // Extensions defines extensions
 type Extensions struct {
+	Type       string      `xml:"type,attr,omitempty"`
 	Extensions []Extension `xml:"Extension,omitempty"`
 }
 
