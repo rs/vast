@@ -605,6 +605,7 @@ type CreativeExtensions struct {
 
 // Extension represent aribtrary XML provided by the platform to extend the VAST response
 type Extension struct {
+	Type string `xml:"type,attr,omitempty"`
 	Data []byte `xml:",innerxml"`
 }
 
