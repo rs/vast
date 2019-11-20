@@ -426,7 +426,7 @@ type Icon struct {
 	// URL to a static file, such as an image or SWF file
 	StaticResource *StaticResource `xml:",omitempty"`
 	// URL source for an IFrame to display the companion element
-	IFrameResource CDATAString `xml:",omitempty"`
+	IFrameResource *CDATAString `xml:",omitempty"`
 	// HTML to display the companion element
 	HTMLResource *HTMLResource `xml:",omitempty"`
 }
