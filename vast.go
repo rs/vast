@@ -8,6 +8,12 @@ import (
 	"strings"
 )
 
+const (
+	WrapperCreativeType = "w"
+	VastCreativeType    = "v"
+	VpaidCreativeType   = "vp"
+)
+
 // MarshalXML is a custom XML marshalling method, with some fixes on top of the native encoding/xml package
 func (v *VAST) MarshalXML() ([]byte, error) {
 	v.formatVastStrings()
@@ -94,6 +100,38 @@ func (v *VAST) RemovePixels() {
 			}
 		}
 	}
+}
+
+func (v *VAST) GetVastType() (string, error) {
+	ads := v.Ads
+	if len(ads) == 0 {
+		return "", errors.New("empty Ads attribute")
+	}
+	ad := ads[0]
+
+	if wrapper := ad.Wrapper; wrapper != nil && wrapper.VASTAdTagURI != "" {
+		return WrapperCreativeType, nil
+	}
+	inLine := ad.InLine
+	if inLine == nil {
+		return "", errors.New("empty InLine attribute")
+	}
+	creatives := inLine.Creatives
+	if len(creatives) == 0 {
+		return "", errors.New("empty Creative attribute")
+	}
+	linear := creatives[0].Linear
+	if linear == nil {
+		return "", errors.New("empty Linear attribute")
+	}
+	mediafiles := linear.MediaFiles
+	if len(mediafiles) == 0 {
+		return "", errors.New("empty MediaFiles attribute")
+	}
+	if strings.EqualFold(mediafiles[0].APIFramework, "VPAID") {
+		return VpaidCreativeType, nil
+	}
+	return VastCreativeType, nil
 }
 
 // FromXML is a custom XML unmarshalling method, with some fixes on top of the native encoding/xml package
