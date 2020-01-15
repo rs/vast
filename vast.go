@@ -220,7 +220,7 @@ type InLine struct {
 	// XML elements from VAST elements. The following example includes a custom
 	// xml element within the Extensions element.
 	Extensions *Extensions `xml:",omitempty"`
-	// Custom XML node for SuperSonic social links
+	AdVerifications *AdVerifications `xml:",omitempty"`
 }
 
 type Error struct {
@@ -675,6 +675,50 @@ type CompanionClickThrough struct {
 
 type CompanionClickTracking struct {
 	// URL to a static file, such as an image or SWF file
+	URI string `xml:",cdata"`
+}
+
+//The <AdVerifications> element contains one or more <Verification> elements, which list the resources and metadata
+// required to execute third-party measurement code in order to verify creative playback.
+type AdVerifications struct {
+	AdVerifications []Verification `xml:"Verification,omitempty"`
+}
+
+// The <Verification> element contains the executable and bootstrapping data required to run the measurement code for
+// a single verification vendor.
+type Verification struct {
+	Vendor string `xml:"type,attr"`
+	JavaScriptResource *JavaScriptResource `xml:",omitempty"`
+	ExecutableResource *ExecutableResource `xml:",omitempty"`
+	TrackingEvents []Tracking `xml:"TrackingEvents>Tracking,omitempty"`
+	VerificationParameters *VerificationParameters `xml:",omitempty"`
+}
+
+// JavaScriptResource is a container for the URI to the JavaScript file used to collect verification data.
+type JavaScriptResource struct {
+	// The name of the API framework used to execute the AdVerification code (required)
+	APIFramework string `xml:"apiFramework,attr"`
+	// If "true", this resource is optimized and able to execute in an environment without DOM and other browser
+	// built-ins (required)
+	BrowserOptional bool `xml:"browserOptional,attr"`
+	// URL to the JavaScript used to collect data
+	URI string `xml:",cdata"`
+}
+
+// ExecutableResource is a reference to a non-JavaScript or custom-integration resource intended for collecting
+// verification data via the listed apiFramework.
+type ExecutableResource struct {
+	// The name of the API framework used to execute the AdVerification code (required)
+	APIFramework string `xml:"apiFramework,attr"`
+	// The type of executable resource provided
+	Type string `xml:"type,attr,omitempty"`
+	// A CDATA-wrapped reference to the resource
+	URI string `xml:",cdata"`
+}
+// VerificationParameters contains a CDATA-wrapped string intended for bootstrapping the verification code and providing
+// metadata about the current impression.
+type VerificationParameters struct {
+	// CDATA-wrapped metadata string for the verification executable
 	URI string `xml:",cdata"`
 }
 
