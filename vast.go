@@ -273,7 +273,8 @@ type Wrapper struct {
 	// custom element should be nested under <Extensions> to help separate custom
 	// XML elements from VAST elements. The following example includes a custom
 	// xml element within the Extensions element.
-	Extensions *Extensions `xml:",omitempty"`
+	Extensions      *Extensions      `xml:",omitempty"`
+	AdVerifications *AdVerifications `xml:",omitempty"`
 }
 
 // AdSystem contains information about the system that returned the ad
