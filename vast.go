@@ -219,7 +219,7 @@ type InLine struct {
 	// custom element should be nested under <Extensions> to help separate custom
 	// XML elements from VAST elements. The following example includes a custom
 	// xml element within the Extensions element.
-	Extensions *Extensions `xml:",omitempty"`
+	Extensions      *Extensions      `xml:",omitempty"`
 	AdVerifications *AdVerifications `xml:",omitempty"`
 }
 
@@ -687,10 +687,10 @@ type AdVerifications struct {
 // The <Verification> element contains the executable and bootstrapping data required to run the measurement code for
 // a single verification vendor.
 type Verification struct {
-	Vendor string `xml:"type,attr"`
-	JavaScriptResource *JavaScriptResource `xml:",omitempty"`
-	ExecutableResource *ExecutableResource `xml:",omitempty"`
-	TrackingEvents []Tracking `xml:"TrackingEvents>Tracking,omitempty"`
+	Vendor                 string                  `xml:"vendor,attr"`
+	JavaScriptResource     *JavaScriptResource     `xml:",omitempty"`
+	ExecutableResource     *ExecutableResource     `xml:",omitempty"`
+	TrackingEvents         []Tracking              `xml:"TrackingEvents>Tracking,omitempty"`
 	VerificationParameters *VerificationParameters `xml:",omitempty"`
 }
 
@@ -715,6 +715,7 @@ type ExecutableResource struct {
 	// A CDATA-wrapped reference to the resource
 	URI string `xml:",cdata"`
 }
+
 // VerificationParameters contains a CDATA-wrapped string intended for bootstrapping the verification code and providing
 // metadata about the current impression.
 type VerificationParameters struct {
