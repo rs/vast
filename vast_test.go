@@ -203,6 +203,7 @@ func TestInlineLinear(t *testing.T) {
 						if assert.NotNil(t, comp1.StaticResource) {
 							assert.Equal(t, "image/jpeg", comp1.StaticResource.CreativeType)
 							assert.Equal(t, "http://demo.tremormedia.com/proddev/vast/Blistex1.jpg", comp1.StaticResource.URI)
+							assert.Nil(t, comp1.IFrameResource)
 						}
 						if assert.Len(t, comp1.TrackingEvents, 1) {
 							assert.Equal(t, "creativeView", comp1.TrackingEvents[0].Event)
@@ -605,6 +606,7 @@ func TestIcons(t *testing.T) {
 							assert.Equal(t, "image/png", icon1.StaticResource.CreativeType)
 							assert.Equal(t, "https://s.aolcdn.com/ads/adchoices.png", icon1.StaticResource.URI)
 							assert.Equal(t, "https://adinfo.aol.com", icon1.IconClickThrough.CDATA)
+							assert.Nil(t, icon1.IFrameResource)
 						}
 					}
 				}
