@@ -44,29 +44,29 @@ type CDATAString struct {
 // URIs necessary to display the ad.
 type InLine struct {
 	// The name of the ad server that returned the ad
-	AdSystem *AdSystem
-	// The common name of the ad
-	AdTitle CDATAString
-	// One or more URIs that directs the video player to a tracking resource file that the
-	// video player should request when the first frame of the ad is displayed
-	Impressions []Impression `xml:"Impression"`
-	// The container for one or more <Creative> elements
-	Creatives []Creative `xml:"Creatives>Creative"`
-	// A string value that provides a longer description of the ad.
-	Description CDATAString `xml:",omitempty"`
+	AdSystem *AdSystem `xml:",omitempty"`
 	// The name of the advertiser as defined by the ad serving party.
 	// This element can be used to prevent displaying ads with advertiser
 	// competitors. Ad serving parties and publishers should identify how
 	// to interpret values provided within this element. As with any optional
 	// elements, the video player is not required to support it.
 	Advertiser string `xml:",omitempty"`
+	// The common name of the ad
+	AdTitle *string
+	// One or more URIs that directs the video player to a tracking resource file that the
+	// video player should request when the first frame of the ad is displayed
+	Impressions []Impression `xml:"Impression"`
+	// The container for one or more <Creative> elements
+	Creatives []Creative `xml:"Creatives>Creative"`
+	// A string value that provides a longer description of the ad.
+	Description *CDATAString `xml:",omitempty"`
 	// A URI to a survey vendor that could be the survey, a tracking pixel,
 	// or anything to do with the survey. Multiple survey elements can be provided.
 	// A type attribute is available to specify the MIME type being served.
 	// For example, the attribute might be set to type=”text/javascript”.
 	// Surveys can be dynamically inserted into the VAST response as long as
 	// cross-domain issues are avoided.
-	Survey CDATAString `xml:",omitempty"`
+	Survey *CDATAString `xml:",omitempty"`
 	// A URI representing an error-tracking pixel; this element can occur multiple
 	// times.
 	Errors []CDATAString `xml:"Error,omitempty"`
@@ -127,7 +127,7 @@ type Wrapper struct {
 	// custom element should be nested under <Extensions> to help separate custom
 	// XML elements from VAST elements. The following example includes a custom
 	// xml element within the Extensions element.
-	Extensions []Extension `xml:"Extensions>Extension,omitempty"`
+	Extensions *[]Extension `xml:"Extensions>Extension,omitempty"`
 
 	FallbackOnNoAd           *bool `xml:"fallbackOnNoAd,attr,omitempty"`
 	AllowMultipleAds         *bool `xml:"allowMultipleAds,attr,omitempty"`
@@ -137,7 +137,7 @@ type Wrapper struct {
 // AdSystem contains information about the system that returned the ad
 type AdSystem struct {
 	Version string `xml:"version,attr,omitempty"`
-	Name    string `xml:",cdata"`
+	Name    string `xml:",chardata"`
 }
 
 // Creative is a file that is part of a VAST ad.
@@ -183,7 +183,7 @@ type CompanionAds struct {
 
 // NonLinearAds contains non linear creatives
 type NonLinearAds struct {
-	TrackingEvents []Tracking `xml:"TrackingEvents>Tracking,omitempty"`
+	TrackingEvents *[]Tracking `xml:"TrackingEvents>Tracking,omitempty"`
 	// Non linear creatives
 	NonLinears []NonLinear `xml:"NonLinear,omitempty"`
 }
@@ -215,7 +215,7 @@ type CompanionAdsWrapper struct {
 
 // NonLinearAdsWrapper contains non linear creatives in a wrapper
 type NonLinearAdsWrapper struct {
-	TrackingEvents []Tracking `xml:"TrackingEvents>Tracking,omitempty"`
+	TrackingEvents *[]Tracking `xml:"TrackingEvents>Tracking,omitempty"`
 	// Non linear creatives
 	NonLinears []NonLinearWrapper `xml:"NonLinear,omitempty"`
 }
@@ -239,17 +239,17 @@ type Linear struct {
 	// Duration in standard time format, hh:mm:ss
 	Duration       Duration
 	AdParameters   *AdParameters `xml:",omitempty"`
+	TrackingEvents *[]Tracking   `xml:"TrackingEvents>Tracking,omitempty"`
+	VideoClicks    *VideoClicks  `xml:",omitempty"`
+	MediaFiles     []MediaFile   `xml:"MediaFiles>MediaFile,omitempty"`
 	Icons          *Icons
-	TrackingEvents []Tracking   `xml:"TrackingEvents>Tracking,omitempty"`
-	VideoClicks    *VideoClicks `xml:",omitempty"`
-	MediaFiles     []MediaFile  `xml:"MediaFiles>MediaFile,omitempty"`
 }
 
 // LinearWrapper defines a wrapped linear creative
 type LinearWrapper struct {
-	Icons          *Icons
-	TrackingEvents []Tracking   `xml:"TrackingEvents>Tracking,omitempty"`
+	TrackingEvents *[]Tracking  `xml:"TrackingEvents>Tracking,omitempty"`
 	VideoClicks    *VideoClicks `xml:",omitempty"`
+	Icons          *Icons
 }
 
 // Companion defines a companion ad
@@ -280,7 +280,7 @@ type Companion struct {
 	AltText string `xml:",omitempty"`
 	// The creativeView should always be requested when present. For Companions
 	// creativeView is the only supported event.
-	TrackingEvents []Tracking `xml:"TrackingEvents>Tracking,omitempty"`
+	TrackingEvents *[]Tracking `xml:"TrackingEvents>Tracking,omitempty"`
 	// Data to be passed into the companion ads. The apiFramework defines the method
 	// to use for communication (e.g. “FlashVar”)
 	AdParameters *AdParameters `xml:",omitempty"`
@@ -320,7 +320,7 @@ type CompanionWrapper struct {
 	AltText string `xml:",omitempty"`
 	// The creativeView should always be requested when present. For Companions
 	// creativeView is the only supported event.
-	TrackingEvents []Tracking `xml:"TrackingEvents>Tracking,omitempty"`
+	TrackingEvents *[]Tracking `xml:"TrackingEvents>Tracking,omitempty"`
 	// Data to be passed into the companion ads. The apiFramework defines the method
 	// to use for communication (e.g. “FlashVar”)
 	AdParameters *AdParameters `xml:",omitempty"`
@@ -341,28 +341,28 @@ type NonLinear struct {
 	// Pixel dimensions of companion.
 	Height int `xml:"height,attr"`
 	// Pixel dimensions of expanding nonlinear ad when in expanded state.
-	ExpandedWidth int `xml:"expandedWidth,attr"`
+	ExpandedWidth int `xml:"expandedWidth,attr,omitempty"`
 	// Pixel dimensions of expanding nonlinear ad when in expanded state.
-	ExpandedHeight int `xml:"expandedHeight,attr"`
+	ExpandedHeight int `xml:"expandedHeight,attr,omitempty"`
+	// Suggested duration to display non-linear ad, typically for animation to complete.
+	// Expressed in standard time format hh:mm:ss.
+	MinSuggestedDuration *Duration `xml:"minSuggestedDuration,attr,omitempty"`
 	// Whether it is acceptable to scale the image.
 	Scalable bool `xml:"scalable,attr,omitempty"`
 	// Whether the ad must have its aspect ratio maintained when scales.
 	MaintainAspectRatio bool `xml:"maintainAspectRatio,attr,omitempty"`
-	// Suggested duration to display non-linear ad, typically for animation to complete.
-	// Expressed in standard time format hh:mm:ss.
-	MinSuggestedDuration *Duration `xml:"minSuggestedDuration,attr,omitempty"`
 	// The apiFramework defines the method to use for communication with the nonlinear element.
 	APIFramework string `xml:"apiFramework,attr,omitempty"`
 	// URLs to ping when user clicks on the the non-linear ad.
 	NonLinearClickTracking []CDATAString `xml:",omitempty"`
 	// URL to open as destination page when user clicks on the non-linear ad unit.
-	NonLinearClickThrough CDATAString `xml:",omitempty"`
+	NonLinearClickThrough *CDATAString `xml:",omitempty"`
 	// Data to be passed into the video ad.
 	AdParameters *AdParameters `xml:",omitempty"`
 	// URL to a static file, such as an image or SWF file
 	StaticResource *StaticResource `xml:",omitempty"`
 	// URL source for an IFrame to display the companion element
-	IFrameResource CDATAString `xml:",omitempty"`
+	IFrameResource *CDATAString `xml:",omitempty"`
 	// HTML to display the companion element
 	HTMLResource *HTMLResource `xml:",omitempty"`
 }
@@ -389,7 +389,7 @@ type NonLinearWrapper struct {
 	// The apiFramework defines the method to use for communication with the nonlinear element.
 	APIFramework string `xml:"apiFramework,attr,omitempty"`
 	// The creativeView should always be requested when present.
-	TrackingEvents []Tracking `xml:"TrackingEvents>Tracking,omitempty"`
+	TrackingEvents *[]Tracking `xml:"TrackingEvents>Tracking,omitempty"`
 	// URLs to ping when user clicks on the the non-linear ad.
 	NonLinearClickTracking []CDATAString `xml:",omitempty"`
 }
@@ -414,19 +414,19 @@ type Icon struct {
 	// Must match ([0-9]*|top|bottom)
 	YPosition string `xml:"yPosition,attr"`
 	// Start time at which the player should display the icon. Expressed in standard time format hh:mm:ss.
-	Offset Offset `xml:"offset,attr"`
+	Offset *Offset `xml:"offset,attr,omitempty"`
 	// duration for which the player must display the icon. Expressed in standard time format hh:mm:ss.
-	Duration Duration `xml:"duration,attr"`
+	Duration *Duration `xml:"duration,attr,omitempty"`
 	// The apiFramework defines the method to use for communication with the icon element
-	APIFramework string `xml:"apiFramework,attr,omitempty"`
+	APIFramework *string `xml:"apiFramework,attr,omitempty"`
+	// URL to a static file, such as an image or SWF file
+	StaticResource *StaticResource `xml:",omitempty"`
 	// URL to open as destination page when user clicks on the icon.
 	IconClickThrough CDATAString `xml:"IconClicks>IconClickThrough,omitempty"`
 	// URLs to ping when user clicks on the the icon.
 	IconClickTrackings []CDATAString `xml:"IconClicks>IconClickTracking,omitempty"`
-	// URL to a static file, such as an image or SWF file
-	StaticResource *StaticResource `xml:",omitempty"`
 	// URL source for an IFrame to display the companion element
-	IFrameResource CDATAString `xml:",omitempty"`
+	IFrameResource *CDATAString `xml:",omitempty"`
 	// HTML to display the companion element
 	HTMLResource *HTMLResource `xml:",omitempty"`
 }
@@ -483,17 +483,10 @@ type VideoClick struct {
 
 // MediaFile defines a reference to a linear creative asset
 type MediaFile struct {
-	// Optional identifier
-	ID string `xml:"id,attr,omitempty"`
-	// Method of delivery of ad (either "streaming" or "progressive")
-	Delivery string `xml:"delivery,attr"`
-	// MIME type. Popular MIME types include, but are not limited to
-	// “video/x-ms-wmv” for Windows Media, and “video/x-flv” for Flash
-	// Video. Image ads or interactive ads can be included in the
-	// MediaFiles section with appropriate Mime types
-	Type string `xml:"type,attr"`
-	// The codec used to produce the media file.
-	Codec string `xml:"codec,attr,omitempty"`
+	// Pixel dimensions of video.
+	Height int `xml:"height,attr"`
+	// Pixel dimensions of video.
+	Width int `xml:"width,attr"`
 	// Bitrate of encoded video in Kbps. If bitrate is supplied, MinBitrate
 	// and MaxBitrate should not be supplied.
 	Bitrate int `xml:"bitrate,attr,omitempty"`
@@ -503,10 +496,17 @@ type MediaFile struct {
 	// Maximum bitrate of an adaptive stream in Kbps. If MaxBitrate is supplied,
 	// MinBitrate must be supplied and Bitrate should not be supplied.
 	MaxBitrate int `xml:"maxBitrate,attr,omitempty"`
-	// Pixel dimensions of video.
-	Width int `xml:"width,attr"`
-	// Pixel dimensions of video.
-	Height int `xml:"height,attr"`
+	// MIME type. Popular MIME types include, but are not limited to
+	// “video/x-ms-wmv” for Windows Media, and “video/x-flv” for Flash
+	// Video. Image ads or interactive ads can be included in the
+	// MediaFiles section with appropriate Mime types
+	Type string `xml:"type,attr"`
+	// Optional identifier
+	Delivery string `xml:"delivery,attr"`
+	// The codec used to produce the media file.
+	ID string `xml:"id,attr,omitempty"`
+	// Method of delivery of ad (either "streaming" or "progressive")
+	Codec string `xml:"codec,attr,omitempty"`
 	// Whether it is acceptable to scale the image.
 	Scalable bool `xml:"scalable,attr,omitempty"`
 	// Whether the ad must have its aspect ratio maintained when scales.
@@ -524,4 +524,21 @@ type UniversalAdID struct {
 	IDRegistry string `xml:"idRegistry,attr"`
 	IDValue    string `xml:"idValue,attr"`
 	ID         string `xml:",cdata"`
+}
+
+func UnmarshallVAST(xmlString string) (*VAST, error) {
+	var v VAST
+	err := xml.Unmarshal([]byte(xmlString), &v)
+	if err != nil {
+		return nil, err
+	}
+	return &v, nil
+}
+
+func MarshallVAST(vastXML *VAST) (string, error) {
+	xmlBytes, err := xml.Marshal(vastXML)
+	if err != nil {
+		return "nil", err
+	}
+	return string(xmlBytes), nil
 }
