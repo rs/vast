@@ -16,10 +16,10 @@ type Offset struct {
 
 // MarshalText implements the encoding.TextMarshaler interface.
 func (o Offset) MarshalText() ([]byte, error) {
-	if o.Duration != nil {
-		return o.Duration.MarshalText()
+	if o.Duration == nil {
+		return []byte(fmt.Sprintf("%d%%", int(o.Percent*100))), nil
 	}
-	return []byte(fmt.Sprintf("%d%%", int(o.Percent*100))), nil
+	return o.Duration.MarshalText()
 }
 
 // UnmarshalText implements the encoding.TextUnmarshaler interface.

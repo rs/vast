@@ -21,6 +21,10 @@ func loadFixture(path string) (*VAST, string, string, error) {
 
 	var v VAST
 	err = xml.Unmarshal(b, &v)
+	if err != nil {
+		return nil, "", "", err
+
+	}
 
 	res, err := xml.MarshalIndent(v, "", "  ")
 	if err != nil {
@@ -143,7 +147,7 @@ func TestInlineLinear(t *testing.T) {
 			inline := ad.InLine
 			assert.Equal(t, "Acudeo Compatible", inline.AdSystem.Name)
 			assert.Equal(t, "1.0", inline.AdSystem.Version)
-			assert.Equal(t, "VAST 2.0 Instream Test 1", inline.AdTitle.CDATA)
+			assert.Equal(t, "VAST 2.0 Instream Test 1", *(inline.AdTitle))
 			assert.Equal(t, "VAST 2.0 Instream Test 1", inline.Description.CDATA)
 			if assert.Len(t, inline.Errors, 2) {
 				assert.Equal(t, "http://myErrorURL/error", inline.Errors[0].CDATA)
@@ -162,11 +166,11 @@ func TestInlineLinear(t *testing.T) {
 				if assert.NotNil(t, crea1.Linear) {
 					linear := crea1.Linear
 					assert.Equal(t, Duration(30*time.Second), linear.Duration)
-					if assert.Len(t, linear.TrackingEvents, 6) {
-						assert.Equal(t, linear.TrackingEvents[0].Event, "creativeView")
-						assert.Equal(t, linear.TrackingEvents[0].URI, "http://myTrackingURL/creativeView")
-						assert.Equal(t, linear.TrackingEvents[1].Event, "start")
-						assert.Equal(t, linear.TrackingEvents[1].URI, "http://myTrackingURL/start")
+					if assert.Len(t, (*linear.TrackingEvents), 6) {
+						assert.Equal(t, (*linear.TrackingEvents)[0].Event, "creativeView")
+						assert.Equal(t, (*linear.TrackingEvents)[0].URI, "http://myTrackingURL/creativeView")
+						assert.Equal(t, (*linear.TrackingEvents)[1].Event, "start")
+						assert.Equal(t, (*linear.TrackingEvents)[1].URI, "http://myTrackingURL/start")
 					}
 					if assert.NotNil(t, linear.VideoClicks) {
 						if assert.Len(t, linear.VideoClicks.ClickThroughs, 1) {
@@ -204,9 +208,9 @@ func TestInlineLinear(t *testing.T) {
 							assert.Equal(t, "image/jpeg", comp1.StaticResource.CreativeType)
 							assert.Equal(t, "http://demo.tremormedia.com/proddev/vast/Blistex1.jpg", comp1.StaticResource.URI)
 						}
-						if assert.Len(t, comp1.TrackingEvents, 1) {
-							assert.Equal(t, "creativeView", comp1.TrackingEvents[0].Event)
-							assert.Equal(t, "http://myTrackingURL/firstCompanionCreativeView", comp1.TrackingEvents[0].URI)
+						if assert.Len(t, (*comp1.TrackingEvents), 1) {
+							assert.Equal(t, "creativeView", (*comp1.TrackingEvents)[0].Event)
+							assert.Equal(t, "http://myTrackingURL/firstCompanionCreativeView", (*comp1.TrackingEvents)[0].URI)
 						}
 						assert.Equal(t, "http://www.tremormedia.com", comp1.CompanionClickThrough.CDATA)
 
@@ -262,7 +266,7 @@ func TestInlineNonLinear(t *testing.T) {
 		if assert.NotNil(t, ad.InLine) {
 			inline := ad.InLine
 			assert.Equal(t, "Acudeo Compatible", inline.AdSystem.Name)
-			assert.Equal(t, "NonLinear Test Campaign 1", inline.AdTitle.CDATA)
+			assert.Equal(t, "NonLinear Test Campaign 1", (*inline.AdTitle))
 			assert.Equal(t, "NonLinear Test Campaign 1", inline.Description.CDATA)
 			assert.Equal(t, "http://mySurveyURL/survey", inline.Survey.CDATA)
 			if assert.Len(t, inline.Errors, 1) {
@@ -278,11 +282,11 @@ func TestInlineNonLinear(t *testing.T) {
 				assert.Nil(t, crea1.CompanionAds)
 				if assert.NotNil(t, crea1.NonLinearAds) {
 					nonlin := crea1.NonLinearAds
-					if assert.Len(t, nonlin.TrackingEvents, 5) {
-						assert.Equal(t, nonlin.TrackingEvents[0].Event, "creativeView")
-						assert.Equal(t, nonlin.TrackingEvents[0].URI, "http://myTrackingURL/nonlinear/creativeView")
-						assert.Equal(t, nonlin.TrackingEvents[1].Event, "expand")
-						assert.Equal(t, nonlin.TrackingEvents[1].URI, "http://myTrackingURL/nonlinear/expand")
+					if assert.Len(t, (*nonlin.TrackingEvents), 5) {
+						assert.Equal(t, (*nonlin.TrackingEvents)[0].Event, "creativeView")
+						assert.Equal(t, (*nonlin.TrackingEvents)[0].URI, "http://myTrackingURL/nonlinear/creativeView")
+						assert.Equal(t, (*nonlin.TrackingEvents)[1].Event, "expand")
+						assert.Equal(t, (*nonlin.TrackingEvents)[1].URI, "http://myTrackingURL/nonlinear/expand")
 					}
 					if assert.Len(t, nonlin.NonLinears, 2) {
 						assert.Equal(t, "image/jpeg", nonlin.NonLinears[0].StaticResource.CreativeType)
@@ -315,9 +319,9 @@ func TestInlineNonLinear(t *testing.T) {
 							assert.Equal(t, "image/jpeg", comp2.StaticResource.CreativeType)
 							assert.Equal(t, "http://demo.tremormedia.com/proddev/vast/728x90_banner1.jpg", comp2.StaticResource.URI)
 						}
-						if assert.Len(t, comp2.TrackingEvents, 1) {
-							assert.Equal(t, "creativeView", comp2.TrackingEvents[0].Event)
-							assert.Equal(t, "http://myTrackingURL/secondCompanion", comp2.TrackingEvents[0].URI)
+						if assert.Len(t, (*comp2.TrackingEvents), 1) {
+							assert.Equal(t, "creativeView", (*comp2.TrackingEvents)[0].Event)
+							assert.Equal(t, "http://myTrackingURL/secondCompanion", (*comp2.TrackingEvents)[0].URI)
 						}
 						assert.Equal(t, "http://www.tremormedia.com", comp2.CompanionClickThrough.CDATA)
 					}
@@ -360,11 +364,11 @@ func TestWrapperLinear(t *testing.T) {
 				assert.Nil(t, crea1.CompanionAds)
 				if assert.NotNil(t, crea1.Linear) {
 					linear := crea1.Linear
-					if assert.Len(t, linear.TrackingEvents, 11) {
-						assert.Equal(t, linear.TrackingEvents[0].Event, "creativeView")
-						assert.Equal(t, linear.TrackingEvents[0].URI, "http://myTrackingURL/wrapper/creativeView")
-						assert.Equal(t, linear.TrackingEvents[1].Event, "start")
-						assert.Equal(t, linear.TrackingEvents[1].URI, "http://myTrackingURL/wrapper/start")
+					if assert.Len(t, (*linear.TrackingEvents), 11) {
+						assert.Equal(t, (*linear.TrackingEvents)[0].Event, "creativeView")
+						assert.Equal(t, (*linear.TrackingEvents)[0].URI, "http://myTrackingURL/wrapper/creativeView")
+						assert.Equal(t, (*linear.TrackingEvents)[1].Event, "start")
+						assert.Equal(t, (*linear.TrackingEvents)[1].URI, "http://myTrackingURL/wrapper/start")
 					}
 					assert.Nil(t, linear.VideoClicks)
 				}
@@ -384,9 +388,9 @@ func TestWrapperLinear(t *testing.T) {
 				assert.Nil(t, crea3.CompanionAds)
 				assert.Nil(t, crea3.Linear)
 				if assert.NotNil(t, crea3.NonLinearAds) {
-					if assert.Len(t, crea3.NonLinearAds.TrackingEvents, 1) {
-						assert.Equal(t, "creativeView", crea3.NonLinearAds.TrackingEvents[0].Event)
-						assert.Equal(t, "http://myTrackingURL/wrapper/creativeView", crea3.NonLinearAds.TrackingEvents[0].URI)
+					if assert.Len(t, (*crea3.NonLinearAds.TrackingEvents), 1) {
+						assert.Equal(t, "creativeView", (*crea3.NonLinearAds.TrackingEvents)[0].Event)
+						assert.Equal(t, "http://myTrackingURL/wrapper/creativeView", (*crea3.NonLinearAds.TrackingEvents)[0].URI)
 					}
 				}
 			}
@@ -429,9 +433,9 @@ func TestWrapperNonLinear(t *testing.T) {
 				assert.Nil(t, crea2.CompanionAds)
 				assert.Nil(t, crea2.Linear)
 				if assert.NotNil(t, crea2.NonLinearAds) {
-					if assert.Len(t, crea2.NonLinearAds.TrackingEvents, 5) {
-						assert.Equal(t, "creativeView", crea2.NonLinearAds.TrackingEvents[0].Event)
-						assert.Equal(t, "http://myTrackingURL/wrapper/nonlinear/creativeView/creativeView", crea2.NonLinearAds.TrackingEvents[0].URI)
+					if assert.Len(t, (*crea2.NonLinearAds.TrackingEvents), 5) {
+						assert.Equal(t, "creativeView", (*crea2.NonLinearAds.TrackingEvents)[0].Event)
+						assert.Equal(t, "http://myTrackingURL/wrapper/nonlinear/creativeView/creativeView", (*crea2.NonLinearAds.TrackingEvents)[0].URI)
 					}
 				}
 			}
@@ -454,7 +458,7 @@ func TestSpotXVpaid(t *testing.T) {
 			inline := ad.InLine
 			assert.Equal(t, "SpotXchange", inline.AdSystem.Name)
 			assert.Equal(t, "1.0", inline.AdSystem.Version)
-			assert.Equal(t, "IntegralAds_VAST_2_0_Ad_Wrapper", inline.AdTitle.CDATA)
+			assert.Equal(t, "IntegralAds_VAST_2_0_Ad_Wrapper", (*inline.AdTitle))
 			assert.Equal(t, "", inline.Description.CDATA)
 
 			if assert.Len(t, inline.Creatives, 2) {
@@ -500,7 +504,7 @@ func TestSpotXVpaid(t *testing.T) {
 							}
 							defer htmlResource.Close()
 							b, _ := ioutil.ReadAll(htmlResource)
-							assert.Equal(t, companionAds2.HTMLResource.HTML, string(b))
+							assert.Equal(t, companionAds2.HTMLResource.HTML+"\n", string(b))
 						}
 						companionAds3 := crea2.CompanionAds.Companions[2]
 						assert.Equal(t, 300, companionAds3.Width)
@@ -549,7 +553,7 @@ func TestExtraSpacesVpaid(t *testing.T) {
 			inline := ad.InLine
 			assert.Equal(t, "SpotXchange", inline.AdSystem.Name)
 			assert.Equal(t, "1.0", inline.AdSystem.Version)
-			assert.Equal(t, "IntegralAds_VAST_2_0_Ad_Wrapper", inline.AdTitle.CDATA)
+			assert.Equal(t, "IntegralAds_VAST_2_0_Ad_Wrapper", (*inline.AdTitle))
 			assert.Equal(t, "", inline.Description.CDATA)
 
 			if assert.Len(t, inline.Creatives, 1) {
@@ -588,8 +592,7 @@ func TestIcons(t *testing.T) {
 			inline := ad.InLine
 			assert.Equal(t, "Adap.tv", inline.AdSystem.Name)
 			assert.Equal(t, "1.0", inline.AdSystem.Version)
-			assert.Equal(t, "Adap.tv Ad Unit", inline.AdTitle.CDATA)
-			assert.Equal(t, "", inline.Description.CDATA)
+			assert.Equal(t, "Adap.tv Ad Unit", (*inline.AdTitle))
 
 			if assert.Len(t, inline.Creatives, 1) {
 				crea1 := inline.Creatives[0]
