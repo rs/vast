@@ -526,7 +526,7 @@ type UniversalAdID struct {
 	ID         string `xml:",cdata"`
 }
 
-func UnmarshallVAST(xmlString string) (*VAST, error) {
+func UnmarshalVAST(xmlString string) (*VAST, error) {
 	var v VAST
 	err := xml.Unmarshal([]byte(xmlString), &v)
 	if err != nil {
@@ -534,11 +534,16 @@ func UnmarshallVAST(xmlString string) (*VAST, error) {
 	}
 	return &v, nil
 }
+ 
 
-func MarshallVAST(vastXML *VAST) (string, error) {
+func MarshalVAST(vastXML *VAST) (string, error) {
 	xmlBytes, err := xml.Marshal(vastXML)
 	if err != nil {
 		return "nil", err
 	}
 	return string(xmlBytes), nil
 }
+
+// Legacy support for misspelled interfaces
+var UnmarshallVAST = UnmarshalVAST
+var MarshallVAST = MarshalVAST
