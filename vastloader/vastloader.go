@@ -38,12 +38,12 @@ func VASTResponseHandler(res *http.Response, err error) VASTResponse {
 }
 
 // LoadVAST attempts to load VAST
-func LoadVAST(VASTAdTagURI string) (*vastXml.VAST, error) {
+func LoadVAST(VASTAdTagURI string, milliseconds time.Duration) (*vastXml.VAST, error) {
 	var (
 		ctx    context.Context
 		cancel context.CancelFunc
 	)
-	ctx, cancel = context.WithTimeout(context.Background(), time.Second*1)
+	ctx, cancel = context.WithTimeout(context.Background(), time.Millisecond*milliseconds)
 	defer cancel()
 
 	req, err := http.NewRequestWithContext(ctx, http.MethodGet, VASTAdTagURI, nil)
