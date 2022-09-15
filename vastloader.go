@@ -1,13 +1,10 @@
-package vastloader
+package vast
 
 import (
 	"context"
 	"io"
 	"net/http"
 	"time"
-
-	"github.com/KargoGlobal/vast"
-	vastXml "github.com/KargoGlobal/vast"
 )
 
 type VASTResponse struct {
@@ -38,7 +35,7 @@ func VASTResponseHandler(res *http.Response, err error) VASTResponse {
 }
 
 // LoadVAST attempts to load VAST
-func LoadVAST(VASTAdTagURI string, milliseconds time.Duration) (*vastXml.VAST, error) {
+func LoadVAST(VASTAdTagURI string, milliseconds time.Duration) (*VAST, error) {
 	var (
 		ctx    context.Context
 		cancel context.CancelFunc
@@ -58,7 +55,7 @@ func LoadVAST(VASTAdTagURI string, milliseconds time.Duration) (*vastXml.VAST, e
 	if vastResponse.Err != nil {
 		return nil, vastResponse.Err
 	}
-	vast, err := vast.UnmarshalVAST(string(vastResponse.Body))
+	vast, err := UnmarshalVAST(string(vastResponse.Body))
 	if err != nil {
 		return nil, err
 	}
