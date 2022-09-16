@@ -47,11 +47,7 @@ func LoadVAST(VASTAdTagURI string, milliseconds time.Duration) (*VAST, error) {
 	if err != nil {
 		return nil, err
 	}
-	responseChan := make(chan VASTResponse, 0)
-	go func() {
-		responseChan <- VASTResponseHandler(http.DefaultClient.Do(req))
-	}()
-	vastResponse := <-responseChan
+	vastResponse := VASTResponseHandler(http.DefaultClient.Do(req))
 	if vastResponse.Err != nil {
 		return nil, vastResponse.Err
 	}
