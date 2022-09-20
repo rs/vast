@@ -534,7 +534,6 @@ func UnmarshalVAST(xmlString string) (*VAST, error) {
 	}
 	return &v, nil
 }
- 
 
 func MarshalVAST(vastXML *VAST) (string, error) {
 	xmlBytes, err := xml.Marshal(vastXML)
@@ -547,3 +546,8 @@ func MarshalVAST(vastXML *VAST) (string, error) {
 // Legacy support for misspelled interfaces
 var UnmarshallVAST = UnmarshalVAST
 var MarshallVAST = MarshalVAST
+
+// IsWrapper returns whether the Vast is in question is wrapper
+func IsWrapper(vast *VAST) bool {
+	return vast.Ads != nil && len(vast.Ads) > 0 && vast.Ads[0].Wrapper != nil
+}
