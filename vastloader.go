@@ -13,7 +13,7 @@ type VASTResponse struct {
 }
 
 // VASTResponseHandler handles the repsonse from the request
-func VASTResponseHandler(res *http.Response, err error) VASTResponse {
+func ResponseHandler(res *http.Response, err error) VASTResponse {
 	if err != nil {
 		return VASTResponse{
 			Body: []byte(""),
@@ -35,7 +35,7 @@ func VASTResponseHandler(res *http.Response, err error) VASTResponse {
 }
 
 // LoadVAST attempts to load VAST
-func LoadVAST(VASTAdTagURI string, milliseconds time.Duration) (*VAST, error) {
+func LoadURI(VASTAdTagURI string, milliseconds time.Duration) (*VAST, error) {
 	var (
 		ctx    context.Context
 		cancel context.CancelFunc
@@ -47,7 +47,7 @@ func LoadVAST(VASTAdTagURI string, milliseconds time.Duration) (*VAST, error) {
 	if err != nil {
 		return nil, err
 	}
-	vastResponse := VASTResponseHandler(http.DefaultClient.Do(req))
+	vastResponse := ResponseHandler(http.DefaultClient.Do(req))
 	if vastResponse.Err != nil {
 		return nil, vastResponse.Err
 	}
