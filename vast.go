@@ -551,3 +551,8 @@ var MarshallVAST = MarshalVAST
 func (vast *VAST) IsWrapper() bool {
 	return vast.Ads != nil && len(vast.Ads) > 0 && vast.Ads[0].Wrapper != nil
 }
+
+// IsInLine returns whether the VAST in question is inline
+func (vast *VAST) IsInLine() bool {
+	return vast.Ads != nil && len(vast.Ads) > 0 && vast.Ads[0].InLine != nil
+}
