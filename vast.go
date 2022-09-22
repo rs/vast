@@ -547,7 +547,7 @@ func MarshalVAST(vastXML *VAST) (string, error) {
 var UnmarshallVAST = UnmarshalVAST
 var MarshallVAST = MarshalVAST
 
-// IsWrapper returns whether the Vast is in question is wrapper
+// IsWrapper returns whether the VAST in question is wrapper
 func (vast *VAST) IsWrapper() bool {
 	return vast.Ads != nil && len(vast.Ads) > 0 && vast.Ads[0].Wrapper != nil
 }
